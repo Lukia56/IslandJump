@@ -1,0 +1,173 @@
+#include "Transform.h"
+#include <cassert>
+#include <memory>
+#include <vector>
+#include "../GameObject.h"
+#include "Utility/Math.h"
+#include "Utility/Vector.h"
+
+Transform::Transform(GameObject* owner) :
+	localPosition(Vector3::Zero),
+	localRotation(Vector3::Zero),
+	localScale(Vector3::One),
+	mOwner(owner),
+	mParent(nullptr)
+{
+}
+
+Transform::~Transform()
+{
+	// 子オブジェクトを削除する
+	while (mChildren.size() > 0)
+	{
+		auto it = mChildren.begin();
+		(*it)->Finalize();
+		mChildren.erase(it);
+	}
+
+	mParent = nullptr;
+	mOwner = nullptr;
+}
+
+void Transform::Translate(const Vector3& translation)
+{
+	localPosition += translation;
+}
+
+void Transform::Translate(float x, float y, float z)
+{
+	Translate(Vector3(x, y, z));
+}
+
+void Transform::RotateRad(const Vector3& angle)
+{
+	localRotation += angle;
+}
+
+void Transform::RotateRad(float x, float y, float z)
+{
+	RotateRad(Vector3(x, y, z));
+}
+
+void Transform::RotateDeg(const Vector3& angle)
+{
+	localRotation += Vector3(
+		Math::ToRadian(angle.x),
+		Math::ToRadian(angle.y),
+		Math::ToRadian(angle.z)
+	);
+}
+
+void Transform::RotateDeg(float x, float y, float z)
+{
+	RotateDeg(Vector3(x, y, z));
+}
+
+void Transform::SetupParent(std::unique_ptr<GameObject> owner, Transform* newParent)
+{
+	if (mParent)
+	{
+		assert(false && "Transform // すでに親オブジェクトが設定されています");
+		return;
+	}
+
+	// 親を設定
+	mParent = newParent;
+	OnUpdateParent();
+
+	// 新しい親に移動
+	if (mParent)
+	{
+		mParent->GetChildren().emplace_back(std::move(owner));
+	}
+}
+
+void Transform::ChangeParent(Transform* newParent)
+{
+	if (!mParent)
+	{
+		assert(false && "Transform // 親オブジェクトが設定されていません");
+		return;
+	}
+
+	// 自身のイテレータを探す
+	auto& siblings = mParent->GetChildren();
+	auto it = std::find_if(siblings.begin(), siblings.end(),
+		[this](const std::unique_ptr<GameObject>& ptr)
+		{
+			return this == ptr->GetTransform();
+		});
+	if (it == siblings.end())
+	{
+		assert(false && "Transform // 親オブジェクトに自身が含まれていませんでした");
+		return;
+	}
+
+	// 元の親から削除
+	std::unique_ptr<GameObject> gameObject = std::move(*it);
+	siblings.erase(it);
+
+	// 親を設定
+	mParent = newParent;
+	OnUpdateParent();
+
+	// 新しい親に移動
+	if (mParent)
+	{
+		mParent->GetChildren().emplace_back(std::move(gameObject));
+	}
+}
+
+Vector3 Transform::CalculateWorldPosition() const
+{
+	Vector3 world = localPosition;
+
+	// 親オブジェクトについて再帰
+	if (mParent) return world += mParent->CalculateWorldPosition();
+
+	return world;
+}
+
+Vector3 Transform::CalculateWorldRotation() const
+{
+	Vector3 world = localRotation;
+
+	// 親オブジェクトについて再帰
+	if (mParent) world += mParent->CalculateWorldRotation();
+
+	return world;
+}
+
+Vector3 Transform::CalculateWorldScale() const
+{
+	Vector3 world = localScale;
+
+	// 親オブジェクトについて再帰
+	if (mParent)
+	{
+		Vector3 parentScale = mParent->CalculateWorldScale();
+		world.x *= parentScale.x;
+		world.y *= parentScale.y;
+		world.z *= parentScale.z;
+	}
+
+	return world;
+}
+
+Vector3 Transform::GetRotationAsDeg() const
+{
+	return Vector3(
+		Math::ToRadian(localRotation.x),
+		Math::ToRadian(localRotation.y),
+		Math::ToRadian(localRotation.z)
+	);
+}
+
+void Transform::SetRotationAsDeg(const Vector3& angle)
+{
+	localRotation = Vector3(
+		Math::ToRadian(angle.x),
+		Math::ToRadian(angle.y),
+		Math::ToRadian(angle.z)
+	);
+}

@@ -1,0 +1,28 @@
+#include "SpriteRenderer.h"
+#include <DxLib.h>
+#include "System/Resource/ResourceBase.h"
+#include "World/GameObject.h"
+
+SpriteRenderer::SpriteRenderer(GameObject* owner, std::shared_ptr<Resource::ResourceBase> resource) :
+	Renderer(owner, resource),
+	mTexHalfSize(Vector2::One)
+{
+	if (resource)
+	{
+		// ‰æ‘œ‚Ì”¼Œa‚ðŽæ“¾
+		GetGraphSizeF(resource->GetHandle(), &mTexHalfSize.x, &mTexHalfSize.y);
+		mTexHalfSize *= 0.5f;
+	}
+}
+
+void SpriteRenderer::Draw() const
+{
+	if (!mOwner) return;
+	if (!mResource) return;
+
+	const VECTOR pos = (mOwner->GetTransform()->CalculateWorldPosition() + mOffsetPos).GetAsDxLibVector();
+	const VECTOR rot = mOwner->GetTransform()->CalculateWorldRotation().GetAsDxLibVector();
+	const VECTOR scale = mOwner->GetTransform()->CalculateWorldScale().GetAsDxLibVector();
+
+	DrawRotaGraphFast3F(pos.x, pos.y, mTexHalfSize.x, mTexHalfSize.y, scale.x, scale.y, rot.z, mResource->GetHandle(), true);
+}
