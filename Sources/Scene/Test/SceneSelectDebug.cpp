@@ -1,5 +1,6 @@
 #include "SceneSelectDebug.h"
 #include <DxLib.h>
+#include "SceneStageTest.h"
 #include "System/InputManager.h"
 #include "System/Input/Mouse.h"
 #include "Utility/Color.h"
@@ -13,9 +14,9 @@ void SceneSelectDebug::OnInit()
 {
 	SceneInfo info;
 
-	//info.name = "StageTest";
-	//info.createSceneFunc = []() { return std::make_unique<SceneStageTest>(); };
-	//mSceneList.emplace_back(info);
+	info.name = "StageTest";
+	info.createSceneFunc = []() { return std::make_unique<SceneStageTest>(); };
+	mSceneList.emplace_back(info);
 
 	Mouse::GetInstance().SetMode(Mouse::Mode::Absolute);
 }
