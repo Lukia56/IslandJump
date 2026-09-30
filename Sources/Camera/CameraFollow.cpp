@@ -7,7 +7,7 @@
 
 namespace
 {
-	constexpr float kDistance = 400.0f;
+	constexpr float kDistance = 700.0f;
 
 	constexpr float kMaxPitch = 80.0f;
 	constexpr float kMinPitch = -80.0f;

@@ -7,7 +7,6 @@ namespace Collision
 		Invalid = -1,
 		Body,
 		Foot,
-		CheckWall,
 		Sensor,
 	};
 }

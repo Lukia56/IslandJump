@@ -1,0 +1,63 @@
+#pragma once
+
+#include "../GameObject.h"
+#include <vector>
+#include "Camera/CameraProperty.h"
+#include "Utility/Vector.h"
+
+class Collider3D;
+
+class Player : public GameObject
+{
+public:
+
+	Player();
+
+	void Init() override;
+
+	void Update() override;
+
+	void PhysicsUpdate() override;
+
+	void Draw() override;
+
+	void DebugDraw() override;
+
+	void ResolveCollision(const Collision::Result& result, const Collider3D* myCollider, const Collider3D* oppCollider) override;
+
+public:
+
+	void SetCameraView(const Camera::View& view) { mCameraView = view; }
+
+private:
+
+	void ResolvePush();
+
+	void MoveHorizontal(float deltaTime);
+
+	void MoveVertical(float deltaTime);
+
+	bool CanJump() const;
+
+	bool CanCancelJump() const;
+
+private:
+
+	Vector3 mVelocity;
+
+	Vector3 mLastMoveVec;
+
+	Vector3 mCollisionPush;
+
+	float mJumpBufferTimer;
+
+	float mForceJumpTimer;
+
+	bool mIsJumping;
+
+	bool mOnGround;
+
+	std::vector<std::unique_ptr<Collider3D>> mColliders;
+
+	Camera::View mCameraView;
+};
