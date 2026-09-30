@@ -154,6 +154,7 @@
     <ClCompile Include="Sources\System\EffekseerManager.cpp" />
     <ClCompile Include="Sources\Factory\StageObjectCreator.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneSelectDebug.cpp" />
+    <ClCompile Include="Sources\World\Object\ItemSpawner.cpp" />
     <ClCompile Include="Sources\World\Other\StageManager.cpp" />
     <ClCompile Include="Sources\Stage\StageLoader.cpp" />
     <ClCompile Include="Sources\Stage\StageModelDataBase.cpp" />
@@ -244,6 +245,7 @@
     <ClInclude Include="Sources\Factory\StageObjectCreator.h" />
     <ClInclude Include="Sources\Param\TempParam.h" />
     <ClInclude Include="Sources\Scene\Test\SceneSelectDebug.h" />
+    <ClInclude Include="Sources\World\Object\ItemSpawner.h" />
     <ClInclude Include="Sources\World\Other\StageManager.h" />
     <ClInclude Include="Sources\Stage\StageLoader.h" />
     <ClInclude Include="Sources\Stage\StageData.h" />
