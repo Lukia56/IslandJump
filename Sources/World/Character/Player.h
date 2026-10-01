@@ -7,12 +7,14 @@
 
 class Collider3D;
 class LandTerrainRecorder;
+class ItemObjectManager;
 
 class Player : public GameObject
 {
 public:
 
 	Player();
+	Player(ItemObjectManager* itemObjectManager);
 
 	void Init() override;
 
@@ -63,6 +65,8 @@ private:
 	std::vector<std::unique_ptr<Collider3D>> mColliders;
 
 	std::unique_ptr<LandTerrainRecorder> mLandTerrainRecorder;
+
+	ItemObjectManager* mItemObjectManager;
 
 	Camera::View mCameraView;
 };

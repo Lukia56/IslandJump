@@ -24,14 +24,15 @@ SceneItemSpawnerTest::SceneItemSpawnerTest() :
 
 void SceneItemSpawnerTest::OnInit()
 {
-	mPlayer = CreateToRoot<Player>();
-	mPlayer->GetTransform()->localPosition = Vector3(100.0f, 200.0f, 0.0f);
-
 	CreateToRoot<DebugGround>();
 
 	StageManager* stageManager = CreateToRoot<StageManager>(kStageDataPath);
 
 	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(kItemNum);
+
+	mPlayer = CreateToRoot<Player>(itemObjectManager);
+	mPlayer->GetTransform()->localPosition = Vector3(100.0f, 200.0f, 0.0f);
+
 	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder(), itemObjectManager, kItemNum);
 
 	GetCameraManager()->AddCamera(Camera::Type::DebugFree, std::make_unique<CameraDebugFree>());

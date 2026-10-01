@@ -2,6 +2,8 @@
 
 #include "../GameObject.h"
 
+class Collider3D;
+
 /// <summary>
 /// プレイヤーが取得できる配置されたアイテム
 /// </summary>
@@ -19,4 +21,8 @@ public:
 	void DebugDraw() override;
 
 	void Setup(const Vector3& spawnPos);
+
+private:
+
+	std::unique_ptr<Collider3D> mCollider;
 };

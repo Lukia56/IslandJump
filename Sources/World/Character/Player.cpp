@@ -3,6 +3,7 @@
 #include "LandTerrainRecorder.h"
 #include "../Component/Collider3D.h"
 #include "../Object/DebugGround.h"
+#include "../Other/ItemObjectManager.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "System/InputManager.h"
@@ -36,6 +37,20 @@ Player::Player() :
 	mIsJumping(false),
 	mOnGround(false),
 	mLandTerrainRecorder(nullptr),
+	mItemObjectManager(nullptr),
+	mCameraView{}
+{
+	// ItemSpawnerManagerのコンストラクタで必要なためここで生成
+	mLandTerrainRecorder = std::make_unique<LandTerrainRecorder>();
+}
+
+Player::Player(ItemObjectManager* itemObjectManager) :
+	mJumpBufferTimer(0.0f),
+	mForceJumpTimer(0.0f),
+	mIsJumping(false),
+	mOnGround(false),
+	mLandTerrainRecorder(nullptr),
+	mItemObjectManager(itemObjectManager),
 	mCameraView{}
 {
 	// ItemSpawnerManagerのコンストラクタで必要なためここで生成
@@ -162,6 +177,15 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 		{
 			mVelocity.y = Math::Min(mVelocity.y, 0.0f);
 		}
+		break;
+
+	case Tag::ItemObject:
+
+		if (mItemObjectManager)
+		{
+			mItemObjectManager->ConsumeItem(oppCollider->GetOwner()->GetTransform());
+		}
+
 		break;
 	}
 }
