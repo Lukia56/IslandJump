@@ -2,17 +2,21 @@
 #include <DxLib.h>
 #include "Collision/Collision3D.h"
 #include "Utility/Color.h"
+#include "World/Character/LandTerrainRecorder.h"
 #include "World/Component/Collider3D.h"
+#include "World/Object/ItemObject.h"
 
 namespace
 {
 	constexpr float kTriggerRadius = 25.0f;
 }
 
-ItemSpawner::ItemSpawner(Transform* terrain) :
+ItemSpawner::ItemSpawner(Transform* terrain, LandTerrainRecorder* landTerrainRecorder, GameObject* itemRoot) :
 	mTerrain(terrain),
 	mIsTriggered(false),
-	mCollider(nullptr)
+	mCollider(nullptr),
+	mLandTerrainRecorder(landTerrainRecorder),
+	mItemRoot(itemRoot)
 {
 }
 
@@ -55,7 +59,18 @@ void ItemSpawner::ResolveCollision(const Collision::Result& result, const Collid
 {
 	if (oppCollider->GetOwner()->GetTag() != GameObject::Tag::Player) return;
 
+	if (IsPlayerLandedMyself()) return;
+	if (!mLandTerrainRecorder->GetPreLandTerrain()) return;
+
 	mIsTriggered = true;
 
 	mCollider->Disable();
+
+	Vector3 preTerrainPos = mLandTerrainRecorder->GetPreLandTerrain()->CalculateWorldPosition();
+	mItemRoot->CreateToChild<ItemObject>(preTerrainPos);
+}
+
+bool ItemSpawner::IsPlayerLandedMyself() const
+{
+	return mTerrain == mLandTerrainRecorder->GetCurrentTerrain();
 }

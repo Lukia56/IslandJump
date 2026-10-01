@@ -27,7 +27,7 @@ void SceneItemSpawnerTest::OnInit()
 	CreateToRoot<DebugGround>();
 
 	StageManager* stageManager = CreateToRoot<StageManager>(kStageDataPath);
-	CreateToRoot<ItemSpawnerManager>(stageManager);
+	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder());
 
 	GetCameraManager()->AddCamera(Camera::Type::DebugFree, std::make_unique<CameraDebugFree>());
 	GetCameraManager()->AddCamera(Camera::Type::Follow, std::make_unique<CameraFollow>(mPlayer->GetTransform()));
