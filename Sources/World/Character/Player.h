@@ -6,6 +6,7 @@
 #include "Utility/Vector.h"
 
 class Collider3D;
+class LandTerrainRecorder;
 
 class Player : public GameObject
 {
@@ -26,6 +27,8 @@ public:
 	void ResolveCollision(const Collision::Result& result, const Collider3D* myCollider, const Collider3D* oppCollider) override;
 
 public:
+
+	LandTerrainRecorder* GetLandTerrainRecorder() const { return mLandTerrainRecorder.get(); }
 
 	void SetCameraView(const Camera::View& view) { mCameraView = view; }
 
@@ -59,9 +62,7 @@ private:
 
 	std::vector<std::unique_ptr<Collider3D>> mColliders;
 
-	Transform* mCurrentLandTerrain;
-
-	Transform* mPreLandTerrain;
+	std::unique_ptr<LandTerrainRecorder> mLandTerrainRecorder;
 
 	Camera::View mCameraView;
 };

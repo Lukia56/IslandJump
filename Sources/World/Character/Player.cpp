@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <imgui.h>
+#include "LandTerrainRecorder.h"
 #include "../Component/Collider3D.h"
 #include "../Object/DebugGround.h"
 #include "Collision/Collision3D.h"
@@ -34,10 +35,11 @@ Player::Player() :
 	mForceJumpTimer(0.0f),
 	mIsJumping(false),
 	mOnGround(false),
-	mCurrentLandTerrain(nullptr),
-	mPreLandTerrain(nullptr),
+	mLandTerrainRecorder(nullptr),
 	mCameraView{}
 {
+	// ItemSpawnerManagerのコンストラクタで必要なためここで生成
+	mLandTerrainRecorder = std::make_unique<LandTerrainRecorder>();
 }
 
 void Player::Init()
@@ -130,13 +132,7 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 		if (Math::IsNearZero(mVelocity.y)) mIsJumping = false;
 
 		Transform* oppTransform = oppCollider->GetOwner()->GetTransform();
-
-		// 違う地形に移動していたら着地した地形を更新する
-		if (mCurrentLandTerrain != oppTransform)
-		{
-			mPreLandTerrain = mCurrentLandTerrain;
-			mCurrentLandTerrain = oppTransform;
-		}
+		mLandTerrainRecorder->UpdateLandTerrain(oppTransform);
 
 		return;
 	}
