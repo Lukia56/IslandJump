@@ -9,7 +9,7 @@ class ItemObject : public GameObject
 {
 public:
 
-	ItemObject(const Vector3& spawnPos);
+	ItemObject();
 	~ItemObject() = default;
 
 	void Init() override;
@@ -18,7 +18,5 @@ public:
 
 	void DebugDraw() override;
 
-private:
-
-	Vector3 mSpawnPos;
+	void Setup(const Vector3& spawnPos);
 };

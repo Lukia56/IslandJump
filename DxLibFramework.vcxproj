@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\World\Other\ItemObjectManager.cpp" />
     <ClCompile Include="Sources\World\Character\LandTerrainRecorder.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneItemSpawnerTest.cpp" />
     <ClCompile Include="Sources\World\Character\Player.cpp" />
@@ -231,6 +232,7 @@
     <ClCompile Include="Sources\World\Test\TestTerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\World\Other\ItemObjectManager.h" />
     <ClInclude Include="Sources\Scene\Test\SceneItemSpawnerTest.h" />
     <ClInclude Include="Sources\World\Character\LandTerrainRecorder.h" />
     <ClInclude Include="Sources\World\Character\Player.h" />

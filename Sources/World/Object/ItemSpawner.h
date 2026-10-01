@@ -3,6 +3,7 @@
 #include "../GameObject.h"
 
 class LandTerrainRecorder;
+class ItemObjectManager;
 class Collider3D;
 
 /// <summary>
@@ -12,7 +13,7 @@ class ItemSpawner : public GameObject
 {
 public:
 
-	ItemSpawner(Transform* terrain, LandTerrainRecorder* landTerrainRecorder, GameObject* itemRoot);
+	ItemSpawner(Transform* terrain, LandTerrainRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager);
 	~ItemSpawner() = default;
 
 	void Init() override;
@@ -39,5 +40,5 @@ private:
 
 	LandTerrainRecorder* mLandTerrainRecorder;
 
-	GameObject* mItemRoot;
+	ItemObjectManager* mItemObjectManager;
 };

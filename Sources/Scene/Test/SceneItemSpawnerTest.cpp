@@ -6,12 +6,15 @@
 #include "Camera/CameraManager.h"
 #include "System/Input/Keyboard.h"
 #include "World/Object/DebugGround.h"
+#include "World/Other/ItemObjectManager.h"
 #include "World/Other/ItemSpawnerManager.h"
 #include "World/Character/Player.h"
 
 namespace
 {
 	const char* const kStageDataPath = "Resources\\MasterData\\ItemSpawnerTest.json";
+
+	constexpr int kItemNum = 10;
 }
 
 SceneItemSpawnerTest::SceneItemSpawnerTest() :
@@ -27,7 +30,9 @@ void SceneItemSpawnerTest::OnInit()
 	CreateToRoot<DebugGround>();
 
 	StageManager* stageManager = CreateToRoot<StageManager>(kStageDataPath);
-	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder());
+
+	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(kItemNum);
+	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder(), itemObjectManager, kItemNum);
 
 	GetCameraManager()->AddCamera(Camera::Type::DebugFree, std::make_unique<CameraDebugFree>());
 	GetCameraManager()->AddCamera(Camera::Type::Follow, std::make_unique<CameraFollow>(mPlayer->GetTransform()));

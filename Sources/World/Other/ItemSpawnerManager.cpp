@@ -1,20 +1,14 @@
 #include "ItemSpawnerManager.h"
 #include <memory>
 #include <vector>
+#include "ItemObjectManager.h"
 #include "RootObject.h"
 #include "../Object/ItemSpawner.h"
 #include "Utility/Random.h"
 
-namespace
-{
-	constexpr int kSpawnerNum = 10;
-}
-
-ItemSpawnerManager::ItemSpawnerManager(GameObject* stageManager, LandTerrainRecorder* landTerrainRecorder) :
-	mItemRoot(nullptr),
+ItemSpawnerManager::ItemSpawnerManager(GameObject* stageManager, LandTerrainRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager, int itemNum) :
 	mSpawnerRoot(nullptr)
 {
-	mItemRoot = CreateToChild<RootObject>();
 	mSpawnerRoot = CreateToChild<RootObject>();
 
 	std::vector<std::unique_ptr<GameObject>>& objects = stageManager->GetTransform()->GetChildren();
@@ -25,12 +19,12 @@ ItemSpawnerManager::ItemSpawnerManager(GameObject* stageManager, LandTerrainReco
 		indices.emplace_back(i);
 	}
 
-	for (int i = 0; i < kSpawnerNum; i++)
+	for (int i = 0; i < itemNum; i++)
 	{
 		if (indices.empty()) break;
 
 		size_t index = Random::Range(static_cast<size_t>(0), indices.size());
-		mSpawnerRoot->CreateToChild<ItemSpawner>(objects[indices[index]]->GetTransform(), landTerrainRecorder, mItemRoot);
+		mSpawnerRoot->CreateToChild<ItemSpawner>(objects[indices[index]]->GetTransform(), landTerrainRecorder, itemObjectManager);
 
 		indices.erase(indices.begin() + index);
 	}
