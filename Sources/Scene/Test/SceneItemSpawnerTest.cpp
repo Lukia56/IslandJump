@@ -6,6 +6,7 @@
 #include "System/Input/Keyboard.h"
 #include "World/Object/DebugGround.h"
 #include "World/Other/ItemSpawnerManager.h"
+#include "World/Character/Player.h"
 
 namespace
 {
@@ -18,6 +19,9 @@ SceneItemSpawnerTest::SceneItemSpawnerTest()
 
 void SceneItemSpawnerTest::OnInit()
 {
+	Player* player = CreateToRoot<Player>();
+	player->GetTransform()->localPosition = Vector3(100.0f, 200.0f, 0.0f);
+
 	CreateToRoot<DebugGround>();
 
 	StageManager* stageManager = CreateToRoot<StageManager>(kStageDataPath);

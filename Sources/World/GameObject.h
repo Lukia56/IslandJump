@@ -24,6 +24,7 @@ public:
 		None,
 		Player,
 		Terrain,
+		ItemSpawner,
 	};
 
 	/// <summary>
