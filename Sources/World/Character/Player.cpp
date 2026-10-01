@@ -34,6 +34,8 @@ Player::Player() :
 	mForceJumpTimer(0.0f),
 	mIsJumping(false),
 	mOnGround(false),
+	mCurrentLandTerrain(nullptr),
+	mPreLandTerrain(nullptr),
 	mCameraView{}
 {
 }
@@ -126,6 +128,15 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 		mJumpBufferTimer = kJumpBufferTime;
 		mOnGround = true;
 		if (Math::IsNearZero(mVelocity.y)) mIsJumping = false;
+
+		Transform* oppTransform = oppCollider->GetOwner()->GetTransform();
+
+		// 違う地形に移動していたら着地した地形を更新する
+		if (mCurrentLandTerrain != oppTransform)
+		{
+			mPreLandTerrain = mCurrentLandTerrain;
+			mCurrentLandTerrain = oppTransform;
+		}
 
 		return;
 	}

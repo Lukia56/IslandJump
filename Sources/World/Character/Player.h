@@ -59,5 +59,9 @@ private:
 
 	std::vector<std::unique_ptr<Collider3D>> mColliders;
 
+	Transform* mCurrentLandTerrain;
+
+	Transform* mPreLandTerrain;
+
 	Camera::View mCameraView;
 };
