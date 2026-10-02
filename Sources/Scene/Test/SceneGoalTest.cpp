@@ -37,6 +37,7 @@ void SceneGoalTest::OnInit()
 	mShowGoalUI = std::make_unique<Observer::ShowGoalUI>(mUIManager);
 
 	goal->GetEventSubject()->RegisterObserver(mShowGoalUI.get());
+	goal->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 
 	GetCameraManager()->AddCamera(Camera::Type::Follow, std::make_unique<CameraFollow>(mPlayer->GetTransform()));
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Follow);

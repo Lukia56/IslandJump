@@ -8,6 +8,10 @@
 class Collider3D;
 class LandTerrainRecorder;
 class ItemObjectManager;
+namespace Observer
+{
+	class IObserver;
+}
 
 class Player : public GameObject
 {
@@ -31,6 +35,8 @@ public:
 public:
 
 	LandTerrainRecorder* GetLandTerrainRecorder() const { return mLandTerrainRecorder.get(); }
+
+	Observer::IObserver* GetObserver() const { return mObserver.get(); }
 
 	void SetCameraView(const Camera::View& view) { mCameraView = view; }
 
@@ -65,6 +71,8 @@ private:
 	std::vector<std::unique_ptr<Collider3D>> mColliders;
 
 	std::unique_ptr<LandTerrainRecorder> mLandTerrainRecorder;
+
+	std::unique_ptr<Observer::IObserver> mObserver;
 
 	ItemObjectManager* mItemObjectManager;
 

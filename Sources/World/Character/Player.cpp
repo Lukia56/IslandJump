@@ -6,6 +6,7 @@
 #include "../Other/ItemObjectManager.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
+#include "Observer/PlayerObserver.h"
 #include "System/InputManager.h"
 #include "System/TimeManager.h"
 #include "Utility/Math.h"
@@ -42,6 +43,8 @@ Player::Player() :
 {
 	// ItemSpawnerManagerのコンストラクタで必要なためここで生成
 	mLandTerrainRecorder = std::make_unique<LandTerrainRecorder>();
+
+	mObserver = std::make_unique<Observer::PlayerObserver>(this);
 }
 
 Player::Player(ItemObjectManager* itemObjectManager) :
@@ -55,6 +58,8 @@ Player::Player(ItemObjectManager* itemObjectManager) :
 {
 	// ItemSpawnerManagerのコンストラクタで必要なためここで生成
 	mLandTerrainRecorder = std::make_unique<LandTerrainRecorder>();
+
+	mObserver = std::make_unique<Observer::PlayerObserver>(this);
 }
 
 void Player::Init()
