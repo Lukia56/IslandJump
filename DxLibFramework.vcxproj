@@ -232,8 +232,11 @@
     <ClCompile Include="Sources\World\UI\Test\TestOptionScreen.cpp" />
     <ClCompile Include="Sources\World\UI\Screen\TitleMenuScreen.cpp" />
     <ClCompile Include="Sources\World\Test\TestTerrain.cpp" />
+    <ClCompile Include="Sources\Observer\Subject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Observer\IObserver.h" />
+    <ClInclude Include="Sources\Observer\ObserverEvent.h" />
     <ClInclude Include="Sources\Scene\Test\SceneGoalTest.h" />
     <ClInclude Include="Sources\World\Object\GoalTrigger.h" />
     <ClInclude Include="Sources\World\Other\ItemObjectManager.h" />
@@ -353,6 +356,7 @@
     <ClInclude Include="Sources\World\UI\Test\TestOptionScreen.h" />
     <ClInclude Include="Sources\World\UI\Screen\TitleMenuScreen.h" />
     <ClInclude Include="Sources\World\Test\TestTerrain.h" />
+    <ClInclude Include="Sources\Observer\Subject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
