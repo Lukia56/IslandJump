@@ -3,6 +3,7 @@
 #include "SceneStageTest.h"
 #include "SceneItemSpawnerTest.h"
 #include "SceneGoalTest.h"
+#include "SceneDeathCloudTest.h"
 #include "System/InputManager.h"
 #include "System/Input/Mouse.h"
 #include "Utility/Color.h"
@@ -26,6 +27,10 @@ void SceneSelectDebug::OnInit()
 
 	info.name = "GoalTest";
 	info.createSceneFunc = []() { return std::make_unique<SceneGoalTest>(); };
+	mSceneList.emplace_back(info);
+
+	info.name = "DeathCloudTest";
+	info.createSceneFunc = []() { return std::make_unique<SceneDeathCloudTest>(); };
 	mSceneList.emplace_back(info);
 
 	Mouse::GetInstance().SetMode(Mouse::Mode::Absolute);
