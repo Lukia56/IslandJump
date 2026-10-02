@@ -2,6 +2,7 @@
 #include "../Component/Collider3D.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
+#include "Observer/Subject.h"
 #include "Utility/Color.h"
 
 namespace
@@ -11,8 +12,10 @@ namespace
 
 GoalTrigger::GoalTrigger() :
 	mIsTriggered(false),
-	mCollider(nullptr)
+	mCollider(nullptr),
+	mEventSubject(nullptr)
 {
+	mEventSubject = std::make_unique<Observer::Subject>();
 }
 
 void GoalTrigger::Init()
@@ -46,4 +49,6 @@ void GoalTrigger::ResolveCollision(const Collision::Result& result, const Collid
 	if (oppCollider->GetOwner()->GetTag() != GameObject::Tag::Player) return;
 
 	mIsTriggered = true;
+
+	mEventSubject->Notify(Observer::Event::ReachGoal);
 }

@@ -7,6 +7,10 @@ namespace UI
 {
 	class UIManager;
 }
+namespace Observer
+{
+	class ShowGoalUI;
+}
 
 class SceneGoalTest : public SceneBase
 {
@@ -24,4 +28,6 @@ private:
 	Player* mPlayer;
 
 	UI::UIManager* mUIManager;
+
+	std::unique_ptr<Observer::ShowGoalUI> mShowGoalUI;
 };

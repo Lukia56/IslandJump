@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Observer\ShowGoalUI.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneGoalTest.cpp" />
     <ClCompile Include="Sources\World\Object\GoalTrigger.cpp" />
     <ClCompile Include="Sources\World\Other\ItemObjectManager.cpp" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Sources\Main.cpp" />
     <ClCompile Include="Sources\Scene\SceneBase.cpp" />
     <ClCompile Include="Sources\Scene\SceneManager.cpp" />
+    <ClCompile Include="Sources\World\UI\Screen\GoalEventScreen.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\ImageObject.cpp" />
     <ClCompile Include="Sources\World\UI\Screen\MenuScreen.cpp" />
     <ClCompile Include="Sources\World\UI\Core\Screen.cpp" />
@@ -237,6 +239,7 @@
   <ItemGroup>
     <ClInclude Include="Sources\Observer\IObserver.h" />
     <ClInclude Include="Sources\Observer\ObserverEvent.h" />
+    <ClInclude Include="Sources\Observer\ShowGoalUI.h" />
     <ClInclude Include="Sources\Scene\Test\SceneGoalTest.h" />
     <ClInclude Include="Sources\World\Object\GoalTrigger.h" />
     <ClInclude Include="Sources\World\Other\ItemObjectManager.h" />
@@ -342,6 +345,7 @@
     <ClInclude Include="Sources\Scene\SceneBase.h" />
     <ClInclude Include="Sources\Scene\SceneManager.h" />
     <ClInclude Include="Sources\World\UI\Core\Command.h" />
+    <ClInclude Include="Sources\World\UI\Screen\GoalEventScreen.h" />
     <ClInclude Include="Sources\World\UI\Widget\ImageObject.h" />
     <ClInclude Include="Sources\World\UI\Screen\MenuScreen.h" />
     <ClInclude Include="Sources\World\UI\Test\TestMenuScreen.h" />
