@@ -1,11 +1,17 @@
 #include "SceneStageTest.h"
 #include "SceneSelectDebug.h"
-#include "World/Character/Player.h"
-#include "World/Test/TestTerrain.h"
 #include "Camera/CameraFollow.h"
 #include "Camera/CameraManager.h"
 #include "System/Input/Keyboard.h"
 #include "System/Input/Mouse.h"
+#include "World/Character/Player.h"
+#include "World/Other/StageManager.h"
+#include "World/Test/TestTerrain.h"
+
+namespace
+{
+	const char* const kStageDataPath = "Resources\\MasterData\\MainStage.json";
+}
 
 SceneStageTest::SceneStageTest() :
 	mPlayer(nullptr)
@@ -14,6 +20,8 @@ SceneStageTest::SceneStageTest() :
 
 void SceneStageTest::OnInit()
 {
+	StageManager* stageManager = CreateToRoot<StageManager>(kStageDataPath);
+
 	mPlayer = CreateToRoot<Player>();
 	mPlayer->GetTransform()->Translate(0.0f, 100.0f, 0.0f);
 
