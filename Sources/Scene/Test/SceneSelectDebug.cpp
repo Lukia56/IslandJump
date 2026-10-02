@@ -2,6 +2,7 @@
 #include <DxLib.h>
 #include "SceneStageTest.h"
 #include "SceneItemSpawnerTest.h"
+#include "SceneGoalTest.h"
 #include "System/InputManager.h"
 #include "System/Input/Mouse.h"
 #include "Utility/Color.h"
@@ -21,6 +22,10 @@ void SceneSelectDebug::OnInit()
 
 	info.name = "ItemSpawnerTest";
 	info.createSceneFunc = []() { return std::make_unique<SceneItemSpawnerTest>(); };
+	mSceneList.emplace_back(info);
+
+	info.name = "GoalTest";
+	info.createSceneFunc = []() { return std::make_unique<SceneGoalTest>(); };
 	mSceneList.emplace_back(info);
 
 	Mouse::GetInstance().SetMode(Mouse::Mode::Absolute);
