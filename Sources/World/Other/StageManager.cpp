@@ -2,11 +2,22 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "Stage/StageGenerator.h"
 #include "Stage/StageLoader.h"
 
 StageManager::StageManager(const std::string& objectDataPath)
 {
 	std::vector<std::unique_ptr<GameObject>> objects = Stage::StageLoader::Load(objectDataPath);
+
+	for (auto& object : objects)
+	{
+		AddToChild(std::move(object));
+	}
+}
+
+StageManager::StageManager()
+{
+	std::vector<std::unique_ptr<GameObject>> objects = Stage::StageGenerator::Generate();
 
 	for (auto& object : objects)
 	{

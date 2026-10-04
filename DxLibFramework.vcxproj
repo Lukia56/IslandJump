@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Scene\Test\SceneLoadStageTest.cpp" />
     <ClCompile Include="Sources\Observer\PlayerObserver.cpp" />
     <ClCompile Include="Sources\Observer\ShowGoalUI.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneDeathCloudTest.cpp" />
@@ -238,8 +239,10 @@
     <ClCompile Include="Sources\World\UI\Screen\TitleMenuScreen.cpp" />
     <ClCompile Include="Sources\World\Test\TestTerrain.cpp" />
     <ClCompile Include="Sources\Observer\Subject.cpp" />
+    <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Scene\Test\SceneLoadStageTest.h" />
     <ClInclude Include="Sources\Observer\PlayerObserver.h" />
     <ClInclude Include="Sources\Observer\IObserver.h" />
     <ClInclude Include="Sources\Observer\ObserverEvent.h" />
@@ -367,6 +370,7 @@
     <ClInclude Include="Sources\World\UI\Screen\TitleMenuScreen.h" />
     <ClInclude Include="Sources\World\Test\TestTerrain.h" />
     <ClInclude Include="Sources\Observer\Subject.h" />
+    <ClInclude Include="Sources\Stage\StageGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -11,6 +11,7 @@ class StageManager : public GameObject
 public:
 
 	StageManager(const std::string& objectDataPath);
+	StageManager();
 
 	void Init() override;
 	void Update() override;
