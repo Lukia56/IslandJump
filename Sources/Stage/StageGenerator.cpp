@@ -1,14 +1,28 @@
 #include "StageGenerator.h"
+#include <array>
 #include <memory>
 #include <string>
 #include <vector>
 #include "Stage/StageLoader.h"
+#include "Utility/Math.h"
+#include "Utility/Random.h"
 #include "World/GameObject.h"
 #include "World/Other/RootObject.h"
 
 namespace
 {
 	const char* const kStartIslandPath = "Resources\\MasterData\\Island\\StartIsland.json";
+
+	const std::array<std::string, 1> kIslandPaths[] = {
+		"Resources\\MasterData\\Island\\Island0.json"
+	};
+
+	constexpr float kGenerateRangeAngle = 70.0f;
+
+	constexpr float kGenerateRangeHMinDistance = 500.0f;
+	constexpr float kGenerateRangeHMaxDistance = 1000.0f;
+	constexpr float kGenerateRangeVMinDistance = 200.0f;
+	constexpr float kGenerateRangeVMaxDistance = 500.0f;
 }
 
 namespace Stage
@@ -27,6 +41,31 @@ namespace Stage
 			startIsland->AddToChild(std::move(object));
 		}
 		islands.emplace_back(std::move(startIsland));
+
+		// ƒ‰ƒ“ƒ_ƒ€‚É“‡‚ğ¶¬
+		Vector3 generatePos;
+		float dir = 0.0f;
+		constexpr float generateRangeRad = Math::ToRadian(kGenerateRangeAngle);
+
+		std::unique_ptr<RootObject> island = std::make_unique<RootObject>();
+		int islandIndex = Random::Range(0, static_cast<int>(kIslandPaths->size()));
+		objects = Stage::StageLoader::Load(kIslandPaths->at(islandIndex));
+		for (auto& object : objects)
+		{
+			island->AddToChild(std::move(object));
+		}
+
+		dir += Random::Range(-generateRangeRad * 0.5f, generateRangeRad * 0.5f);
+		float distance = Random::Range(kGenerateRangeHMinDistance, kGenerateRangeHMaxDistance);
+		generatePos += Vector3(
+			std::sin(dir) * distance,
+			Random::Range(kGenerateRangeVMinDistance, kGenerateRangeVMaxDistance),
+			-std::cos(dir) * distance
+		);
+
+		island->GetTransform()->localPosition = generatePos;
+
+		islands.emplace_back(std::move(island));
 
 		return islands;
 	}

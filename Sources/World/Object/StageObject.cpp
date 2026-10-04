@@ -20,7 +20,6 @@ StageObject::StageObject(const StageObjectParam& param, std::shared_ptr<Resource
 		this,
 		Collision::Tag::Body
 	);
-	mCollider->GetShape()->SetPosition(mTransform->CalculateWorldPosition());
 }
 
 void StageObject::Init()
@@ -30,6 +29,7 @@ void StageObject::Init()
 
 void StageObject::Update()
 {
+	mCollider->GetShape()->SetPosition(mTransform->CalculateWorldPosition());
 }
 
 void StageObject::Draw()
