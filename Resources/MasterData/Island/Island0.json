@@ -1,0 +1,130 @@
+[
+  {
+    "name": "block-grass-overhang-large-tall",
+    "transform": {
+      "position": {
+        "x": 0.0,
+        "y": -200.0,
+        "z": 42.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 208.21,
+        "y": 200.0,
+        "z": 208.21
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 100.0,
+        "z": 0.0
+      }
+    }
+  },
+  {
+    "name": "block-grass-overhang-large",
+    "transform": {
+      "position": {
+        "x": 50.0,
+        "y": -100.0,
+        "z": -58.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 208.21,
+        "y": 100.0,
+        "z": 208.21
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 50.0,
+        "z": 0.0
+      }
+    }
+  },
+  {
+    "name": "block-grass-overhang-large",
+    "transform": {
+      "position": {
+        "x": -70.0,
+        "y": -100.0,
+        "z": -8.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 208.21,
+        "y": 100.0,
+        "z": 208.21
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 50.0,
+        "z": 0.0
+      }
+    }
+  },
+  {
+    "name": "block-grass-overhang-edge",
+    "transform": {
+      "position": {
+        "x": 50.0,
+        "y": -100.0,
+        "z": 142.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 108.21000000000001,
+        "y": 100.0,
+        "z": 108.21000000000001
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 50.0,
+        "z": 0.0
+      }
+    }
+  }
+]
