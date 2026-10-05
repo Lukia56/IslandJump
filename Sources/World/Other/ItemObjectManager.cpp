@@ -3,10 +3,15 @@
 #include "../Object/ItemObject.h"
 #include "../Object/ItemTextureDataBase.h"
 #include "RootObject.h"
-#include "Utility/Random.h"
-
 #include "System/ResourceManager.h"
 #include "System/Resource/Texture.h"
+#include "Utility/Random.h"
+#include "Utility/Data/CSV/CsvLoader.h"
+
+namespace
+{
+	const char* const kEffectParamPath = "Resources\\MasterData\\ItemEffectParam.csv";
+}
 
 ItemObjectManager::ItemObjectManager(int itemNum) :
 	mActiveItemRoot(nullptr),
@@ -34,6 +39,8 @@ void ItemObjectManager::Init()
 		std::shared_ptr<Resource::ResourceBase> texture = ResourceManager::GetInstance().GetResource<Resource::Texture>(filePath);
 		mTextures[i] = texture;
 	}
+
+	mEffectParams = Data::Csv::LoadCsvAs<ItemEffectParam>(kEffectParamPath);
 }
 
 void ItemObjectManager::Update()
