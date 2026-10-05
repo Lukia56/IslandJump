@@ -2,11 +2,13 @@
 #include "SceneSelectDebug.h"
 #include "Camera/CameraFollow.h"
 #include "Camera/CameraManager.h"
+#include "Observer/Subject.h"
 #include "System/Input/Keyboard.h"
 #include "System/Input/Mouse.h"
 #include "World/Character/Player.h"
+#include "World/Object/GoalObject.h"
+#include "World/Object/GoalTrigger.h"
 #include "World/Other/StageManager.h"
-#include "World/Test/TestTerrain.h"
 
 namespace
 {
@@ -20,12 +22,13 @@ SceneStageTest::SceneStageTest() :
 
 void SceneStageTest::OnInit()
 {
-	StageManager* stageManager = CreateToRoot<StageManager>(kStageDataPath);
+	StageManager* stageManager = CreateToRoot<StageManager>();
 
 	mPlayer = CreateToRoot<Player>();
 	mPlayer->GetTransform()->Translate(0.0f, 100.0f, 0.0f);
 
-	CreateToRoot<TestTerrain>(Vector3(1000.0f, 100.0f, 1000.0f));
+	GoalTrigger* goalTrigger = stageManager->GetGoalObject()->GetTrigger();
+	goalTrigger->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 
 	GetCameraManager()->AddCamera(Camera::Type::Follow, std::make_unique<CameraFollow>(mPlayer->GetTransform()));
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Follow);
