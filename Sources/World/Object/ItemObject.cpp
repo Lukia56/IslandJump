@@ -1,20 +1,22 @@
 #include "ItemObject.h"
-#include <DxLib.h>
 #include "../Component/Collider3D.h"
+#include "../Component/Rendering/BillboardRenderer.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
-#include "Utility/Color.h"
+#include "System/Resource/ResourceBase.h"
 
 namespace
 {
-	constexpr Vector3 kOffsetPos{ 0.0f, 50.0f, 0.0f };
+	constexpr Vector3 kOffsetPos{ 0.0f, 100.0f, 0.0f };
 
-	constexpr float kBodyCollRadius = 20.0f;
+	constexpr float kBodyCollRadius = 50.0f;
 }
 
 ItemObject::ItemObject() :
-	mCollider(nullptr)
+	mCollider(nullptr),
+	mBillboard(nullptr)
 {
+	mBillboard = std::make_unique<BillboardRenderer>(this, nullptr);
 }
 
 void ItemObject::Init()
@@ -35,16 +37,19 @@ void ItemObject::Update()
 	mCollider->GetShape()->SetPosition(worldPos);
 }
 
+void ItemObject::Draw()
+{
+	mBillboard->Draw();
+}
+
 void ItemObject::DebugDraw()
 {
-	Vector3 pos = mTransform->CalculateWorldPosition();
-
-	DrawSphere3D(pos.GetAsDxLibVector(), 20.0f, 8, Color::magenta.GetAsHexRGB(), Color::magenta.GetAsHexRGB(), true);
-
 	mCollider->GetShape()->DebugDraw();
 }
 
-void ItemObject::Setup(const Vector3& spawnPos)
+void ItemObject::Setup(const Vector3& spawnPos, std::shared_ptr<Resource::ResourceBase> texture)
 {
 	mTransform->localPosition = spawnPos + kOffsetPos;
+
+	mBillboard->SetResource(texture);
 }
