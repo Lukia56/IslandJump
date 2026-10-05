@@ -14,7 +14,7 @@ ItemSpawnerManager::ItemSpawnerManager(GameObject* stageManager, LandTerrainReco
 	std::vector<std::unique_ptr<GameObject>>& objects = stageManager->GetTransform()->GetChildren();
 
 	std::vector<size_t> indices;
-	for (int i = 0; i < objects.size(); i++)
+	for (int i = 0; i < objects.size() - 1; i++)
 	{
 		indices.emplace_back(i);
 	}

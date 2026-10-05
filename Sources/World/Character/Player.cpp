@@ -160,7 +160,7 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 		mOnGround = true;
 		if (Math::IsNearZero(mVelocity.y)) mIsJumping = false;
 
-		Transform* oppTransform = oppCollider->GetOwner()->GetTransform();
+		Transform* oppTransform = oppCollider->GetOwner()->GetTransform()->GetParent();
 		mLandTerrainRecorder->UpdateLandTerrain(oppTransform);
 
 		return;

@@ -8,11 +8,13 @@
 #include "World/Character/Player.h"
 #include "World/Object/GoalObject.h"
 #include "World/Object/GoalTrigger.h"
+#include "World/Other/ItemObjectManager.h"
+#include "World/Other/ItemSpawnerManager.h"
 #include "World/Other/StageManager.h"
 
 namespace
 {
-	const char* const kStageDataPath = "Resources\\MasterData\\MainStage.json";
+	constexpr int kItemNum = 10;
 }
 
 SceneStageTest::SceneStageTest() :
@@ -24,11 +26,15 @@ void SceneStageTest::OnInit()
 {
 	StageManager* stageManager = CreateToRoot<StageManager>();
 
-	mPlayer = CreateToRoot<Player>();
+	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(kItemNum);
+
+	mPlayer = CreateToRoot<Player>(itemObjectManager);
 	mPlayer->GetTransform()->Translate(0.0f, 100.0f, 0.0f);
 
 	GoalTrigger* goalTrigger = stageManager->GetGoalObject()->GetTrigger();
 	goalTrigger->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
+
+	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder(), itemObjectManager, kItemNum);
 
 	GetCameraManager()->AddCamera(Camera::Type::Follow, std::make_unique<CameraFollow>(mPlayer->GetTransform()));
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Follow);
