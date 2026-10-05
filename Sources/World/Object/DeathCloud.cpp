@@ -2,6 +2,7 @@
 #include "../Component/Collider3D.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
+#include "Observer/Subject.h"
 #include "System/TimeManager.h"
 
 namespace
@@ -13,9 +14,11 @@ namespace
 
 DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos) :
 	mGoalPos(goalPos),
+	mIsTriggered(false),
 	mCollider(nullptr)
 {
 	mTransform->localPosition = initPos;
+	mEventSubject = std::make_unique<Observer::Subject>();
 }
 
 void DeathCloud::Init()
@@ -50,4 +53,16 @@ void DeathCloud::PhysicsUpdate()
 void DeathCloud::DebugDraw()
 {
 	mCollider->GetShape()->DebugDraw();
+}
+
+void DeathCloud::ResolveCollision(const Collision::Result& result, const Collider3D* myCollider, const Collider3D* oppCollider)
+{
+	if (mIsTriggered) return;
+
+	// プレイヤーとの接触時のみ処理を行う
+	if (oppCollider->GetOwner()->GetTag() != GameObject::Tag::Player) return;
+
+	mIsTriggered = true;
+
+	mEventSubject->Notify(Observer::Event::FallCloudPlayer);
 }

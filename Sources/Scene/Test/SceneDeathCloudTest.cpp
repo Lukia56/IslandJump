@@ -2,12 +2,13 @@
 #include "SceneSelectDebug.h"
 #include "Camera/CameraFollow.h"
 #include "Camera/CameraManager.h"
+#include "Observer/Subject.h"
 #include "System/Input/Keyboard.h"
 #include "System/Input/Mouse.h"
 #include "World/Character/Player.h"
 #include "World/Object/DebugGround.h"
 #include "World/Object/DeathCloud.h"
-#include "World/Object/GoalTrigger.h"
+#include "World/Object/GoalObject.h"
 #include "World/Test/TestTerrain.h"
 
 namespace
@@ -27,7 +28,7 @@ void SceneDeathCloudTest::OnInit()
 	mPlayer = CreateToRoot<Player>();
 	mPlayer->GetTransform()->localPosition = Vector3(100.0f, 200.0f, 0.0f);
 
-	GoalTrigger* goal = CreateToRoot<GoalTrigger>();
+	GoalObject* goal = CreateToRoot<GoalObject>();
 	goal->GetTransform()->localPosition = Vector3(0.0f, 600.0f, -300.0f);
 
 	CreateToRoot<TestTerrain>(Vector3(1000.0f, 100.0f, 1000.0f));
@@ -35,6 +36,7 @@ void SceneDeathCloudTest::OnInit()
 	Vector3 cloudInitPos = mPlayer->GetTransform()->localPosition + kDeathCloudOffsetPlayer;
 	Vector3 goalPos = goal->GetTransform()->CalculateWorldPosition();
 	DeathCloud* cloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos);
+	cloud->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 
 	GetCameraManager()->AddCamera(Camera::Type::Follow, std::make_unique<CameraFollow>(mPlayer->GetTransform()));
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Follow);

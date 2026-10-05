@@ -10,9 +10,19 @@ namespace Observer
 
 	void PlayerObserver::OnNotify(Event event)
 	{
-		if (event == Event::ReachGoal)
+		switch (event)
 		{
+		case Observer::Event::ReachGoal:
+
 			mPlayer->SetActive(false);
+			
+			break;
+
+		case Observer::Event::FallCloudPlayer:
+
+			mPlayer->SetActive(false);
+
+			break;
 		}
 	}
 }

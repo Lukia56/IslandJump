@@ -5,5 +5,6 @@ namespace Observer
 	enum class Event
 	{
 		ReachGoal,
+		FallCloudPlayer,
 	};
 }

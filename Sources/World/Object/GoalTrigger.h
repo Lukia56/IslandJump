@@ -3,10 +3,6 @@
 #include "../GameObject.h"
 
 class Collider3D;
-namespace UI
-{
-	class UIManager;
-}
 namespace Observer
 {
 	class Subject;
