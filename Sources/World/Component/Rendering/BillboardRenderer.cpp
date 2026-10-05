@@ -26,3 +26,15 @@ void BillboardRenderer::Draw() const
 
 	DrawBillboard3D(pos, 0.5f, 0.5f, mTexWidth * scale.x, rot.z, mResource->GetHandle(), true);
 }
+
+void BillboardRenderer::SetResource(std::shared_ptr<Resource::ResourceBase> resource)
+{
+	Renderer::SetResource(resource);
+
+	if (resource)
+	{
+		// ‰æ‘œ‚ÌƒTƒCƒY‚ðŽæ“¾
+		float height;
+		GetGraphSizeF(resource->GetHandle(), &mTexWidth, &height);
+	}
+}

@@ -26,3 +26,15 @@ void SpriteRenderer::Draw() const
 
 	DrawRotaGraphFast3F(pos.x, pos.y, mTexHalfSize.x, mTexHalfSize.y, scale.x, scale.y, rot.z, mResource->GetHandle(), true);
 }
+
+void SpriteRenderer::SetResource(std::shared_ptr<Resource::ResourceBase> resource)
+{
+	Renderer::SetResource(resource);
+
+	if (resource)
+	{
+		// ‰æ‘œ‚Ì”¼Œa‚ðŽæ“¾
+		GetGraphSizeF(resource->GetHandle(), &mTexHalfSize.x, &mTexHalfSize.y);
+		mTexHalfSize *= 0.5f;
+	}
+}

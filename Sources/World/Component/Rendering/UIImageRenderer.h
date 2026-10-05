@@ -21,6 +21,8 @@ public:
 
 public:
 
+	void SetResource(std::shared_ptr<Resource::ResourceBase> resource) override;
+
 	/// <summary>
 	/// スケーリングしたテクスチャのサイズを取得する
 	/// </summary>

@@ -32,6 +32,16 @@ void UIImageRenderer::Draw() const
 		mResource->GetHandle(), true);
 }
 
+void UIImageRenderer::SetResource(std::shared_ptr<Resource::ResourceBase> resource)
+{
+	Renderer::SetResource(resource);
+
+	if (resource)
+	{
+		GetGraphSizeF(resource->GetHandle(), &mTexSize.x, &mTexSize.y);
+	}
+}
+
 Vector2 UIImageRenderer::GetTexSize() const
 {
 	Vector3 worldScale = mRectTransform->CalculateWorldScale();

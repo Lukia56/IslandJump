@@ -23,6 +23,8 @@ public:
 
 public:
 
+	virtual void SetResource(std::shared_ptr<Resource::ResourceBase> resource) { mResource = resource; }
+
 	void SetOffsetPos(const Vector3& offsetPos) { mOffsetPos = offsetPos; }
 
 protected:

@@ -48,6 +48,17 @@ void ModelRenderer::DisableMovement(const std::string& rootName)
 	MV1SetFrameUserLocalMatrix(handle, rootFrameIndex, rootMtx);
 }
 
+void ModelRenderer::SetResource(std::shared_ptr<Resource::ResourceBase> resource)
+{
+	Renderer::SetResource(resource);
+
+	mModelInstance.reset();
+	if (resource)
+	{
+		mModelInstance = std::make_unique<ModelInstance>(resource);
+	}
+}
+
 int ModelRenderer::GetHandle() const
 {
 	if (!mModelInstance) return -1;

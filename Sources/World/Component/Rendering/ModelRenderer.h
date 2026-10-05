@@ -27,6 +27,8 @@ public:
 
 public:
 
+	void SetResource(std::shared_ptr<Resource::ResourceBase> resource) override;
+
 	int GetHandle() const;
 
 private:

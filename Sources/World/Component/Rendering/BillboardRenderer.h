@@ -17,6 +17,10 @@ public:
 	/// </summary>
 	void Draw() const override;
 
+public:
+
+	void SetResource(std::shared_ptr<Resource::ResourceBase> resource) override;
+
 private:
 
 	float mTexWidth;
