@@ -66,6 +66,8 @@ private:
 
 	bool mIsJumping;
 
+	float mBonusJumpForce;
+
 	bool mOnGround;
 
 	std::vector<std::unique_ptr<Collider3D>> mColliders;

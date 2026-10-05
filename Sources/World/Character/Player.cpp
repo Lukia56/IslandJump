@@ -7,6 +7,7 @@
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "Observer/PlayerObserver.h"
+#include "Param/Param.h"
 #include "System/InputManager.h"
 #include "System/TimeManager.h"
 #include "Utility/Math.h"
@@ -51,6 +52,7 @@ Player::Player(ItemObjectManager* itemObjectManager) :
 	mJumpBufferTimer(0.0f),
 	mForceJumpTimer(0.0f),
 	mIsJumping(false),
+	mBonusJumpForce(0.0f),
 	mOnGround(false),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(itemObjectManager),
@@ -188,7 +190,20 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 
 		if (mItemObjectManager)
 		{
-			mItemObjectManager->ConsumeItem(oppCollider->GetOwner()->GetTransform());
+			ItemType itemType = mItemObjectManager->ConsumeItem(oppCollider->GetOwner()->GetTransform());
+
+			switch (itemType)
+			{
+			case ItemType::JumpBoost:
+				mBonusJumpForce += mItemObjectManager->GetEffectParam(itemType).param;
+				break;
+
+			case ItemType::SpeedUp:
+				break;
+
+			case ItemType::AerialControl:
+				break;
+			}
 		}
 
 		break;
@@ -233,7 +248,7 @@ void Player::MoveVertical(float deltaTime)
 	// ƒWƒƒƒ“ƒv
 	if (InputManager::GetInstance().IsPressed(Input::Action::Jump) && CanJump())
 	{
-		mVelocity.y = kJumpForce;
+		mVelocity.y = kJumpForce + mBonusJumpForce;
 		mIsJumping = true;
 		mJumpBufferTimer = 0.0f;
 		mForceJumpTimer = kForceJumpTime;
