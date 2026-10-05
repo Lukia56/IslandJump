@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\World\Object\GoalObject.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneLoadStageTest.cpp" />
     <ClCompile Include="Sources\Observer\PlayerObserver.cpp" />
     <ClCompile Include="Sources\Observer\ShowGoalUI.cpp" />
@@ -242,6 +243,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\World\Object\GoalObject.h" />
     <ClInclude Include="Sources\Scene\Test\SceneLoadStageTest.h" />
     <ClInclude Include="Sources\Observer\PlayerObserver.h" />
     <ClInclude Include="Sources\Observer\IObserver.h" />
