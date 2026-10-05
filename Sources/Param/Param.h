@@ -46,3 +46,9 @@ struct ItemTextureData
 	ItemType itemType = ItemType::Invalid;
 	std::string filePath = "";
 };
+
+struct ItemEffectParam
+{
+	ItemType itemType = ItemType::Invalid;
+	float param = 0.0f;
+};

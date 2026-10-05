@@ -93,5 +93,17 @@ namespace Data
 				return param;
 			}
 		};
+
+		template <>
+		struct FromCsv<ItemEffectParam>
+		{
+			static ItemEffectParam Binding(const Row& row)
+			{
+				ItemEffectParam param;
+				param.itemType = Get<ItemType>(row, "itemID");
+				param.param = Get<float>(row, "param");
+				return param;
+			}
+		};
 	}
 }
