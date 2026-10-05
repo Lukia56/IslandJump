@@ -2,6 +2,7 @@
 
 #include "../GameObject.h"
 #include <stack>
+#include "../Object/ItemType.h"
 
 class ItemObject;
 
@@ -21,7 +22,7 @@ public:
 
 	void CreateItem(const Vector3& pos);
 
-	void ConsumeItem(Transform* itemTransform);
+	ItemType ConsumeItem(Transform* itemTransform);
 
 private:
 

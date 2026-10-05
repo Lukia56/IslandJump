@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../GameObject.h"
+#include "ItemType.h"
 
 class Collider3D;
 class BillboardRenderer;
@@ -27,9 +28,15 @@ public:
 
 	void DebugDraw() override;
 
-	void Setup(const Vector3& spawnPos, std::shared_ptr<Resource::ResourceBase> texture);
+	void Setup(const Vector3& spawnPos, std::shared_ptr<Resource::ResourceBase> texture, ItemType itemType);
+
+public:
+
+	ItemType GetItemType() const { return mItemType; }
 
 private:
+
+	ItemType mItemType;
 
 	std::unique_ptr<Collider3D> mCollider;
 

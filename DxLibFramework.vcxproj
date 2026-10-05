@@ -255,6 +255,7 @@
     <ClInclude Include="Sources\Scene\Test\SceneGoalTest.h" />
     <ClInclude Include="Sources\World\Object\DeathCloud.h" />
     <ClInclude Include="Sources\World\Object\GoalTrigger.h" />
+    <ClInclude Include="Sources\World\Object\ItemType.h" />
     <ClInclude Include="Sources\World\Other\ItemObjectManager.h" />
     <ClInclude Include="Sources\Scene\Test\SceneItemSpawnerTest.h" />
     <ClInclude Include="Sources\World\Character\LandTerrainRecorder.h" />

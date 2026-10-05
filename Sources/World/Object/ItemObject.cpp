@@ -13,6 +13,7 @@ namespace
 }
 
 ItemObject::ItemObject() :
+	mItemType(ItemType::Invalid),
 	mCollider(nullptr),
 	mBillboard(nullptr)
 {
@@ -47,9 +48,11 @@ void ItemObject::DebugDraw()
 	mCollider->GetShape()->DebugDraw();
 }
 
-void ItemObject::Setup(const Vector3& spawnPos, std::shared_ptr<Resource::ResourceBase> texture)
+void ItemObject::Setup(const Vector3& spawnPos, std::shared_ptr<Resource::ResourceBase> texture, ItemType itemType)
 {
 	mTransform->localPosition = spawnPos + kOffsetPos;
 
 	mBillboard->SetResource(texture);
+
+	mItemType = itemType;
 }

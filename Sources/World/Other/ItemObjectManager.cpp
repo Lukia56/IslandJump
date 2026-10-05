@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "../Object/ItemObject.h"
 #include "RootObject.h"
+#include "Utility/Random.h"
 
 #include "System/ResourceManager.h"
 #include "System/Resource/Texture.h"
@@ -36,6 +37,9 @@ void ItemObjectManager::Update()
 
 void ItemObjectManager::CreateItem(const Vector3& pos)
 {
+	// ランダムなアイテムの種類を取得
+	ItemType itemType = static_cast<ItemType>(Random::Range(0, static_cast<int>(ItemType::Length)));
+
 	// TODO: アイテムごとのアイコンの配列から取り出すようにする
 	auto res = ResourceManager::GetInstance().GetResource<Resource::Texture>(kTempTexPath);
 
@@ -43,22 +47,24 @@ void ItemObjectManager::CreateItem(const Vector3& pos)
 	ItemObject* item = mPoolItems.top();
 
 	item->GetTransform()->ChangeParent(mActiveItemRoot->GetTransform());
-	item->Setup(pos, res);
+	item->Setup(pos, res, itemType);
 
 	mPoolItems.pop();
 	mActiveItems.emplace_back(item);
 }
 
-void ItemObjectManager::ConsumeItem(Transform* itemTransform)
+ItemType ItemObjectManager::ConsumeItem(Transform* itemTransform)
 {
 	auto iter = std::find_if(mActiveItems.begin(), mActiveItems.end(), [&itemTransform](ItemObject* item)
 		{
 			return item->GetTransform() == itemTransform;
 		});
 
-	if (iter == mActiveItems.end()) return;
+	if (iter == mActiveItems.end()) return ItemType::Invalid;
 
 	ItemObject* item = *iter;
+
+	ItemType itemType = item->GetItemType();
 
 	// プールに移動させる
 	item->GetTransform()->ChangeParent(mPoolItemRoot->GetTransform());
@@ -66,5 +72,5 @@ void ItemObjectManager::ConsumeItem(Transform* itemTransform)
 	mActiveItems.erase(iter);
 	mPoolItems.emplace(item);
 
-	// TODO: アイテムの効果を返す
+	return itemType;
 }
