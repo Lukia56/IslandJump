@@ -29,7 +29,7 @@ namespace
 
 namespace Stage
 {
-	std::vector<std::unique_ptr<GameObject>> StageGenerator::Generate()
+	std::vector<std::unique_ptr<GameObject>> StageGenerator::Generate(Vector3& goalPos)
 	{
 		std::vector<std::unique_ptr<GameObject>> islands;
 
@@ -71,6 +71,15 @@ namespace Stage
 
 			islands.emplace_back(std::move(island));
 		}
+
+		// ƒS[ƒ‹‚ÌÀ•W‚ğŒvZ‚·‚é
+		float distance = Random::Range(kGenerateRangeHMinDistance, kGenerateRangeHMaxDistance);
+		generatePos += Vector3(
+			std::sin(dir) * distance,
+			Random::Range(kGenerateRangeVMinDistance, kGenerateRangeVMaxDistance),
+			std::cos(dir) * distance
+		);
+		goalPos = generatePos;
 
 		return islands;
 	}

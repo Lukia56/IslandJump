@@ -9,7 +9,7 @@ SceneLoadStageTest::SceneLoadStageTest()
 
 void SceneLoadStageTest::OnInit()
 {
-	CreateToRoot<StageManager>();
+	StageManager* stageManager = CreateToRoot<StageManager>();
 
 	GetCameraManager()->AddCamera(Camera::Type::DebugFree, std::make_unique<CameraDebugFree>());
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::DebugFree);

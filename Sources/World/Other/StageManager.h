@@ -3,6 +3,8 @@
 #include "../GameObject.h"
 #include <string>
 
+class GoalObject;
+
 /// <summary>
 /// ステージを生成し、管理するクラス
 /// </summary>
@@ -15,4 +17,12 @@ public:
 
 	void Init() override;
 	void Update() override;
+
+public:
+
+	GoalObject* GetGoalObject() const { return mGoalObject; }
+
+private:
+
+	GoalObject* mGoalObject;
 };

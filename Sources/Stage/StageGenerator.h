@@ -1,8 +1,8 @@
 #pragma once
 
-#include <string>
 #include <memory>
 #include <vector>
+#include "Utility/Vector.h"
 
 class GameObject;
 
@@ -12,6 +12,6 @@ namespace Stage
 	{
 	public:
 
-		static std::vector<std::unique_ptr<GameObject>> Generate();
+		static std::vector<std::unique_ptr<GameObject>> Generate(Vector3& goalPos);
 	};
 }
