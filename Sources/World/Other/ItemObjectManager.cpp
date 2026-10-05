@@ -1,16 +1,12 @@
 #include "ItemObjectManager.h"
 #include <algorithm>
 #include "../Object/ItemObject.h"
+#include "../Object/ItemTextureDataBase.h"
 #include "RootObject.h"
 #include "Utility/Random.h"
 
 #include "System/ResourceManager.h"
 #include "System/Resource/Texture.h"
-
-namespace
-{
-	const char* const kTempTexPath = "Resources\\Sprite\\TempItem.png";
-}
 
 ItemObjectManager::ItemObjectManager(int itemNum) :
 	mActiveItemRoot(nullptr),
@@ -29,6 +25,15 @@ ItemObjectManager::ItemObjectManager(int itemNum) :
 void ItemObjectManager::Init()
 {
 	mActiveItemRoot = CreateToChild<RootObject>();
+
+	ItemTextureDataBase textureDataBase;
+
+	for (int i = 0; i < static_cast<int>(ItemType::Length); i++)
+	{
+		std::string filePath = textureDataBase.GetFilePath(static_cast<ItemType>(i));
+		std::shared_ptr<Resource::ResourceBase> texture = ResourceManager::GetInstance().GetResource<Resource::Texture>(filePath);
+		mTextures[i] = texture;
+	}
 }
 
 void ItemObjectManager::Update()
@@ -40,14 +45,11 @@ void ItemObjectManager::CreateItem(const Vector3& pos)
 	// ランダムなアイテムの種類を取得
 	ItemType itemType = static_cast<ItemType>(Random::Range(0, static_cast<int>(ItemType::Length)));
 
-	// TODO: アイテムごとのアイコンの配列から取り出すようにする
-	auto res = ResourceManager::GetInstance().GetResource<Resource::Texture>(kTempTexPath);
-
 	// プールから取り出す
 	ItemObject* item = mPoolItems.top();
 
 	item->GetTransform()->ChangeParent(mActiveItemRoot->GetTransform());
-	item->Setup(pos, res, itemType);
+	item->Setup(pos, mTextures[static_cast<int>(itemType)], itemType);
 
 	mPoolItems.pop();
 	mActiveItems.emplace_back(item);

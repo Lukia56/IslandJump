@@ -1,10 +1,15 @@
 #pragma once
 
 #include "../GameObject.h"
+#include <array>
 #include <stack>
 #include "../Object/ItemType.h"
 
 class ItemObject;
+namespace Resource
+{
+	class ResourceBase;
+}
 
 /// <summary>
 /// 配置されるアイテムをプールで管理する
@@ -28,6 +33,8 @@ private:
 
 	GameObject* mActiveItemRoot;
 	GameObject* mPoolItemRoot;
+
+	std::array<std::shared_ptr<Resource::ResourceBase>, static_cast<int>(ItemType::Length)> mTextures;
 
 	std::vector<ItemObject*> mActiveItems;
 	std::stack<ItemObject*> mPoolItems;
