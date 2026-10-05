@@ -4,6 +4,7 @@
 #include "TempParam.h"
 #include "Collision/CollisionTag.h"
 #include "Utility/Vector.h"
+#include "World/Object/ItemType.h"
 
 struct WindowConfigs
 {
@@ -37,5 +38,11 @@ struct StageObjectParam
 struct StageModelData
 {
 	std::string objectName = "";
+	std::string filePath = "";
+};
+
+struct ItemTextureData
+{
+	ItemType itemType = ItemType::Invalid;
 	std::string filePath = "";
 };

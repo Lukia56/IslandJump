@@ -4,6 +4,7 @@
 #include <sstream>
 #include "Collision/CollisionTag.h"
 #include "Utility/Vector.h"
+#include "World/Object/ItemType.h"
 
 namespace Data
 {
@@ -87,6 +88,12 @@ namespace Data
 		inline Collision::Tag Convert<Collision::Tag>(const std::string& str)
 		{
 			return static_cast<Collision::Tag>(std::stoi(str));
+		}
+
+		template <>
+		inline ItemType Convert<ItemType>(const std::string& str)
+		{
+			return static_cast<ItemType>(std::stoi(str));
 		}
 	}
 }

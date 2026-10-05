@@ -81,5 +81,17 @@ namespace Data
 				return param;
 			}
 		};
+
+		template <>
+		struct FromCsv<ItemTextureData>
+		{
+			static ItemTextureData Binding(const Row& row)
+			{
+				ItemTextureData param;
+				param.itemType = Get<ItemType>(row, "itemID");
+				param.filePath = Get<std::string>(row, "filePath");
+				return param;
+			}
+		};
 	}
 }
