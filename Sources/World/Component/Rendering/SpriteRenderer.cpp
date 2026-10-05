@@ -5,7 +5,7 @@
 
 SpriteRenderer::SpriteRenderer(GameObject* owner, std::shared_ptr<Resource::ResourceBase> resource) :
 	Renderer(owner, resource),
-	mTexHalfSize(Vector2::One)
+	mTexHalfSize(Vector2::Zero)
 {
 	if (resource)
 	{
