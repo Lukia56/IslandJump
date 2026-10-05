@@ -68,6 +68,10 @@ private:
 
 	float mBonusJumpForce;
 
+	float mBonusMoveSpeed;
+
+	float mBonusMoveAccel;
+
 	bool mOnGround;
 
 	std::vector<std::unique_ptr<Collider3D>> mColliders;

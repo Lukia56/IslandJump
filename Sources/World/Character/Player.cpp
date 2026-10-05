@@ -37,6 +37,9 @@ Player::Player() :
 	mJumpBufferTimer(0.0f),
 	mForceJumpTimer(0.0f),
 	mIsJumping(false),
+	mBonusJumpForce(0.0f),
+	mBonusMoveSpeed(0.0f),
+	mBonusMoveAccel(0.0f),
 	mOnGround(false),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(nullptr),
@@ -53,6 +56,8 @@ Player::Player(ItemObjectManager* itemObjectManager) :
 	mForceJumpTimer(0.0f),
 	mIsJumping(false),
 	mBonusJumpForce(0.0f),
+	mBonusMoveSpeed(0.0f),
+	mBonusMoveAccel(0.0f),
 	mOnGround(false),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(itemObjectManager),
@@ -195,10 +200,12 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 			switch (itemType)
 			{
 			case ItemType::JumpBoost:
-				mBonusJumpForce += mItemObjectManager->GetEffectParam(itemType).param;
+				mBonusJumpForce += mItemObjectManager->GetEffectParam(itemType).param[0];
 				break;
 
 			case ItemType::SpeedUp:
+				mBonusMoveSpeed += mItemObjectManager->GetEffectParam(itemType).param[0];
+				mBonusMoveAccel += mItemObjectManager->GetEffectParam(itemType).param[1];
 				break;
 
 			case ItemType::AerialControl:
@@ -221,8 +228,8 @@ void Player::ResolvePush()
 
 void Player::MoveHorizontal(float deltaTime)
 {
-	float targetSpeed = kMoveSpeed;
-	float accel = kMoveAccel;
+	float targetSpeed = kMoveSpeed + mBonusMoveSpeed;
+	float accel = kMoveAccel + mBonusMoveSpeed * 0.1f;
 
 	Vector3 moveVec = InputManager::GetInstance().GetAsVector3(Input::Action::Move);
 

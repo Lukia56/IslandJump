@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include "TempParam.h"
 #include "Collision/CollisionTag.h"
 #include "Utility/Vector.h"
@@ -50,5 +51,5 @@ struct ItemTextureData
 struct ItemEffectParam
 {
 	ItemType itemType = ItemType::Invalid;
-	float param = 0.0f;
+	std::vector<float> param;
 };

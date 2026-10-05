@@ -101,7 +101,9 @@ namespace Data
 			{
 				ItemEffectParam param;
 				param.itemType = Get<ItemType>(row, "itemID");
-				param.param = Get<float>(row, "param");
+
+				param.param.emplace_back(Get<float>(row, "param0"));
+				param.param.emplace_back(Get<float>(row, "param1"));
 				return param;
 			}
 		};
