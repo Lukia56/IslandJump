@@ -72,6 +72,8 @@ private:
 
 	float mBonusMoveAccel;
 
+	float mAerialControl;
+
 	bool mOnGround;
 
 	std::vector<std::unique_ptr<Collider3D>> mColliders;

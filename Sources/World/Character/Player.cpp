@@ -40,6 +40,7 @@ Player::Player() :
 	mBonusJumpForce(0.0f),
 	mBonusMoveSpeed(0.0f),
 	mBonusMoveAccel(0.0f),
+	mAerialControl(0.0f),
 	mOnGround(false),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(nullptr),
@@ -58,6 +59,7 @@ Player::Player(ItemObjectManager* itemObjectManager) :
 	mBonusJumpForce(0.0f),
 	mBonusMoveSpeed(0.0f),
 	mBonusMoveAccel(0.0f),
+	mAerialControl(0.0f),
 	mOnGround(false),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(itemObjectManager),
@@ -209,6 +211,8 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 				break;
 
 			case ItemType::AerialControl:
+				mAerialControl += mItemObjectManager->GetEffectParam(itemType).param[0];
+				mAerialControl = Math::Min(mAerialControl, 1.0f);
 				break;
 			}
 		}
@@ -240,7 +244,7 @@ void Player::MoveHorizontal(float deltaTime)
 
 	if (moveVec != Vector3::Zero) mLastMoveVec = moveVec;
 
-	float accelCoef = mOnGround ? 1.0f : kAirResistanceCoef;
+	float accelCoef = mOnGround ? 1.0f : kAirResistanceCoef + (1.0f - kAirResistanceCoef) * mAerialControl;
 
 	// XÇ∆Zê¨ï™ÇæÇØï‚ä‘Ç≥ÇπÇÈ
 	Vector3 vel = Vector3(mVelocity.x, 0.0f, mVelocity.z);
