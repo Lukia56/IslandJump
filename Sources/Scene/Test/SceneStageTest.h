@@ -3,6 +3,7 @@
 #include "../SceneBase.h"
 
 class Player;
+class Skybox;
 
 class SceneStageTest : public SceneBase
 {
@@ -18,4 +19,6 @@ public:
 private:
 
 	Player* mPlayer;
+
+	Skybox* mSkybox;
 };
