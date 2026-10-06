@@ -2,6 +2,8 @@
 #include <imgui.h>
 #include "LandTerrainRecorder.h"
 #include "../Component/Collider3D.h"
+#include "../Component/ModelAnimator.h"
+#include "../Component/Rendering/ModelRenderer.h"
 #include "../Object/DebugGround.h"
 #include "../Other/ItemObjectManager.h"
 #include "Collision/Collision3D.h"
@@ -27,10 +29,16 @@ namespace
 	constexpr float kGravity = 980.0f;
 
 	constexpr Vector3 kBodyCollSize{ 100.0f, 100.0f, 100.0f };
-	constexpr Vector3 kBodyCollOffset{};
+	constexpr Vector3 kBodyCollOffset{ 0.0f, 50.0f, 0.0f };
 
 	constexpr Vector3 kFootCollSize{ 100.0f, 10.0f, 100.0f };
-	constexpr Vector3 kFootCollOffset{ 0.0f, -55.0f, 0.0f };
+	constexpr Vector3 kFootCollOffset{ 0.0f, -5.0f, 0.0f };
+
+	constexpr Vector3 kInitScale{ 0.5f, 0.5f, 0.5f };
+
+	constexpr float kYawLatency = 0.25;
+
+	constexpr float kModelAnimationFPS = 30.0f;
 }
 
 Player::Player() :
@@ -42,6 +50,7 @@ Player::Player() :
 	mBonusMoveAccel(0.0f),
 	mAerialControl(0.0f),
 	mOnGround(false),
+	mModel(nullptr),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(nullptr),
 	mCameraView{}
@@ -61,6 +70,7 @@ Player::Player(ItemObjectManager* itemObjectManager) :
 	mBonusMoveAccel(0.0f),
 	mAerialControl(0.0f),
 	mOnGround(false),
+	mModel(nullptr),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(itemObjectManager),
 	mCameraView{}
@@ -71,9 +81,36 @@ Player::Player(ItemObjectManager* itemObjectManager) :
 	mObserver = std::make_unique<Observer::PlayerObserver>(this);
 }
 
+Player::Player(std::shared_ptr<Resource::ResourceBase> model, ItemObjectManager* itemObjectManager) :
+	mJumpBufferTimer(0.0f),
+	mForceJumpTimer(0.0f),
+	mIsJumping(false),
+	mBonusJumpForce(0.0f),
+	mBonusMoveSpeed(0.0f),
+	mBonusMoveAccel(0.0f),
+	mAerialControl(0.0f),
+	mOnGround(false),
+	mModel(nullptr),
+	mLandTerrainRecorder(nullptr),
+	mItemObjectManager(itemObjectManager),
+	mCameraView{}
+{
+	// ItemSpawnerManagerのコンストラクタで必要なためここで生成
+	mLandTerrainRecorder = std::make_unique<LandTerrainRecorder>();
+
+	mObserver = std::make_unique<Observer::PlayerObserver>(this);
+
+	mModel = std::make_unique<ModelRenderer>(this, model);
+}
+
 void Player::Init()
 {
 	SetTag(Tag::Player);
+
+	mTransform->localScale = kInitScale;
+
+	mModelAnimator = std::make_unique<ModelAnimator>(mModel.get(), kModelAnimationFPS);
+	mModelAnimator->Play(AnimationParam{ .animIndex = 3, .isLoop = true, .isForcePlay = false });
 
 	mColliders.emplace_back(
 		std::make_unique<Collider3D>(
@@ -101,6 +138,16 @@ void Player::Update()
 	MoveHorizontal(deltaTime);
 	MoveVertical(deltaTime);
 
+	mModelAnimator->Update();
+
+	// 角度を設定する
+	if (mLastMoveVec != Vector3::Zero)
+	{
+		float targetYaw = std::atan2(mLastMoveVec.x, mLastMoveVec.z) + Math::kPi;
+		float yawDiff = targetYaw - mTransform->CalculateWorldRotation().y;
+		mTransform->localRotation.y += Math::NormalizeRadian(yawDiff) * kYawLatency;
+	}
+
 	if (!mOnGround && mJumpBufferTimer > 0.0f) mJumpBufferTimer -= TimeManager::GetDeltaTime();
 
 	if (mForceJumpTimer > 0.0f) mForceJumpTimer -= TimeManager::GetDeltaTime();
@@ -121,6 +168,7 @@ void Player::PhysicsUpdate()
 
 void Player::Draw()
 {
+	mModel->Draw();
 }
 
 void Player::DebugDraw()

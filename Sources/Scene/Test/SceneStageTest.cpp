@@ -17,6 +17,8 @@
 
 namespace
 {
+	const char* const kPlayerModelPath = "Resources\\Model\\Player.mv1";
+
 	const char* const kSkyboxModelPath = "Resources\\Model\\Skybox\\Skybox.mv1";
 
 	constexpr int kItemNum = 10;
@@ -37,7 +39,8 @@ void SceneStageTest::OnInit()
 
 	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(kItemNum);
 
-	mPlayer = CreateToRoot<Player>(itemObjectManager);
+	std::shared_ptr<Resource::ResourceBase> playerModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kPlayerModelPath);
+	mPlayer = CreateToRoot<Player>(playerModel, itemObjectManager);
 	mPlayer->GetTransform()->Translate(0.0f, 100.0f, 0.0f);
 
 	GoalTrigger* goalTrigger = stageManager->GetGoalObject()->GetTrigger();

@@ -5,9 +5,15 @@
 #include "Camera/CameraProperty.h"
 #include "Utility/Vector.h"
 
+class ModelRenderer;
+class ModelAnimator;
 class Collider3D;
 class LandTerrainRecorder;
 class ItemObjectManager;
+namespace Resource
+{
+	class ResourceBase;
+}
 namespace Observer
 {
 	class IObserver;
@@ -19,6 +25,7 @@ public:
 
 	Player();
 	Player(ItemObjectManager* itemObjectManager);
+	Player(std::shared_ptr<Resource::ResourceBase> model, ItemObjectManager* itemObjectManager);
 
 	void Init() override;
 
@@ -75,6 +82,10 @@ private:
 	float mAerialControl;
 
 	bool mOnGround;
+
+	std::unique_ptr<ModelRenderer> mModel;
+
+	std::unique_ptr<ModelAnimator> mModelAnimator;
 
 	std::vector<std::unique_ptr<Collider3D>> mColliders;
 
