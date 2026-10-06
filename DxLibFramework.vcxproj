@@ -246,6 +246,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\World\Character\PlayerAnimation.h" />
     <ClInclude Include="Sources\World\Object\Skybox.h" />
     <ClInclude Include="Sources\World\Object\ItemTextureDataBase.h" />
     <ClInclude Include="Sources\World\Component\Rendering\BillboardRenderer.h" />
