@@ -335,6 +335,14 @@ void Player::AnimationUpdate()
 {
 	PlayerAnimation nextAnim = PlayerAnimation::Idle;
 
+	if (mOnGround)
+	{
+		if (InputManager::GetInstance().GetAsVector3(Input::Action::Move) != Vector3::Zero)
+		{
+			nextAnim = PlayerAnimation::Run;
+		}
+	}
+
 	if (mCurrentAnimation != nextAnim)
 	{
 		mCurrentAnimation = nextAnim;

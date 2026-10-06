@@ -1,6 +1,6 @@
 animIndex,_selectAnim,isLoop,isForcePlay
 3,Idle,1,0
 11,Run,1,0
-6,JumpIn,0,0
+6,JumpIn,0,1
 7,JumpLoop,1,0
 8,Land,0,0
