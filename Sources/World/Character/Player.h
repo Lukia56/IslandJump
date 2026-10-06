@@ -2,7 +2,9 @@
 
 #include "../GameObject.h"
 #include <vector>
+#include "PlayerAnimation.h"
 #include "Camera/CameraProperty.h"
+#include "Param/Param.h"
 #include "Utility/Vector.h"
 
 class ModelRenderer;
@@ -25,7 +27,7 @@ public:
 
 	Player();
 	Player(ItemObjectManager* itemObjectManager);
-	Player(std::shared_ptr<Resource::ResourceBase> model, ItemObjectManager* itemObjectManager);
+	Player(std::shared_ptr<Resource::ResourceBase> model, std::vector<AnimationParam> animationParams, ItemObjectManager* itemObjectManager);
 
 	void Init() override;
 
@@ -55,9 +57,16 @@ private:
 
 	void MoveVertical(float deltaTime);
 
+	void AnimationUpdate();
+
 	bool CanJump() const;
 
 	bool CanCancelJump() const;
+
+	/// <summary>
+	/// éÊìæÇ…é∏îsÇµÇΩÇÁåxçêÇï\é¶Ç∑ÇÈ
+	/// </summary>
+	const AnimationParam& GetAnimationParam(PlayerAnimation anim) const;
 
 private:
 
@@ -82,6 +91,10 @@ private:
 	float mAerialControl;
 
 	bool mOnGround;
+
+	PlayerAnimation mCurrentAnimation;
+
+	std::vector<AnimationParam> mAnimationParams;
 
 	std::unique_ptr<ModelRenderer> mModel;
 

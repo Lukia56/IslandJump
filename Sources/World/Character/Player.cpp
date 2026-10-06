@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <cassert>
 #include <imgui.h>
 #include "LandTerrainRecorder.h"
 #include "../Component/Collider3D.h"
@@ -50,6 +51,7 @@ Player::Player() :
 	mBonusMoveAccel(0.0f),
 	mAerialControl(0.0f),
 	mOnGround(false),
+	mCurrentAnimation(PlayerAnimation::Idle),
 	mModel(nullptr),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(nullptr),
@@ -70,6 +72,7 @@ Player::Player(ItemObjectManager* itemObjectManager) :
 	mBonusMoveAccel(0.0f),
 	mAerialControl(0.0f),
 	mOnGround(false),
+	mCurrentAnimation(PlayerAnimation::Idle),
 	mModel(nullptr),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(itemObjectManager),
@@ -81,7 +84,7 @@ Player::Player(ItemObjectManager* itemObjectManager) :
 	mObserver = std::make_unique<Observer::PlayerObserver>(this);
 }
 
-Player::Player(std::shared_ptr<Resource::ResourceBase> model, ItemObjectManager* itemObjectManager) :
+Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::vector<AnimationParam> animationParams, ItemObjectManager* itemObjectManager) :
 	mJumpBufferTimer(0.0f),
 	mForceJumpTimer(0.0f),
 	mIsJumping(false),
@@ -90,6 +93,8 @@ Player::Player(std::shared_ptr<Resource::ResourceBase> model, ItemObjectManager*
 	mBonusMoveAccel(0.0f),
 	mAerialControl(0.0f),
 	mOnGround(false),
+	mCurrentAnimation(PlayerAnimation::Idle),
+	mAnimationParams(animationParams),
 	mModel(nullptr),
 	mLandTerrainRecorder(nullptr),
 	mItemObjectManager(itemObjectManager),
@@ -138,7 +143,7 @@ void Player::Update()
 	MoveHorizontal(deltaTime);
 	MoveVertical(deltaTime);
 
-	mModelAnimator->Update();
+	AnimationUpdate();
 
 	// 角度を設定する
 	if (mLastMoveVec != Vector3::Zero)
@@ -326,6 +331,20 @@ void Player::MoveVertical(float deltaTime)
 	}
 }
 
+void Player::AnimationUpdate()
+{
+	PlayerAnimation nextAnim = PlayerAnimation::Idle;
+
+	if (mCurrentAnimation != nextAnim)
+	{
+		mCurrentAnimation = nextAnim;
+
+		mModelAnimator->Play(GetAnimationParam(nextAnim));
+	}
+
+	mModelAnimator->Update();
+}
+
 bool Player::CanJump() const
 {
 	return mOnGround || mJumpBufferTimer > 0.0f;
@@ -334,4 +353,13 @@ bool Player::CanJump() const
 bool Player::CanCancelJump() const
 {
 	return mIsJumping && mVelocity.y > kJumpCancelThreshold && mForceJumpTimer <= 0;
+}
+
+const AnimationParam& Player::GetAnimationParam(PlayerAnimation anim) const
+{
+	size_t index = static_cast<size_t>(anim);
+
+	assert(index < mAnimationParams.size() && "Player // 存在しないアニメーションデータにアクセスしました");
+
+	return mAnimationParams[index];
 }
