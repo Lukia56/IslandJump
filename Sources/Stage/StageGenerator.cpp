@@ -13,9 +13,11 @@ namespace
 {
 	const char* const kStartIslandPath = "Resources\\MasterData\\Island\\StartIsland.json";
 
-	const std::array<std::string, 1> kIslandPaths[] = {
-		"Resources\\MasterData\\Island\\Island0.json"
+	const std::string kIslandPaths[] = {
+		"Resources\\MasterData\\Island\\Island0.json",
+		"Resources\\MasterData\\Island\\Island1.json",
 	};
+	constexpr size_t kIslandTypeNum = 2;
 
 	constexpr float kGenerateRangeAngle = 90.0f;
 
@@ -52,8 +54,8 @@ namespace Stage
 		while (generatePos.y < kGoalPosY)
 		{
 			std::unique_ptr<RootObject> island = std::make_unique<RootObject>();
-			int islandIndex = Random::Range(0, static_cast<int>(kIslandPaths->size()));
-			objects = Stage::StageLoader::Load(kIslandPaths->at(islandIndex));
+			int islandIndex = Random::Range(0, static_cast<int>(kIslandTypeNum));
+			objects = Stage::StageLoader::Load(kIslandPaths[islandIndex]);
 			for (auto& object : objects)
 			{
 				island->AddToChild(std::move(object));
