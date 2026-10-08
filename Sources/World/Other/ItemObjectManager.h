@@ -33,12 +33,16 @@ public:
 
 public:
 
+	int GetItemUseCount() const { return mItemUseCount; }
+
 	const ItemEffectParam& GetEffectParam(ItemType itemType) const { return mEffectParams[static_cast<int>(itemType)]; }
 
 private:
 
 	GameObject* mActiveItemRoot;
 	GameObject* mPoolItemRoot;
+
+	int mItemUseCount;
 
 	std::array<std::shared_ptr<Resource::ResourceBase>, static_cast<int>(ItemType::Length)> mTextures;
 

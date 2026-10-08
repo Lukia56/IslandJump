@@ -81,5 +81,7 @@ ItemType ItemObjectManager::ConsumeItem(Transform* itemTransform)
 	mActiveItems.erase(iter);
 	mPoolItems.emplace(item);
 
+	mItemUseCount++;
+
 	return itemType;
 }
