@@ -10,10 +10,14 @@ namespace
 	constexpr float kMoveSpeed = 100.0f;
 
 	constexpr Vector3 kBodyCollSize{ 3000.0f, 100.0f, 3000.0f };
+
+	constexpr float kResultTransitionTime = 1.0f;
 }
 
 DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos) :
 	mGoalPos(goalPos),
+	mResultTransitionTimer(0.0f),
+	mIsStartTransitionResult(false),
 	mIsTriggered(false),
 	mCollider(nullptr)
 {
@@ -40,6 +44,18 @@ void DeathCloud::Update()
 	{
 		mVelocity.y = kMoveSpeed * TimeManager::GetDeltaTime();
 	}
+
+	if (mIsTriggered && !mIsStartTransitionResult)
+	{
+		mResultTransitionTimer -= TimeManager::GetDeltaTime();
+
+		if (mResultTransitionTimer < 0.0f)
+		{
+			mEventSubject->Notify(Observer::Event::TransitionResult);
+
+			mIsStartTransitionResult = true;
+		}
+	}
 }
 
 void DeathCloud::PhysicsUpdate()
@@ -63,6 +79,8 @@ void DeathCloud::ResolveCollision(const Collision::Result& result, const Collide
 	if (oppCollider->GetOwner()->GetTag() != GameObject::Tag::Player) return;
 
 	mIsTriggered = true;
+
+	mResultTransitionTimer = kResultTransitionTime;
 
 	mEventSubject->Notify(Observer::Event::FallCloudPlayer);
 }

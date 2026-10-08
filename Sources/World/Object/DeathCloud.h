@@ -38,6 +38,10 @@ private:
 
 	Vector3 mGoalPos;
 
+	float mResultTransitionTimer;
+
+	bool mIsStartTransitionResult;
+
 	bool mIsTriggered;
 
 	std::unique_ptr<Collider3D> mCollider;

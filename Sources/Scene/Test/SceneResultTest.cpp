@@ -4,11 +4,13 @@
 #include "Camera/CameraManager.h"
 #include "Factory/PlayerCreator.h"
 #include "Observer/GoalObserver.h"
+#include "Observer/PlayerObserver.h"
+#include "Observer/ResultObserver.h"
 #include "Observer/Subject.h"
 #include "System/Input/Keyboard.h"
 #include "System/Input/Mouse.h"
 #include "World/Character/Player.h"
-#include "World/Object/DebugGround.h"
+#include "World/Object/DeathCloud.h"
 #include "World/Object/GoalTrigger.h"
 #include "World/Test/TestTerrain.h"
 #include "World/UI/Core/UIManager.h"
@@ -17,23 +19,19 @@
 
 namespace
 {
+	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -800.0f, 0.0f };
 }
 
 SceneResultTest::SceneResultTest() :
 	mPlayer(nullptr),
 	mUIManager(nullptr),
-	mGoalObserver(nullptr)
+	mGoalObserver(nullptr),
+	mResultObserver(nullptr)
 {
 }
 
 void SceneResultTest::OnInit()
 {
-	CreateToRoot<DebugGround>();
-
-	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(nullptr);
-	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
-	mPlayer->GetTransform()->localPosition = Vector3(100.0f, 200.0f, 0.0f);
-
 	GoalTrigger* goal = CreateToRoot<GoalTrigger>();
 	goal->GetTransform()->localPosition = Vector3(0.0f, 200.0f, -300.0f);
 
@@ -43,10 +41,22 @@ void SceneResultTest::OnInit()
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
 	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>());
 
+	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(nullptr);
+	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
+	mPlayer->GetTransform()->localPosition = Vector3(100.0f, 200.0f, 0.0f);
+
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
+	mResultObserver = std::make_unique<Observer::ResultObserver>(mUIManager);
 
 	goal->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 	goal->GetEventSubject()->RegisterObserver(mGoalObserver.get());
+	goal->GetEventSubject()->RegisterObserver(mResultObserver.get());
+
+	Vector3 cloudInitPos = mPlayer->GetTransform()->localPosition + kDeathCloudOffsetPlayer;
+	Vector3 goalPos = goal->GetTransform()->CalculateWorldPosition();
+	DeathCloud* cloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos);
+	cloud->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
+	cloud->GetEventSubject()->RegisterObserver(mResultObserver.get());
 
 	GetCameraManager()->AddCamera(Camera::Type::Follow, std::make_unique<CameraFollow>(mPlayer->GetTransform()));
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Follow);
