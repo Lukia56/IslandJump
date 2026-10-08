@@ -2,7 +2,7 @@
 #include "SceneSelectDebug.h"
 #include "Camera/CameraFollow.h"
 #include "Camera/CameraManager.h"
-#include "Observer/ShowGoalUI.h"
+#include "Observer/GoalObserver.h"
 #include "Observer/Subject.h"
 #include "System/Input/Keyboard.h"
 #include "System/Input/Mouse.h"
@@ -34,7 +34,7 @@ void SceneGoalTest::OnInit()
 	mUIManager = CreateToRoot<UI::UIManager>();
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
 
-	mShowGoalUI = std::make_unique<Observer::ShowGoalUI>(mUIManager);
+	mShowGoalUI = std::make_unique<Observer::GoalObserver>(mUIManager);
 
 	goal->GetEventSubject()->RegisterObserver(mShowGoalUI.get());
 	goal->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());

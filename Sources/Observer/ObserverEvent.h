@@ -6,5 +6,6 @@ namespace Observer
 	{
 		ReachGoal,
 		FallCloudPlayer,
+		TransitionResult,
 	};
 }

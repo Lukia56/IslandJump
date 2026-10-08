@@ -9,12 +9,12 @@ namespace UI
 
 namespace Observer
 {
-	class ShowGoalUI : public IObserver
+	class GoalObserver : public IObserver
 	{
 	public:
 
-		ShowGoalUI(UI::UIManager* uiManager);
-		~ShowGoalUI() = default;
+		GoalObserver(UI::UIManager* uiManager);
+		~GoalObserver() = default;
 
 		void OnNotify(Event event) override;
 

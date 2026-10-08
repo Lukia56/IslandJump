@@ -3,14 +3,18 @@
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "Observer/Subject.h"
+#include "System/TimeManager.h"
 #include "Utility/Color.h"
 
 namespace
 {
 	constexpr Vector3 kBodyCollSize{ 300.0f, 200.0f, 200.0f };
+
+	constexpr float kResultTransitionTime = 3.0f;
 }
 
 GoalTrigger::GoalTrigger() :
+	mResultTransitionTimer(0.0f),
 	mIsTriggered(false),
 	mCollider(nullptr),
 	mEventSubject(nullptr)
@@ -32,6 +36,18 @@ void GoalTrigger::Update()
 	Vector3 worldPos = mTransform->CalculateWorldPosition();
 
 	mCollider->GetShape()->SetPosition(worldPos);
+
+	if (mIsTriggered)
+	{
+		mResultTransitionTimer -= TimeManager::GetDeltaTime();
+
+		if (mResultTransitionTimer < 0.0f)
+		{
+			mEventSubject->Notify(Observer::Event::TransitionResult);
+
+			SetActive(false);
+		}
+	}
 }
 
 void GoalTrigger::DebugDraw()
@@ -49,6 +65,8 @@ void GoalTrigger::ResolveCollision(const Collision::Result& result, const Collid
 	if (oppCollider->GetOwner()->GetTag() != GameObject::Tag::Player) return;
 
 	mIsTriggered = true;
+
+	mResultTransitionTimer = kResultTransitionTime;
 
 	mEventSubject->Notify(Observer::Event::ReachGoal);
 }

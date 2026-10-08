@@ -9,7 +9,7 @@ namespace UI
 }
 namespace Observer
 {
-	class ShowGoalUI;
+	class GoalObserver;
 }
 
 class SceneGoalTest : public SceneBase
@@ -29,5 +29,5 @@ private:
 
 	UI::UIManager* mUIManager;
 
-	std::unique_ptr<Observer::ShowGoalUI> mShowGoalUI;
+	std::unique_ptr<Observer::GoalObserver> mShowGoalUI;
 };

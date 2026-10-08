@@ -294,7 +294,7 @@
     <ClCompile Include="Sources\Observer\Subject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Observer\ShowGoalUI.cpp">
+    <ClCompile Include="Sources\Observer\GoalObserver.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\UI\Screen\GoalEventScreen.cpp">
@@ -328,6 +328,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\UI\Screen\ResultScreen.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Scene\Test\SceneResultTest.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -698,7 +701,7 @@
     <ClInclude Include="Sources\Observer\ObserverEvent.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Observer\ShowGoalUI.h">
+    <ClInclude Include="Sources\Observer\GoalObserver.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\UI\Screen\GoalEventScreen.h">
@@ -738,6 +741,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\UI\Screen\ResultScreen.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Scene\Test\SceneResultTest.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

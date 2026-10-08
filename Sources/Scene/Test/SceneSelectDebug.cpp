@@ -5,6 +5,7 @@
 #include "SceneGoalTest.h"
 #include "SceneDeathCloudTest.h"
 #include "SceneLoadStageTest.h"
+#include "SceneResultTest.h"
 #include "System/InputManager.h"
 #include "System/Input/Mouse.h"
 #include "Utility/Color.h"
@@ -36,6 +37,10 @@ void SceneSelectDebug::OnInit()
 
 	info.name = "LoadStageTest";
 	info.createSceneFunc = []() { return std::make_unique<SceneLoadStageTest>(); };
+	mSceneList.emplace_back(info);
+
+	info.name = "ResultTest";
+	info.createSceneFunc = []() { return std::make_unique<SceneResultTest>(); };
 	mSceneList.emplace_back(info);
 
 	Mouse::GetInstance().SetMode(Mouse::Mode::Absolute);

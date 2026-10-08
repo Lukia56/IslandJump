@@ -32,6 +32,8 @@ public:
 
 private:
 
+	float mResultTransitionTimer;
+
 	bool mIsTriggered;
 
 	std::unique_ptr<Collider3D> mCollider;

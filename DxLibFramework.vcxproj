@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Scene\Test\SceneResultTest.cpp" />
     <ClCompile Include="Sources\World\UI\Screen\ResultScreen.cpp" />
     <ClCompile Include="Sources\World\Object\Skybox.cpp" />
     <ClCompile Include="Sources\World\Object\ItemTextureDataBase.cpp" />
@@ -147,7 +148,7 @@
     <ClCompile Include="Sources\World\Object\GoalObject.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneLoadStageTest.cpp" />
     <ClCompile Include="Sources\Observer\PlayerObserver.cpp" />
-    <ClCompile Include="Sources\Observer\ShowGoalUI.cpp" />
+    <ClCompile Include="Sources\Observer\GoalObserver.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneDeathCloudTest.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneGoalTest.cpp" />
     <ClCompile Include="Sources\World\Object\DeathCloud.cpp" />
@@ -247,6 +248,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Scene\Test\SceneResultTest.h" />
     <ClInclude Include="Sources\World\UI\Screen\ResultScreen.h" />
     <ClInclude Include="Sources\World\Character\PlayerAnimation.h" />
     <ClInclude Include="Sources\World\Object\Skybox.h" />
@@ -257,7 +259,7 @@
     <ClInclude Include="Sources\Observer\PlayerObserver.h" />
     <ClInclude Include="Sources\Observer\IObserver.h" />
     <ClInclude Include="Sources\Observer\ObserverEvent.h" />
-    <ClInclude Include="Sources\Observer\ShowGoalUI.h" />
+    <ClInclude Include="Sources\Observer\GoalObserver.h" />
     <ClInclude Include="Sources\Scene\Test\SceneDeathCloudTest.h" />
     <ClInclude Include="Sources\Scene\Test\SceneGoalTest.h" />
     <ClInclude Include="Sources\World\Object\DeathCloud.h" />
