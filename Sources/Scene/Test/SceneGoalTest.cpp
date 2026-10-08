@@ -2,6 +2,7 @@
 #include "SceneSelectDebug.h"
 #include "Camera/CameraFollow.h"
 #include "Camera/CameraManager.h"
+#include "Factory/PlayerCreator.h"
 #include "Observer/GoalObserver.h"
 #include "Observer/Subject.h"
 #include "System/Input/Keyboard.h"
@@ -23,7 +24,8 @@ void SceneGoalTest::OnInit()
 {
 	CreateToRoot<DebugGround>();
 
-	mPlayer = CreateToRoot<Player>();
+	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(nullptr);
+	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
 	mPlayer->GetTransform()->localPosition = Vector3(100.0f, 200.0f, 0.0f);
 
 	GoalTrigger* goal = CreateToRoot<GoalTrigger>();

@@ -1,14 +1,15 @@
 #include "SceneItemSpawnerTest.h"
 #include "SceneSelectDebug.h"
-#include "World/Other/StageManager.h"
 #include "Camera/CameraDebugFree.h"
 #include "Camera/CameraFollow.h"
 #include "Camera/CameraManager.h"
+#include "Factory/PlayerCreator.h"
 #include "System/Input/Keyboard.h"
+#include "World/Character/Player.h"
 #include "World/Object/DebugGround.h"
 #include "World/Other/ItemObjectManager.h"
 #include "World/Other/ItemSpawnerManager.h"
-#include "World/Character/Player.h"
+#include "World/Other/StageManager.h"
 
 namespace
 {
@@ -30,7 +31,8 @@ void SceneItemSpawnerTest::OnInit()
 
 	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(kItemNum);
 
-	mPlayer = CreateToRoot<Player>(itemObjectManager);
+	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(itemObjectManager);
+	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
 	mPlayer->GetTransform()->localPosition = Vector3(100.0f, 200.0f, 0.0f);
 
 	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder(), itemObjectManager, kItemNum);

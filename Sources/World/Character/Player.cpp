@@ -42,48 +42,6 @@ namespace
 	constexpr float kModelAnimationFPS = 30.0f;
 }
 
-Player::Player() :
-	mJumpBufferTimer(0.0f),
-	mForceJumpTimer(0.0f),
-	mIsJumping(false),
-	mBonusJumpForce(0.0f),
-	mBonusMoveSpeed(0.0f),
-	mBonusMoveAccel(0.0f),
-	mAerialControl(0.0f),
-	mOnGround(false),
-	mCurrentAnimation(PlayerAnimation::Idle),
-	mModel(nullptr),
-	mLandTerrainRecorder(nullptr),
-	mItemObjectManager(nullptr),
-	mCameraView{}
-{
-	// ItemSpawnerManagerのコンストラクタで必要なためここで生成
-	mLandTerrainRecorder = std::make_unique<LandTerrainRecorder>();
-
-	mObserver = std::make_unique<Observer::PlayerObserver>(this);
-}
-
-Player::Player(ItemObjectManager* itemObjectManager) :
-	mJumpBufferTimer(0.0f),
-	mForceJumpTimer(0.0f),
-	mIsJumping(false),
-	mBonusJumpForce(0.0f),
-	mBonusMoveSpeed(0.0f),
-	mBonusMoveAccel(0.0f),
-	mAerialControl(0.0f),
-	mOnGround(false),
-	mCurrentAnimation(PlayerAnimation::Idle),
-	mModel(nullptr),
-	mLandTerrainRecorder(nullptr),
-	mItemObjectManager(itemObjectManager),
-	mCameraView{}
-{
-	// ItemSpawnerManagerのコンストラクタで必要なためここで生成
-	mLandTerrainRecorder = std::make_unique<LandTerrainRecorder>();
-
-	mObserver = std::make_unique<Observer::PlayerObserver>(this);
-}
-
 Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::vector<AnimationParam> animationParams, ItemObjectManager* itemObjectManager) :
 	mJumpBufferTimer(0.0f),
 	mForceJumpTimer(0.0f),

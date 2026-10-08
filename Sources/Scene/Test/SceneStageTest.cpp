@@ -2,12 +2,12 @@
 #include "SceneSelectDebug.h"
 #include "Camera/CameraFollow.h"
 #include "Camera/CameraManager.h"
+#include "Factory/PlayerCreator.h"
 #include "Observer/Subject.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Model.h"
 #include "System/Input/Keyboard.h"
 #include "System/Input/Mouse.h"
-#include "Utility/Data/CSV/CsvLoader.h"
 #include "World/Character/Player.h"
 #include "World/Object/GoalObject.h"
 #include "World/Object/GoalTrigger.h"
@@ -41,9 +41,8 @@ void SceneStageTest::OnInit()
 
 	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(kItemNum);
 
-	std::shared_ptr<Resource::ResourceBase> playerModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kPlayerModelPath);
-	std::vector<AnimationParam> playerAnimParams = Data::Csv::LoadCsvAs<AnimationParam>(kPlayerAnimationParamPath);
-	mPlayer = CreateToRoot<Player>(playerModel, playerAnimParams, itemObjectManager);
+	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(itemObjectManager);
+	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
 	mPlayer->GetTransform()->Translate(0.0f, 100.0f, 0.0f);
 
 	GoalTrigger* goalTrigger = stageManager->GetGoalObject()->GetTrigger();
