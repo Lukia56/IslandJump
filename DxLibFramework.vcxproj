@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Observer\ResultObserver.cpp" />
     <ClCompile Include="Sources\Factory\PlayerCreator.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneResultTest.cpp" />
     <ClCompile Include="Sources\World\UI\Screen\ResultScreen.cpp" />
@@ -249,6 +250,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Observer\ResultObserver.h" />
     <ClInclude Include="Sources\Factory\PlayerCreator.h" />
     <ClInclude Include="Sources\Scene\Test\SceneResultTest.h" />
     <ClInclude Include="Sources\World\UI\Screen\ResultScreen.h" />

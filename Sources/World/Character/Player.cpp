@@ -55,6 +55,7 @@ Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::vector<Animat
 	mAnimationParams(animationParams),
 	mModel(nullptr),
 	mLandTerrainRecorder(nullptr),
+	mObserver(nullptr),
 	mItemObjectManager(itemObjectManager),
 	mCameraView{}
 {

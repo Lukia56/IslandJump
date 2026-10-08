@@ -3,6 +3,10 @@
 #include "IObserver.h"
 
 class Player;
+namespace UI
+{
+	class UIManager;
+}
 
 namespace Observer
 {

@@ -26,6 +26,7 @@ class Player : public GameObject
 public:
 
 	Player(std::shared_ptr<Resource::ResourceBase> model, std::vector<AnimationParam> animationParams, ItemObjectManager* itemObjectManager);
+	~Player() = default;
 
 	void Init() override;
 
