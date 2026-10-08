@@ -48,7 +48,7 @@ void SceneResultTest::OnInit()
 	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(resultRecorder));
 
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
-	mResultObserver = std::make_unique<Observer::ResultObserver>(mUIManager);
+	mResultObserver = std::make_unique<Observer::ResultObserver>(resultRecorder, mUIManager);
 
 	goal->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 	goal->GetEventSubject()->RegisterObserver(mGoalObserver.get());

@@ -2,6 +2,7 @@
 
 #include "IObserver.h"
 
+class ResultRecorder;
 namespace UI
 {
 	class UIManager;
@@ -13,12 +14,14 @@ namespace Observer
 	{
 	public:
 
-		ResultObserver(UI::UIManager* uiManager);
+		ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager);
 		~ResultObserver() = default;
 
 		void OnNotify(Event event) override;
 
 	private:
+
+		ResultRecorder* mResultRecorder;
 
 		UI::UIManager* mUIManager;
 	};

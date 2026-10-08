@@ -8,6 +8,7 @@ namespace
 }
 
 ResultRecorder::ResultRecorder(Transform* playerTransform) :
+	mIsSuccessed(false),
 	mItemUseCount(0),
 	mPlayTime(0.0f),
 	mPlayerTransform(playerTransform)
@@ -29,7 +30,7 @@ ResultData ResultRecorder::CreateResultData() const
 
 	result.isSuccessed = mIsSuccessed;
 
-	result.progressDistance = Math::Max(0.0f, mPlayerTransform->localPosition.y);
+	result.progressDistance = static_cast<int>(Math::Max(0.0f, mPlayerTransform->localPosition.y));
 
 	result.itemUseCount = mItemUseCount;
 

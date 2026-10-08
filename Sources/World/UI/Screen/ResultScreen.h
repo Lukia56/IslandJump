@@ -25,6 +25,12 @@ namespace UI
 
         TextObject* mResultText;
 
+        TextObject* mProgressText;
+
+        TextObject* mItemUseCountText;
+
+        TextObject* mPlayTimeText;
+
         ResultRecorder* mResultRecorder;
     };
 }

@@ -4,7 +4,7 @@ struct ResultData
 {
 	bool isSuccessed = false;
 
-	float progressDistance = 0.0f;
+	int progressDistance = 0;
 
 	int itemUseCount = 0;
 
