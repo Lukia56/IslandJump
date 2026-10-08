@@ -4,7 +4,6 @@
 #include "Camera/CameraManager.h"
 #include "Factory/PlayerCreator.h"
 #include "Observer/GoalObserver.h"
-#include "Observer/PlayerObserver.h"
 #include "Observer/ResultObserver.h"
 #include "Observer/Subject.h"
 #include "System/Input/Keyboard.h"
@@ -12,6 +11,7 @@
 #include "World/Character/Player.h"
 #include "World/Object/DeathCloud.h"
 #include "World/Object/GoalTrigger.h"
+#include "World/Other/ResultRecorder.h"
 #include "World/Test/TestTerrain.h"
 #include "World/UI/Core/UIManager.h"
 #include "World/UI/Screen/GoalEventScreen.h"
@@ -37,13 +37,15 @@ void SceneResultTest::OnInit()
 
 	CreateToRoot<TestTerrain>(Vector3(1000.0f, 100.0f, 1000.0f));
 
-	mUIManager = CreateToRoot<UI::UIManager>();
-	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
-	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>());
-
 	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(nullptr);
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
 	mPlayer->GetTransform()->localPosition = Vector3(100.0f, 200.0f, 0.0f);
+
+	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>(mPlayer->GetTransform());
+
+	mUIManager = CreateToRoot<UI::UIManager>();
+	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
+	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(resultRecorder));
 
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
 	mResultObserver = std::make_unique<Observer::ResultObserver>(mUIManager);

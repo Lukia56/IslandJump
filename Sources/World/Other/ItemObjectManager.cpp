@@ -3,6 +3,7 @@
 #include "../Object/ItemObject.h"
 #include "../Object/ItemTextureDataBase.h"
 #include "RootObject.h"
+#include "ResultRecorder.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Texture.h"
 #include "Utility/Random.h"
@@ -15,7 +16,23 @@ namespace
 
 ItemObjectManager::ItemObjectManager(int itemNum) :
 	mActiveItemRoot(nullptr),
-	mPoolItemRoot(nullptr)
+	mPoolItemRoot(nullptr),
+	mResultRecorder(nullptr)
+{
+	mPoolItemRoot = CreateToChild<RootObject>();
+	mPoolItemRoot->SetActive(false);
+
+	for (int i = 0; i < itemNum; i++)
+	{
+		ItemObject* item = mPoolItemRoot->CreateToChild<ItemObject>();
+		mPoolItems.emplace(item);
+	}
+}
+
+ItemObjectManager::ItemObjectManager(int itemNum, ResultRecorder* resultRecorder) :
+	mActiveItemRoot(nullptr),
+	mPoolItemRoot(nullptr),
+	mResultRecorder(resultRecorder)
 {
 	mPoolItemRoot = CreateToChild<RootObject>();
 	mPoolItemRoot->SetActive(false);
@@ -81,7 +98,7 @@ ItemType ItemObjectManager::ConsumeItem(Transform* itemTransform)
 	mActiveItems.erase(iter);
 	mPoolItems.emplace(item);
 
-	mItemUseCount++;
+	if (mResultRecorder) mResultRecorder->IncreaseItemUseCount();
 
 	return itemType;
 }

@@ -11,8 +11,19 @@ namespace Observer
 
 	void ResultObserver::OnNotify(Event event)
 	{
-		if (event != Event::TransitionResult) return;
+		// TODO: ‚±‚±‚ÅƒNƒŠƒA‚©Ž¸”s‚©Ý’è‚·‚é
+		switch (event)
+		{
+		case Observer::Event::ReachGoal:
+			break;
 
-		mUIManager->PushScreen<UI::ResultScreen>();
+		case Observer::Event::FallCloudPlayer:
+
+			break;
+
+		case Observer::Event::TransitionResult:
+			mUIManager->PushScreen<UI::ResultScreen>();
+			break;
+		}
 	}
 }

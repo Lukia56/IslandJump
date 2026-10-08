@@ -8,6 +8,7 @@
 #include "Param/Param.h"
 
 class ItemObject;
+class ResultRecorder;
 namespace Resource
 {
 	class ResourceBase;
@@ -21,6 +22,7 @@ class ItemObjectManager : public GameObject
 public:
 
 	ItemObjectManager(int itemNum);
+	ItemObjectManager(int itemNum, ResultRecorder* resultRecorder);
 	~ItemObjectManager() = default;
 
 	void Init() override;
@@ -33,8 +35,6 @@ public:
 
 public:
 
-	int GetItemUseCount() const { return mItemUseCount; }
-
 	const ItemEffectParam& GetEffectParam(ItemType itemType) const { return mEffectParams[static_cast<int>(itemType)]; }
 
 private:
@@ -42,12 +42,12 @@ private:
 	GameObject* mActiveItemRoot;
 	GameObject* mPoolItemRoot;
 
-	int mItemUseCount;
-
 	std::array<std::shared_ptr<Resource::ResourceBase>, static_cast<int>(ItemType::Length)> mTextures;
 
 	std::vector<ItemEffectParam> mEffectParams;
 
 	std::vector<ItemObject*> mActiveItems;
 	std::stack<ItemObject*> mPoolItems;
+
+	ResultRecorder* mResultRecorder;
 };
