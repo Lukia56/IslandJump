@@ -32,7 +32,7 @@ namespace
 
 	constexpr int kItemNum = 10;
 
-	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -250.0f, 0.0f };
+	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -500.0f, 0.0f };
 }
 
 SceneMain::SceneMain() :

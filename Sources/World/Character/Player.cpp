@@ -17,17 +17,19 @@
 
 namespace
 {
-	constexpr float kMoveSpeed = 400.0f;
+	constexpr float kMoveSpeed = 500.0f;
 	constexpr float kMoveAccel = 60.0f;
 
-	constexpr float kJumpForce = 1000.0f;
-	constexpr float kJumpCancelThreshold = 150.0f;
+	constexpr float kJumpForce = 1500.0f;
+	constexpr float kJumpCancelThreshold = 300.0f;
 	constexpr float kJumpBufferTime = 0.15f;
 	constexpr float kForceJumpTime = 0.1f;
 
 	constexpr float kAirResistanceCoef = 0.25f;
 
 	constexpr float kGravity = 980.0f;
+
+	constexpr float kGravityScale = 2.0f;
 
 	constexpr Vector3 kBodyCollSize{ 100.0f, 100.0f, 100.0f };
 	constexpr Vector3 kBodyCollOffset{ 0.0f, 50.0f, 0.0f };
@@ -286,7 +288,7 @@ void Player::MoveVertical(float deltaTime)
 	// óéâ∫èàóù
 	if (!mOnGround)
 	{
-		mVelocity.y -= kGravity * deltaTime;
+		mVelocity.y -= kGravity * kGravityScale * deltaTime;
 	}
 }
 

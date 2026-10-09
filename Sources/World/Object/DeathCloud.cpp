@@ -66,6 +66,10 @@ void DeathCloud::PhysicsUpdate()
 	mCollider->GetShape()->SetPosition(worldPos);
 }
 
+void DeathCloud::Draw()
+{
+}
+
 void DeathCloud::DebugDraw()
 {
 	mCollider->GetShape()->DebugDraw();

@@ -20,12 +20,12 @@ namespace
 	};
 	constexpr size_t kIslandTypeNum = 3;
 
-	constexpr float kGenerateRangeAngle = 90.0f;
+	constexpr float kGenerateRangeAngle = 180.0f;
 
-	constexpr float kGenerateRangeHMinDistance = 400.0f;
-	constexpr float kGenerateRangeHMaxDistance = 800.0f;
-	constexpr float kGenerateRangeVMinDistance = 200.0f;
-	constexpr float kGenerateRangeVMaxDistance = 400.0f;
+	constexpr float kGenerateRangeHMinDistance = 500.0f;
+	constexpr float kGenerateRangeHMaxDistance = 900.0f;
+	constexpr float kGenerateRangeVMinDistance = 300.0f;
+	constexpr float kGenerateRangeVMaxDistance = 500.0f;
 
 	constexpr float kGoalPosY = 5000.0f;
 }

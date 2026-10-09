@@ -24,6 +24,8 @@ public:
 
 	void PhysicsUpdate() override;
 
+	void Draw() override;
+
 	void DebugDraw() override;
 
 	void ResolveCollision(const Collision::Result& result, const Collider3D* myCollider, const Collider3D* oppCollider) override;
