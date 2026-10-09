@@ -40,8 +40,13 @@ namespace UI
 
 		startButton->SetSelectCallback([startText]() { startText->SetColor(Color::cyan); });
 		startButton->SetDeselectCallback([startText]() { startText->SetColor(Color::white); });
+		startButton->SetSubmitCallback([this]()
+									  {
+										  this->SetCommand(Command::StartGame);
+										  return true;
+									  });
 
-		// 設定ボタン
+		// 終了ボタン
 		auto quitButton = itemRoot->CreateToChild<UI::MenuItem>();
 		quitButton->GetRectTransform()->localPosition = kQuitTextPos;
 		quitButton->GetRectTransform()->SetFullRectAsFixed(kButtonRect);
@@ -53,6 +58,7 @@ namespace UI
 		quitButton->SetDeselectCallback([quitText]() { quitText->SetColor(Color::white); });
 		quitButton->SetSubmitCallback([this]()
 									  {
+										  this->SetCommand(Command::QuitGame);
 										  return true;
 									  });
 

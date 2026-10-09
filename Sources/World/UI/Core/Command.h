@@ -11,5 +11,7 @@ namespace UI
 		ExitTestScene,
 		OpenOptions,
 		ExitResult,
+		StartGame,
+		QuitGame,
 	};
 }

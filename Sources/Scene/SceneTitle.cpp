@@ -19,5 +19,15 @@ std::unique_ptr<SceneBase> SceneTitle::OnUpdate()
 {
 	mUIManager->ProcessInput(InputManager::GetInstance().GetUIInputState());
 
+	UI::Command command = mUIManager->ConsumeCommand();
+	switch (command)
+	{
+	case UI::Command::StartGame:
+		break;
+
+	case UI::Command::QuitGame:
+		break;
+	}
+
 	return nullptr;
 }
