@@ -73,6 +73,12 @@ namespace Stage
 			island->GetTransform()->localPosition = generatePos;
 
 			islands.emplace_back(std::move(island));
+
+			// 次に生成する島の種類を決める
+
+				// 通常：ランダムに決める
+				// 分岐：2つ生成する、次の島は通常にする
+					// 次に生成する座標は片方にする
 		}
 
 		// ゴールの座標を計算する
