@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Scene\SceneMain.cpp" />
     <ClCompile Include="Sources\Scene\SceneTitle.cpp" />
     <ClCompile Include="Sources\World\UI\Screen\DifficultyMenuScreen.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\BoxObject.cpp" />
@@ -254,6 +255,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Scene\SceneMain.h" />
     <ClInclude Include="Sources\Scene\SceneTitle.h" />
     <ClInclude Include="Sources\World\UI\Screen\DifficultyMenuScreen.h" />
     <ClInclude Include="Sources\World\UI\Widget\BoxObject.h" />

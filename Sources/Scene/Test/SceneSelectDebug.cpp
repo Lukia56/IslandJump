@@ -7,6 +7,7 @@
 #include "SceneLoadStageTest.h"
 #include "SceneResultTest.h"
 #include "../SceneTitle.h"
+#include "../SceneMain.h"
 #include "System/InputManager.h"
 #include "System/Input/Mouse.h"
 #include "Utility/Color.h"
@@ -46,6 +47,10 @@ void SceneSelectDebug::OnInit()
 
 	info.name = "Title";
 	info.createSceneFunc = []() { return std::make_unique<SceneTitle>(); };
+	mSceneList.emplace_back(info);
+
+	info.name = "Main";
+	info.createSceneFunc = []() { return std::make_unique<SceneMain>(); };
 	mSceneList.emplace_back(info);
 
 	Mouse::GetInstance().SetMode(Mouse::Mode::Absolute);
