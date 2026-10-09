@@ -32,12 +32,14 @@ namespace
 
 	constexpr int kItemNum = 10;
 
-	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -800.0f, 0.0f };
+	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -250.0f, 0.0f };
 }
 
 SceneMain::SceneMain() :
 	mPlayer(nullptr),
-	mSkybox(nullptr)
+	mSkybox(nullptr),
+	mDeathCloud(nullptr),
+	mUIManager(nullptr)
 {
 }
 
@@ -69,9 +71,9 @@ void SceneMain::OnInit()
 
 	Vector3 cloudInitPos = mPlayer->GetTransform()->localPosition + kDeathCloudOffsetPlayer;
 	Vector3 goalPos = stageManager->GetGoalObject()->GetTransform()->CalculateWorldPosition();
-	DeathCloud* cloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos);
-	cloud->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
-	cloud->GetEventSubject()->RegisterObserver(mResultObserver.get());
+	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos);
+	mDeathCloud->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
+	mDeathCloud->GetEventSubject()->RegisterObserver(mResultObserver.get());
 
 	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder(), itemObjectManager, kItemNum);
 
@@ -86,6 +88,9 @@ std::unique_ptr<SceneBase> SceneMain::OnUpdate()
 	mPlayer->SetCameraView(GetCameraManager()->GetCameraView());
 
 	mSkybox->GetTransform()->localPosition = GetCameraManager()->GetCameraView().eyePosition;
+
+	mDeathCloud->GetTransform()->localPosition.x = mPlayer->GetTransform()->localPosition.x;
+	mDeathCloud->GetTransform()->localPosition.z = mPlayer->GetTransform()->localPosition.z;
 
 	mUIManager->ProcessInput(InputManager::GetInstance().GetUIInputState());
 

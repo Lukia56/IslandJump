@@ -4,6 +4,7 @@
 
 class Player;
 class Skybox;
+class DeathCloud;
 namespace UI
 {
 	class UIManager;
@@ -30,6 +31,8 @@ private:
 	Player* mPlayer;
 
 	Skybox* mSkybox;
+
+	DeathCloud* mDeathCloud;
 
 	UI::UIManager* mUIManager;
 
