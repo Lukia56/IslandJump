@@ -1,5 +1,6 @@
 #include "SceneTitle.h"
 #include "SceneMain.h"
+#include "Application.h"
 #include "System/InputManager.h"
 #include "World/UI/Core/UIManager.h"
 #include "World/UI/Screen/TitleMenuScreen.h"
@@ -30,6 +31,7 @@ std::unique_ptr<SceneBase> SceneTitle::OnUpdate()
 		break;
 
 	case UI::Command::QuitGame:
+		Application::isRunning = false;
 		break;
 
 	case UI::Command::StartEasyMode:
