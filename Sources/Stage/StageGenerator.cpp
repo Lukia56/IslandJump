@@ -16,8 +16,9 @@ namespace
 	const std::string kIslandPaths[] = {
 		"Resources\\MasterData\\Island\\Island0.json",
 		"Resources\\MasterData\\Island\\Island1.json",
+		"Resources\\MasterData\\Island\\Island2.json",
 	};
-	constexpr size_t kIslandTypeNum = 2;
+	constexpr size_t kIslandTypeNum = 3;
 
 	constexpr float kGenerateRangeAngle = 90.0f;
 

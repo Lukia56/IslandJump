@@ -1,0 +1,226 @@
+[
+  {
+    "name": "block-grass-overhang-large-tall",
+    "transform": {
+      "position": {
+        "x": 0.0,
+        "y": -200.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 208.21,
+        "y": 200.0,
+        "z": 208.21
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 100.0,
+        "z": 0.0
+      }
+    }
+  },
+  {
+    "name": "block-grass-overhang-large-tall",
+    "transform": {
+      "position": {
+        "x": -160.0,
+        "y": -200.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 208.21,
+        "y": 200.0,
+        "z": 208.21
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 100.0,
+        "z": 0.0
+      }
+    }
+  },
+  {
+    "name": "block-grass-overhang-large-tall",
+    "transform": {
+      "position": {
+        "x": 165.0,
+        "y": -200.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 208.21,
+        "y": 200.0,
+        "z": 208.21
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 100.0,
+        "z": 0.0
+      }
+    }
+  },
+  {
+    "name": "block-grass-overhang-large-tall",
+    "transform": {
+      "position": {
+        "x": -95.0,
+        "y": -258.0,
+        "z": -101.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 208.21,
+        "y": 200.0,
+        "z": 208.21
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 100.0,
+        "z": 0.0
+      }
+    }
+  },
+  {
+    "name": "block-grass-overhang-large-tall",
+    "transform": {
+      "position": {
+        "x": 78.0,
+        "y": -258.0,
+        "z": -71.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 208.21,
+        "y": 200.0,
+        "z": 208.21
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 100.0,
+        "z": 0.0
+      }
+    }
+  },
+  {
+    "name": "block-grass-overhang-large-tall",
+    "transform": {
+      "position": {
+        "x": 65.0,
+        "y": -200.0,
+        "z": 165.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 208.21,
+        "y": 200.0,
+        "z": 208.21
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 100.0,
+        "z": 0.0
+      }
+    }
+  },
+  {
+    "name": "block-grass-overhang-corner",
+    "transform": {
+      "position": {
+        "x": -59.0,
+        "y": -52.2,
+        "z": 132.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    "bounds": {
+      "size": {
+        "x": 108.21000000000001,
+        "y": 100.0,
+        "z": 108.21000000000001
+      },
+      "offsetPos": {
+        "x": 0.0,
+        "y": 50.0,
+        "z": 0.0
+      }
+    }
+  }
+]
