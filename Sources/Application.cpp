@@ -73,7 +73,7 @@ void Application::Finalize()
 void Application::GameLoop()
 {
 	// –â‘è‚ª‹N‚«‚È‚¢ŒÀ‚èˆ—‚ğŒJ‚è•Ô‚·
-	while (ProcessMessage() == 0)
+	while (ProcessMessage() == 0 && isRunning)
 	{
 		ProcessInput();
 		Update();

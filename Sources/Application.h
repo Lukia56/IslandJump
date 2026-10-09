@@ -17,6 +17,12 @@ public:
 	Application();
 	~Application();
 
+public:
+
+	static bool isRunning;
+
+public:
+
 	/// <summary>
 	/// ƒAƒvƒŠ‚ğ‰Šú‰»‚·‚é
 	/// </summary>
@@ -48,3 +54,5 @@ private:
 
 	std::unique_ptr<ImGuiRenderer> mImGuiRenderer;
 };
+
+inline bool Application::isRunning = true;
