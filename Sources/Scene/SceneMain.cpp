@@ -50,19 +50,19 @@ void SceneMain::OnInit()
 
 	StageManager* stageManager = CreateToRoot<StageManager>();
 
-	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(kItemNum);
+	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>();
+
+	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(kItemNum, resultRecorder);
 
 	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(itemObjectManager);
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
-
-	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>(mPlayer->GetTransform());
 
 	mUIManager = CreateToRoot<UI::UIManager>();
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
 	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(resultRecorder));
 
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
-	mResultObserver = std::make_unique<Observer::ResultObserver>(resultRecorder, mUIManager);
+	mResultObserver = std::make_unique<Observer::ResultObserver>(resultRecorder, mUIManager, mPlayer->GetTransform());
 
 	GoalTrigger* goalTrigger = stageManager->GetGoalObject()->GetTrigger();
 	goalTrigger->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());

@@ -10,6 +10,7 @@ class ResultRecorder : public GameObject
 public:
 
 	ResultRecorder(Transform* playerTransform);
+	ResultRecorder();
 	~ResultRecorder() = default;
 
 	void Init() override;
@@ -22,15 +23,17 @@ public:
 
 public:
 
+	void SetProgressDistance(int progress) { mProgressDistance = progress; }
+
 	void SetSuccessed(bool flag) { mIsSuccessed = flag; }
 
 private:
+
+	int mProgressDistance;
 
 	bool mIsSuccessed;
 
 	int mItemUseCount;
 
 	float mPlayTime;
-
-	Transform* mPlayerTransform;
 };

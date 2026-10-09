@@ -7,7 +7,15 @@ namespace Observer
 {
 	ResultObserver::ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager) :
 		mResultRecorder(resultRecorder),
-		mUIManager(uiManager)
+		mUIManager(uiManager),
+		mPlayerTransform(nullptr)
+	{
+	}
+
+	ResultObserver::ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, Transform* playerTransform) :
+		mResultRecorder(resultRecorder),
+		mUIManager(uiManager),
+		mPlayerTransform(playerTransform)
 	{
 	}
 
@@ -16,10 +24,12 @@ namespace Observer
 		switch (event)
 		{
 		case Observer::Event::ReachGoal:
+			mResultRecorder->SetProgressDistance(static_cast<int>(mPlayerTransform->CalculateWorldPosition().y));
 			mResultRecorder->SetSuccessed(true);
 			break;
 
 		case Observer::Event::FallCloudPlayer:
+			mResultRecorder->SetProgressDistance(static_cast<int>(mPlayerTransform->CalculateWorldPosition().y));
 			mResultRecorder->SetSuccessed(false);
 			break;
 
