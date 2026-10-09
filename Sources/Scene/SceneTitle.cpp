@@ -1,4 +1,5 @@
 #include "SceneTitle.h"
+#include "SceneMain.h"
 #include "System/InputManager.h"
 #include "World/UI/Core/UIManager.h"
 #include "World/UI/Screen/TitleMenuScreen.h"
@@ -32,10 +33,10 @@ std::unique_ptr<SceneBase> SceneTitle::OnUpdate()
 		break;
 
 	case UI::Command::StartEasyMode:
-		break;
+		return std::make_unique<SceneMain>();
 
 	case UI::Command::StartHardMode:
-		break;
+		return std::make_unique<SceneMain>();
 	}
 
 	return nullptr;
