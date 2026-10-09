@@ -1,11 +1,13 @@
 #include "SceneResultTest.h"
 #include "SceneSelectDebug.h"
+#include "../SceneTitle.h"
 #include "Camera/CameraFollow.h"
 #include "Camera/CameraManager.h"
 #include "Factory/PlayerCreator.h"
 #include "Observer/GoalObserver.h"
 #include "Observer/ResultObserver.h"
 #include "Observer/Subject.h"
+#include "System/InputManager.h"
 #include "System/Input/Keyboard.h"
 #include "System/Input/Mouse.h"
 #include "World/Character/Player.h"
@@ -69,6 +71,15 @@ void SceneResultTest::OnInit()
 std::unique_ptr<SceneBase> SceneResultTest::OnUpdate()
 {
 	mPlayer->SetCameraView(GetCameraManager()->GetCameraView());
+
+	mUIManager->ProcessInput(InputManager::GetInstance().GetUIInputState());
+
+	UI::Command command = mUIManager->ConsumeCommand();
+	switch (command)
+	{
+	case UI::Command::ExitResult:
+		return std::make_unique<SceneTitle>();
+	}
 
 	if (Keyboard::GetInstance().IsDown(KEY_INPUT_Q))
 	{

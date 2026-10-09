@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core/Screen.h"
+#include "../Screen/MenuScreen.h"
 
 class ResultRecorder;
 
@@ -8,7 +8,7 @@ namespace UI
 {
     class TextObject;
 
-    class ResultScreen : public Screen
+    class ResultScreen : public MenuScreen
     {
     public:
 
@@ -21,6 +21,8 @@ namespace UI
 
         void Setup() override;
 
+        bool ProcessInput(const Input::UIInputState& input);
+
     private:
 
         TextObject* mResultText;
@@ -30,6 +32,8 @@ namespace UI
         TextObject* mItemUseCountText;
 
         TextObject* mPlayTimeText;
+
+        TextObject* mExitText;
 
         ResultRecorder* mResultRecorder;
     };
