@@ -30,6 +30,12 @@ std::unique_ptr<SceneBase> SceneTitle::OnUpdate()
 
 	case UI::Command::QuitGame:
 		break;
+
+	case UI::Command::StartEasyMode:
+		break;
+
+	case UI::Command::StartHardMode:
+		break;
 	}
 
 	return nullptr;

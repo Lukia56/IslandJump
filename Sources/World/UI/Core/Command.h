@@ -13,5 +13,7 @@ namespace UI
 		ExitResult,
 		StartGame,
 		QuitGame,
+		StartEasyMode,
+		StartHardMode,
 	};
 }
