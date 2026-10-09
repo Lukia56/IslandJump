@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Screen/MenuScreen.h"
+#include "MenuScreen.h"
 
 class ResultRecorder;
 

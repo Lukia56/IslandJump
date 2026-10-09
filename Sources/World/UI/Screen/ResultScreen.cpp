@@ -1,8 +1,8 @@
 #include "ResultScreen.h"
 #include "../Core/UIRoot.h"
 #include "../Widget/BoxObject.h"
-#include "../Widget/TextObject.h"
 #include "../Widget/MenuItem.h"
+#include "../Widget/TextObject.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Font.h"
 #include "System/Input/Literal/InputState.h"
@@ -47,7 +47,7 @@ namespace UI
 
 		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
 
-		BoxObject* bg = itemRoot->CreateToChild<UI::BoxObject>(Color::black);
+		BoxObject* bg = itemRoot->CreateToChild<UI::BoxObject>(Color{ 0.0f, 0.0f, 0.0f, 0.5f });
 		bg->GetRectTransform()->localPosition = kBackgroundPos;
 		bg->GetRectTransform()->SetFullRectAsFixed(kBackgroundRect);
 
