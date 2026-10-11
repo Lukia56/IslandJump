@@ -21,6 +21,7 @@
 #include "World/Other/StageManager.h"
 #include "World/UI/Core/UIManager.h"
 #include "World/UI/Screen/GoalEventScreen.h"
+#include "World/UI/Screen/InGameScreen.h"
 #include "World/UI/Screen/ResultScreen.h"
 
 namespace
@@ -31,6 +32,8 @@ namespace
 	const char* const kSkyboxModelPath = "Resources\\Model\\Skybox\\Skybox.mv1";
 
 	constexpr int kItemNum = 10;
+
+	constexpr float kGoalY = 5000.0f;
 
 	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -500.0f, 0.0f };
 }
@@ -58,8 +61,10 @@ void SceneMain::OnInit()
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
 
 	mUIManager = CreateToRoot<UI::UIManager>();
+	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(kGoalY, mPlayer->GetTransform()));
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
 	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(resultRecorder));
+	mUIManager->PushScreen<UI::InGameScreen>();
 
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
 	mResultObserver = std::make_unique<Observer::ResultObserver>(resultRecorder, mUIManager, mPlayer->GetTransform());
