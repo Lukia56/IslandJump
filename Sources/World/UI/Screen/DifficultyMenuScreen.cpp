@@ -34,17 +34,17 @@ namespace UI
 	{
 		// プッシュ時に項目オブジェクトが無いと初期選択がされないため、コンストラクタで生成
 
-		UI::UIRoot* itemRoot = GetMenuItemRoot();
-
 		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
 
-		BoxObject* bg = itemRoot->CreateToChild<UI::BoxObject>(Color{ 0.0f, 0.0f, 0.0f, 0.5f });
+		BoxObject* bg = CreateToChild<UI::BoxObject>(Color{ 0.0f, 0.0f, 0.0f, 0.5f });
 		bg->GetRectTransform()->localPosition = kBackgroundPos;
 		bg->GetRectTransform()->SetFullRectAsFixed(kBackgroundRect);
 
-		TextObject* descText = itemRoot->CreateToChild<UI::TextObject>(font, kDescText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
+		TextObject* descText = CreateToChild<UI::TextObject>(font, kDescText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		descText->GetRectTransform()->localPosition = kDescPos;
 		descText->GetRectTransform()->SetFullRectAsFixed(kDescRect);
+
+		UI::UIRoot* itemRoot = GetMenuItemRoot();
 
 		// イージーモード選択ボタン
 		auto easyModeButton = itemRoot->CreateToChild<UI::MenuItem>();
