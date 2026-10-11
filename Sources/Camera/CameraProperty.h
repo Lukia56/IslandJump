@@ -67,6 +67,7 @@ namespace Camera
 		Static,
 		DebugFree,
 		Follow,
+		Rotation,
 		Max,
 	};
 }
