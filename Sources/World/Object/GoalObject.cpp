@@ -1,18 +1,43 @@
 #include "GoalObject.h"
 #include "GoalTrigger.h"
+#include "../Component/ModelAnimator.h"
+#include "../Component/Rendering/ModelRenderer.h"
+#include "Param/Param.h"
 
 GoalObject::GoalObject() :
-	mTrigger(nullptr)
+	mTrigger(nullptr),
+	mModel(nullptr),
+	mAnimator(nullptr)
 {
 	mTrigger = CreateToChild<GoalTrigger>();
+
+	mModel = std::make_unique<ModelRenderer>(this, nullptr);
+}
+
+GoalObject::GoalObject(std::shared_ptr<Resource::ResourceBase> model) :
+	mTrigger(nullptr),
+	mModel(nullptr),
+	mAnimator(nullptr)
+{
+	mTrigger = CreateToChild<GoalTrigger>();
+
+	mModel = std::make_unique<ModelRenderer>(this, model);
 }
 
 void GoalObject::Init()
 {
-	
+	mAnimator = std::make_unique<ModelAnimator>(mModel.get());
+	mAnimator->Play(AnimationParam{ .animIndex = 0, .isLoop = true, .isForcePlay = false });
+
+	mTransform->localRotation.y = Math::kPiOver2;
 }
 
 void GoalObject::Update()
 {
+	mAnimator->Update();
+}
 
+void GoalObject::Draw()
+{
+	mModel->Draw();
 }

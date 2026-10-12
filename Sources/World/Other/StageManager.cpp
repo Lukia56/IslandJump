@@ -33,6 +33,22 @@ StageManager::StageManager() :
 	mGoalObject->GetTransform()->localPosition = goalPos;
 }
 
+StageManager::StageManager(std::shared_ptr<Resource::ResourceBase> goalModel) :
+	mGoalObject(nullptr)
+{
+	Vector3 goalPos;
+
+	std::vector<std::unique_ptr<GameObject>> objects = Stage::StageGenerator::Generate(goalPos);
+
+	for (auto& object : objects)
+	{
+		AddToChild(std::move(object));
+	}
+
+	mGoalObject = CreateToChild<GoalObject>(goalModel);
+	mGoalObject->GetTransform()->localPosition = goalPos;
+}
+
 void StageManager::Init()
 {
 }

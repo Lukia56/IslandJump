@@ -31,6 +31,8 @@ namespace
 
 	const char* const kSkyboxModelPath = "Resources\\Model\\Skybox\\Skybox.mv1";
 
+	const char* const kHelicopterModelPath = "Resources\\Model\\Helicopter\\helicopter.mv1";
+
 	constexpr int kItemNum = 10;
 
 	constexpr float kGoalY = 5000.0f;
@@ -51,7 +53,8 @@ void SceneMain::OnInit()
 	std::shared_ptr<Resource::ResourceBase> skyboxModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kSkyboxModelPath);
 	mSkybox = CreateToRoot<Skybox>(skyboxModel);
 
-	StageManager* stageManager = CreateToRoot<StageManager>();
+	std::shared_ptr<Resource::ResourceBase> goalModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kHelicopterModelPath);
+	StageManager* stageManager = CreateToRoot<StageManager>(goalModel);
 
 	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>();
 

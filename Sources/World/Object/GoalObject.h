@@ -3,6 +3,12 @@
 #include "../GameObject.h"
 
 class GoalTrigger;
+class ModelRenderer;
+class ModelAnimator;
+namespace Resource
+{
+	class ResourceBase;
+}
 
 /// <summary>
 /// ƒS[ƒ‹‚Ìƒ‚ƒfƒ‹•`‰æ‚ÆƒS[ƒ‹”»’è‚ğs‚¤
@@ -12,11 +18,14 @@ class GoalObject : public GameObject
 public:
 
 	GoalObject();
+	GoalObject(std::shared_ptr<Resource::ResourceBase> model);
 	~GoalObject() = default;
 
-	void Init();
+	void Init() override;
 
-	void Update();
+	void Update() override;
+
+	void Draw() override;
 
 public:
 
@@ -25,4 +34,8 @@ public:
 private:
 
 	GoalTrigger* mTrigger;
+
+	std::unique_ptr<ModelRenderer> mModel;
+
+	std::unique_ptr<ModelAnimator> mAnimator;
 };
