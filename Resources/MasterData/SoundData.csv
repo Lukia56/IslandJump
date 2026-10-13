@@ -2,7 +2,8 @@ ID,filePath
 0,Resources\Sound\SE\Submit.mp3
 1,Resources\Sound\SE\Cancel.mp3
 2,Resources\Sound\SE\MoveCursor.mp3
-3,Resources\Sound\SE\MoveCursor.mp3
-4,Resources\Sound\SE\MoveCursor.mp3
-5,Resources\Sound\SE\MoveCursor.mp3
-6,Resources\Sound\SE\MoveCursor.mp3
+3,Resources\Sound\SE\Jump.mp3
+4,Resources\Sound\SE\Goal.mp3
+5,Resources\Sound\SE\ItemAppear.mp3
+6,Resources\Sound\SE\ItemObtain.mp3
+7,Resources\Sound\SE\Dead.mp3
