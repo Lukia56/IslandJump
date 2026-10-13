@@ -18,8 +18,7 @@ namespace Observer
 
 		std::vector<SoundData> soundData = Data::Csv::LoadCsvAs<SoundData>(kSoundDataPath);
 
-		//for (int i = 0; i < static_cast<int>(Sound::Length); i++)
-		for (int i = 0; i < static_cast<int>(3); i++)
+		for (int i = 0; i < static_cast<int>(Sound::Length); i++)
 		{
 			std::shared_ptr<Resource::ResourceBase> sound = ResourceManager::GetInstance().GetResource<Resource::Sound>(soundData[i].filePath);
 			mSounds[i] = sound;
@@ -40,6 +39,22 @@ namespace Observer
 
 		case Observer::Event::UIMoveCursor:
 			SoundManager::GetInstance().PlaySe(mSounds[static_cast<size_t>(Sound::MenuMoveCursor)]);
+			break;
+
+		case Observer::Event::PlayerJump:
+			SoundManager::GetInstance().PlaySe(mSounds[static_cast<size_t>(Sound::Jump)]);
+			break;
+
+		case Observer::Event::ReachGoal:
+			SoundManager::GetInstance().PlaySe(mSounds[static_cast<size_t>(Sound::Goal)]);
+			break;
+
+		case Observer::Event::ItemAppear:
+			SoundManager::GetInstance().PlaySe(mSounds[static_cast<size_t>(Sound::ItemAppear)]);
+			break;
+
+		case Observer::Event::ItemObtain:
+			SoundManager::GetInstance().PlaySe(mSounds[static_cast<size_t>(Sound::ItemObtain)]);
 			break;
 		}
 	}
