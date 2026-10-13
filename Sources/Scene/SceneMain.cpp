@@ -9,8 +9,10 @@
 #include "Observer/Subject.h"
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
+#include "System/SoundManager.h"
 #include "System/Input/Mouse.h"
 #include "System/Resource/Model.h"
+#include "System/Resource/Sound.h"
 #include "World/Character/Player.h"
 #include "World/Object/DeathCloud.h"
 #include "World/Object/GoalObject.h"
@@ -33,6 +35,8 @@ namespace
 	const char* const kSkyboxModelPath = "Resources\\Model\\Skybox\\Skybox.mv1";
 
 	const char* const kHelicopterModelPath = "Resources\\Model\\Helicopter\\helicopter.mv1";
+
+	const char* const kBGMPath = "Resources\\Sound\\BGM\\InGame.ogg";
 
 	constexpr float kGoalY = 5000.0f;
 
@@ -109,6 +113,9 @@ void SceneMain::OnInit()
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Follow);
 
 	Mouse::GetInstance().SetMode(Mouse::Mode::Relative);
+
+	std::shared_ptr<Resource::ResourceBase> bgm = ResourceManager::GetInstance().GetResource<Resource::Sound>(kBGMPath);
+	SoundManager::GetInstance().PlayBGM(bgm);
 }
 
 std::unique_ptr<SceneBase> SceneMain::OnUpdate()
