@@ -7,5 +7,11 @@ namespace Observer
 		ReachGoal,
 		FallCloudPlayer,
 		TransitionResult,
+		UISubmit,
+		UICancel,
+		UIMoveCursor,
+		PlayerJump,
+		ItemAppear,
+		ItemObtain,
 	};
 }
