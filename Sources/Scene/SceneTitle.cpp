@@ -7,7 +7,9 @@
 #include "Observer/Subject.h"
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
+#include "System/SoundManager.h"
 #include "System/Resource/Model.h"
+#include "System/Resource/Sound.h"
 #include "Utility/Data/CSV/CsvLoader.h"
 #include "World/Object/Skybox.h"
 #include "World/UI/Core/UIManager.h"
@@ -19,6 +21,8 @@ namespace
 	constexpr Vector3 kCameraRotate{ 0.0f, 10.0f, 0.0f };
 
 	const char* const kSkyboxModelPath = "Resources\\Model\\Skybox\\Skybox.mv1";
+
+	const char* const kBGMPath = "Resources\\Sound\\BGM\\Title.ogg";
 
 	const char* const kStageDifficultyDataPath = "Resources\\MasterData\\StageDifficultyData.csv";
 }
@@ -50,6 +54,9 @@ void SceneTitle::OnInit()
 
 	GetCameraManager()->AddCamera(Camera::Type::Rotation, std::make_unique<CameraRotation>(Vector3::Zero, kCameraRotate));
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Rotation);
+
+	std::shared_ptr<Resource::ResourceBase> bgm = ResourceManager::GetInstance().GetResource<Resource::Sound>(kBGMPath);
+	SoundManager::GetInstance().PlayBGM(bgm);
 }
 
 std::unique_ptr<SceneBase> SceneTitle::OnUpdate()
