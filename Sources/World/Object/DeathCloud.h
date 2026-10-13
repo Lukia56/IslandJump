@@ -7,6 +7,10 @@ namespace Observer
 {
 	class Subject;
 }
+namespace Resource
+{
+	class ResourceBase;
+}
 
 /// <summary>
 /// 下から迫る死亡判定を持つオブジェクト
@@ -17,6 +21,7 @@ public:
 
 	DeathCloud(const Vector3& initPos, const Vector3& goalPos);
 	DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed);
+	DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed, std::shared_ptr<Resource::ResourceBase> model);
 	~DeathCloud() = default;
 
 	void Init() override;
@@ -24,8 +29,6 @@ public:
 	void Update() override;
 
 	void PhysicsUpdate() override;
-
-	void Draw() override;
 
 	void DebugDraw() override;
 

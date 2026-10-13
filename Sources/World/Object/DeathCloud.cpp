@@ -1,15 +1,25 @@
 #include "DeathCloud.h"
+#include "CloudModel.h"
 #include "../Component/Collider3D.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "Observer/Subject.h"
 #include "System/TimeManager.h"
+#include "System/Resource/ResourceBase.h"
 
 namespace
 {
 	constexpr Vector3 kBodyCollSize{ 3000.0f, 100.0f, 3000.0f };
 
 	constexpr float kResultTransitionTime = 1.0f;
+
+	constexpr int kCloudXNum = 3;
+	constexpr int kCloudZNum = 5;
+
+	constexpr float kCloudXSpace = 1000.0f;
+	constexpr float kCloudZSpace = 400.0f;
+
+	constexpr float kCloudYOffset = -200.0f;
 }
 
 DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos) :
@@ -34,6 +44,27 @@ DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos, float mov
 {
 	mTransform->localPosition = initPos;
 	mEventSubject = std::make_unique<Observer::Subject>();
+}
+
+DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed, std::shared_ptr<Resource::ResourceBase> model) :
+	mGoalPos(goalPos),
+	mMoveSpeed(moveSpeed),
+	mResultTransitionTimer(0.0f),
+	mIsStartTransitionResult(false),
+	mIsTriggered(false),
+	mCollider(nullptr)
+{
+	mTransform->localPosition = initPos;
+	mEventSubject = std::make_unique<Observer::Subject>();
+
+	for (int i = 0; i < kCloudZNum; i++)
+	{
+		for (int j = 0; j < kCloudXNum; j++)
+		{
+			CloudModel* cloud = CreateToChild<CloudModel>(model);
+			cloud->GetTransform()->localPosition = Vector3(kCloudXSpace * j - kCloudXSpace * kCloudXNum * 0.5f, kCloudYOffset, kCloudZSpace * i - kCloudZSpace * kCloudZNum * 0.5f);
+		}
+	}
 }
 
 void DeathCloud::Init()
@@ -75,10 +106,6 @@ void DeathCloud::PhysicsUpdate()
 
 	Vector3 worldPos = mTransform->CalculateWorldPosition();
 	mCollider->GetShape()->SetPosition(worldPos);
-}
-
-void DeathCloud::Draw()
-{
 }
 
 void DeathCloud::DebugDraw()

@@ -34,6 +34,8 @@ namespace
 
 	const char* const kSkyboxModelPath = "Resources\\Model\\Skybox\\Skybox.mv1";
 
+	const char* const kCloudModelPath = "Resources\\Model\\Cloud.mv1";
+
 	const char* const kHelicopterModelPath = "Resources\\Model\\Helicopter\\helicopter.mv1";
 
 	const char* const kBGMPath = "Resources\\Sound\\BGM\\InGame.ogg";
@@ -82,6 +84,11 @@ void SceneMain::OnInit()
 	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(itemObjectManager);
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
 
+	Vector3 cloudInitPos = mPlayer->GetTransform()->localPosition + kDeathCloudOffsetPlayer;
+	Vector3 goalPos = stageManager->GetGoalObject()->GetTransform()->CalculateWorldPosition();
+	std::shared_ptr<Resource::ResourceBase> cloudModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kCloudModelPath);
+	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos, mDifficultyData.cloudSpeed, cloudModel);
+
 	mUIManager = CreateToRoot<UI::UIManager>();
 	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(kGoalY, mPlayer->GetTransform(), itemObjectManager));
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
@@ -100,9 +107,6 @@ void SceneMain::OnInit()
 	goalTrigger->GetEventSubject()->RegisterObserver(mResultObserver.get());
 	goalTrigger->GetEventSubject()->RegisterObserver(mSoundObserver.get());
 
-	Vector3 cloudInitPos = mPlayer->GetTransform()->localPosition + kDeathCloudOffsetPlayer;
-	Vector3 goalPos = stageManager->GetGoalObject()->GetTransform()->CalculateWorldPosition();
-	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos, mDifficultyData.cloudSpeed);
 	mDeathCloud->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 	mDeathCloud->GetEventSubject()->RegisterObserver(mResultObserver.get());
 	mDeathCloud->GetEventSubject()->RegisterObserver(mSoundObserver.get());
