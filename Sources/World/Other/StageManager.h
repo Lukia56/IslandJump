@@ -18,7 +18,7 @@ public:
 
 	StageManager(const std::string& objectDataPath);
 	StageManager();
-	StageManager(std::shared_ptr<Resource::ResourceBase> goalModel);
+	StageManager(std::shared_ptr<Resource::ResourceBase> goalModel, float goalY);
 
 	void Init() override;
 	void Update() override;

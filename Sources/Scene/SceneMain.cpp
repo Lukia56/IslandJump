@@ -54,7 +54,7 @@ void SceneMain::OnInit()
 	mSkybox = CreateToRoot<Skybox>(skyboxModel);
 
 	std::shared_ptr<Resource::ResourceBase> goalModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kHelicopterModelPath);
-	StageManager* stageManager = CreateToRoot<StageManager>(goalModel);
+	StageManager* stageManager = CreateToRoot<StageManager>(goalModel, kGoalY);
 
 	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>();
 

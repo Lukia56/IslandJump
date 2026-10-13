@@ -26,8 +26,6 @@ namespace
 	constexpr float kGenerateRangeHMaxDistance = 900.0f;
 	constexpr float kGenerateRangeVMinDistance = 300.0f;
 	constexpr float kGenerateRangeVMaxDistance = 500.0f;
-
-	constexpr float kGoalPosY = 5000.0f;
 }
 
 namespace Stage
@@ -52,7 +50,7 @@ namespace Stage
 		float dir = 0.0f;
 		constexpr float generateRangeRad = Math::ToRadian(kGenerateRangeAngle);
 
-		while (generatePos.y < kGoalPosY)
+		while (true)
 		{
 			std::unique_ptr<RootObject> island = std::make_unique<RootObject>();
 			int islandIndex = Random::Range(0, static_cast<int>(kIslandTypeNum));
@@ -70,6 +68,8 @@ namespace Stage
 				std::cos(dir) * distance
 			);
 
+			if (generatePos.y > goalPos.y) break;
+
 			island->GetTransform()->localPosition = generatePos;
 
 			islands.emplace_back(std::move(island));
@@ -81,13 +81,8 @@ namespace Stage
 					// 次に生成する座標は片方にする
 		}
 
-		// ゴールの座標を計算する
-		float distance = Random::Range(kGenerateRangeHMinDistance, kGenerateRangeHMaxDistance);
-		generatePos += Vector3(
-			std::sin(dir) * distance,
-			Random::Range(kGenerateRangeVMinDistance, kGenerateRangeVMaxDistance),
-			std::cos(dir) * distance
-		);
+		// ゴールの座標を設定する
+		generatePos.y = goalPos.y;
 		goalPos = generatePos;
 
 		return islands;
