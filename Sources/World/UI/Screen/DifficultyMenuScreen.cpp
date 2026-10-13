@@ -69,6 +69,10 @@ namespace UI
 				mEventSubject->Notify(Observer::Event::UISubmit);
 				return true;
 			});
+		easyModeButton->SetCancelCallback([this]()
+			{
+				return false;
+			});
 
 		// ハードモード選択ボタン
 		auto hardModeButton = bg->CreateToChild<UI::MenuItem>();
@@ -90,6 +94,10 @@ namespace UI
 				this->SetCommand(Command::StartHardMode);
 				mEventSubject->Notify(Observer::Event::UISubmit);
 				return true;
+			});
+		hardModeButton->SetCancelCallback([this]()
+			{
+				return false;
 			});
 
 		AddMenuItem(easyModeButton);
@@ -122,6 +130,10 @@ namespace UI
 		if (input.submit)
 		{
 			if (!InvokeSubmit()) return false;
+		}
+		if (input.cancel)
+		{
+			if (!InvokeCancel()) return false;
 		}
 
 		return true;
