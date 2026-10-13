@@ -44,7 +44,17 @@ SceneMain::SceneMain() :
 	mPlayer(nullptr),
 	mSkybox(nullptr),
 	mDeathCloud(nullptr),
-	mUIManager(nullptr)
+	mUIManager(nullptr),
+	mDifficultyData{}
+{
+}
+
+SceneMain::SceneMain(const StageDifficultyData& difficultyData) :
+	mPlayer(nullptr),
+	mSkybox(nullptr),
+	mDeathCloud(nullptr),
+	mUIManager(nullptr),
+	mDifficultyData(difficultyData)
 {
 }
 

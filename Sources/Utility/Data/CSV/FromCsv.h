@@ -120,5 +120,17 @@ namespace Data
 				return param;
 			}
 		};
+
+		template <>
+		struct FromCsv<StageDifficultyData>
+		{
+			static StageDifficultyData Binding(const Row& row)
+			{
+				StageDifficultyData param;
+				param.cloudSpeed = Get<float>(row, "cloudSpeed");
+				param.itemNum = Get<int>(row, "itemNum");
+				return param;
+			}
+		};
 	}
 }

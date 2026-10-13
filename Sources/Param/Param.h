@@ -53,3 +53,16 @@ struct ItemEffectParam
 	ItemType itemType = ItemType::Invalid;
 	std::vector<float> param;
 };
+
+struct StageDifficultyData
+{
+	enum class Difficulty
+	{
+		Easy,
+		Hard,
+	};
+
+	float cloudSpeed = 0.0f;
+
+	int itemNum = 0;
+};

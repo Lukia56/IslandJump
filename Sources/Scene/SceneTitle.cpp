@@ -6,6 +6,7 @@
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Model.h"
+#include "Utility/Data/CSV/CsvLoader.h"
 #include "World/Object/Skybox.h"
 #include "World/UI/Core/UIManager.h"
 #include "World/UI/Screen/TitleMenuScreen.h"
@@ -16,6 +17,8 @@ namespace
 	constexpr Vector3 kCameraRotate{ 0.0f, 10.0f, 0.0f };
 
 	const char* const kSkyboxModelPath = "Resources\\Model\\Skybox\\Skybox.mv1";
+
+	const char* const kStageDifficultyDataPath = "Resources\\MasterData\\StageDifficultyData.csv";
 }
 
 SceneTitle::SceneTitle() :
@@ -53,10 +56,12 @@ std::unique_ptr<SceneBase> SceneTitle::OnUpdate()
 		break;
 
 	case UI::Command::StartEasyMode:
-		return std::make_unique<SceneMain>();
-
 	case UI::Command::StartHardMode:
-		return std::make_unique<SceneMain>();
+	{
+		size_t index = static_cast<size_t>(command == UI::Command::StartEasyMode ? StageDifficultyData::Difficulty::Easy : StageDifficultyData::Difficulty::Hard);
+		StageDifficultyData data = Data::Csv::LoadCsvAs<StageDifficultyData>(kStageDifficultyDataPath)[index];
+		return std::make_unique<SceneMain>(data);
+	}
 	}
 
 	return nullptr;

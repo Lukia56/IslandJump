@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SceneBase.h"
+#include "Param/Param.h"
 
 class Player;
 class Skybox;
@@ -20,6 +21,7 @@ class SceneMain : public SceneBase
 public:
 
 	SceneMain();
+	SceneMain(const StageDifficultyData& difficultyData);
 	~SceneMain() = default;
 
 	void OnInit();
@@ -35,6 +37,8 @@ private:
 	DeathCloud* mDeathCloud;
 
 	UI::UIManager* mUIManager;
+
+	StageDifficultyData mDifficultyData;
 
 	std::unique_ptr<Observer::GoalObserver> mGoalObserver;
 
