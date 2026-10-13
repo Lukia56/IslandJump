@@ -4,6 +4,11 @@
 #include "../Component/Rendering/ModelRenderer.h"
 #include "Param/Param.h"
 
+namespace
+{
+	constexpr AnimationParam kAnimParam{ .animIndex = 2, .isLoop = true, .isForcePlay = false };
+}
+
 GoalObject::GoalObject() :
 	mTrigger(nullptr),
 	mModel(nullptr),
@@ -27,7 +32,7 @@ GoalObject::GoalObject(std::shared_ptr<Resource::ResourceBase> model) :
 void GoalObject::Init()
 {
 	mAnimator = std::make_unique<ModelAnimator>(mModel.get());
-	mAnimator->Play(AnimationParam{ .animIndex = 0, .isLoop = true, .isForcePlay = false });
+	mAnimator->Play(kAnimParam);
 
 	mTransform->localRotation.y = Math::kPiOver2;
 }
