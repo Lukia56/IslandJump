@@ -7,6 +7,8 @@
 
 namespace
 {
+	constexpr Vector3 kInitRot{ 0.0f, Math::kPi, 0.0f };
+
 	constexpr float kDistance = 700.0f;
 
 	constexpr float kMaxPitch = 70.0f;
@@ -19,8 +21,8 @@ namespace
 
 CameraFollow::CameraFollow(Transform* target) :
 	mEyePosition(Vector3::Zero),
-	mRotation(Vector3::Zero),
-	mTargetRotation(Vector3::Zero),
+	mRotation(kInitRot),
+	mTargetRotation(kInitRot),
 	mTarget(target)
 {
 }
