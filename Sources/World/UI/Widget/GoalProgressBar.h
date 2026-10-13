@@ -2,6 +2,11 @@
 
 #include "../Core/UIObject.h"
 
+namespace Resource
+{
+	class ResourceBase;
+}
+
 namespace UI
 {
 	class BoxObject;
@@ -11,7 +16,7 @@ namespace UI
 	{
 	public:
 
-		GoalProgressBar(float maxDistance, Transform* playerTransform);
+		GoalProgressBar(float maxDistance, Transform* playerTransform, std::shared_ptr<Resource::ResourceBase> font);
 		~GoalProgressBar() = default;
 
 		void Init() override;

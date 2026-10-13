@@ -1,8 +1,7 @@
 #include "GoalProgressBar.h"
 #include "BoxObject.h"
 #include "TextObject.h"
-#include "System/ResourceManager.h"
-#include "System/Resource/Font.h"
+#include "System/Resource/ResourceBase.h"
 
 namespace
 {
@@ -12,19 +11,19 @@ namespace
 	constexpr Vector3 kProgressPos{ 0.0f, 300.0f, 0.0f };
 
 	const char* const kProgressText = "m to goal";
-
-	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
 }
 
 namespace UI
 {
-	GoalProgressBar::GoalProgressBar(float maxDistance, Transform* playerTransform) :
+	GoalProgressBar::GoalProgressBar(float maxDistance, Transform* playerTransform, std::shared_ptr<Resource::ResourceBase> font) :
 		mMaxDistance(maxDistance),
 		mPlayerTransform(playerTransform),
 		mMaxBar(nullptr),
 		mCurrentBar(nullptr),
 		mProgressText(nullptr)
 	{
+		mProgressText = CreateToChild<UI::TextObject>(font, kProgressText, Color::white, HolizontalAlignment::Right);
+		mProgressText->GetRectTransform()->localPosition = kProgressPos;
 	}
 
 	void GoalProgressBar::Init()
@@ -38,10 +37,6 @@ namespace UI
 		mCurrentBar->GetRectTransform()->localPosition = kBoxPos;
 		mCurrentBar->GetRectTransform()->SetFullRectAsFixed(kBoxSize);
 		mCurrentBar->GetRectTransform()->SetPivot(Vector2(0.0f, 1.0f));
-
-		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
-		mProgressText = CreateToChild<UI::TextObject>(font, kProgressText, Color::white, HolizontalAlignment::Right);
-		mProgressText->GetRectTransform()->localPosition = kProgressPos;
 	}
 
 	void GoalProgressBar::Update()
