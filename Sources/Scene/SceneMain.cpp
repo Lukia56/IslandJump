@@ -40,8 +40,6 @@ namespace
 
 	const char* const kBGMPath = "Resources\\Sound\\BGM\\InGame.ogg";
 
-	constexpr float kGoalY = 5000.0f;
-
 	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -500.0f, 0.0f };
 }
 
@@ -75,7 +73,7 @@ void SceneMain::OnInit()
 	mSkybox = CreateToRoot<Skybox>(skyboxModel);
 
 	std::shared_ptr<Resource::ResourceBase> goalModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kHelicopterModelPath);
-	StageManager* stageManager = CreateToRoot<StageManager>(goalModel, kGoalY);
+	StageManager* stageManager = CreateToRoot<StageManager>(goalModel, mDifficultyData.goalPosY);
 
 	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>();
 
@@ -90,7 +88,7 @@ void SceneMain::OnInit()
 	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos, mDifficultyData.cloudSpeed, cloudModel);
 
 	mUIManager = CreateToRoot<UI::UIManager>();
-	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(kGoalY, mPlayer->GetTransform(), itemObjectManager));
+	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(mDifficultyData.goalPosY, mPlayer->GetTransform(), itemObjectManager));
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
 	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(resultRecorder));
 	mUIManager->PushScreen<UI::InGameScreen>();

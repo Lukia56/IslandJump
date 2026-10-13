@@ -129,6 +129,7 @@ namespace Data
 				StageDifficultyData param;
 				param.cloudSpeed = Get<float>(row, "cloudSpeed");
 				param.itemNum = Get<int>(row, "itemNum");
+				param.goalPosY = Get<float>(row, "goalPosY");
 				return param;
 			}
 		};

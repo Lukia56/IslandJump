@@ -65,6 +65,8 @@ struct StageDifficultyData
 	float cloudSpeed = 0.0f;
 
 	int itemNum = 0;
+
+	float goalPosY = 0.0f;
 };
 
 struct SoundData
