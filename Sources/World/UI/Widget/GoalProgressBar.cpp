@@ -50,7 +50,9 @@ namespace UI
 
 		mCurrentBar->GetRectTransform()->SetRectHeightAsFixed(kBoxSize.y * progressRate);
 
-		mProgressText->SetDisplayText(std::to_string(static_cast<int>(mMaxDistance - mPlayerTransform->CalculateWorldPosition().y)) + kProgressText);
+		float distance = mMaxDistance - mPlayerTransform->CalculateWorldPosition().y;
+		int clampedDistance = Math::Max(static_cast<int>(distance), 0);
+		mProgressText->SetDisplayText(std::to_string(clampedDistance) + kProgressText);
 		mProgressText->GetRectTransform()->localPosition.y = kProgressPos.y + -kBoxSize.y * progressRate;
 	}
 }
