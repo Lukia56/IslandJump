@@ -19,6 +19,7 @@ namespace Resource
 namespace Observer
 {
 	class IObserver;
+	class Subject;
 }
 
 class Player : public GameObject
@@ -45,6 +46,7 @@ public:
 	LandTerrainRecorder* GetLandTerrainRecorder() const { return mLandTerrainRecorder.get(); }
 
 	Observer::IObserver* GetObserver() const { return mObserver.get(); }
+	Observer::Subject* GetEventSubject() const { return mEventSubject.get(); }
 
 	void SetCameraView(const Camera::View& view) { mCameraView = view; }
 
@@ -104,6 +106,7 @@ private:
 	std::unique_ptr<LandTerrainRecorder> mLandTerrainRecorder;
 
 	std::unique_ptr<Observer::IObserver> mObserver;
+	std::unique_ptr<Observer::Subject> mEventSubject;
 
 	ItemObjectManager* mItemObjectManager;
 

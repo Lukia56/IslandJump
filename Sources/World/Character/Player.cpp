@@ -9,6 +9,7 @@
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "Observer/PlayerObserver.h"
+#include "Observer/Subject.h"
 #include "Param/Param.h"
 #include "System/InputManager.h"
 #include "System/TimeManager.h"
@@ -57,6 +58,7 @@ Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::vector<Animat
 	mModel(nullptr),
 	mLandTerrainRecorder(nullptr),
 	mObserver(nullptr),
+	mEventSubject(nullptr),
 	mItemObjectManager(itemObjectManager),
 	mCameraView{}
 {
@@ -64,6 +66,7 @@ Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::vector<Animat
 	mLandTerrainRecorder = std::make_unique<LandTerrainRecorder>();
 
 	mObserver = std::make_unique<Observer::PlayerObserver>(this);
+	mEventSubject = std::make_unique<Observer::Subject>();
 
 	mModel = std::make_unique<ModelRenderer>(this, model);
 }
@@ -204,12 +207,19 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 		}
 		break;
 
+	case Tag::ItemSpawner:
+
+		if (mOnGround) mEventSubject->Notify(Observer::Event::ItemAppear);
+
+		break;
+
 	case Tag::ItemObject:
 
 		if (mItemObjectManager)
 		{
 			ItemType itemType = mItemObjectManager->ConsumeItem(oppCollider->GetOwner()->GetTransform());
 			mItemObjectManager->AddItemUseCount(itemType);
+			mEventSubject->Notify(Observer::Event::ItemObtain);
 
 			switch (itemType)
 			{
@@ -275,6 +285,8 @@ void Player::MoveVertical(float deltaTime)
 		mIsJumping = true;
 		mJumpBufferTimer = 0.0f;
 		mForceJumpTimer = kForceJumpTime;
+
+		mEventSubject->Notify(Observer::Event::PlayerJump);
 	}
 	// ジャンプキャンセル
 	if (!InputManager::GetInstance().IsDown(Input::Action::Jump) && CanCancelJump())
