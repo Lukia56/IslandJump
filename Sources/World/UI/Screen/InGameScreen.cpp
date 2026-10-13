@@ -22,7 +22,7 @@ namespace UI
 	{
 		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
 
-		UI::GoalProgressBar* goalProgressBar = CreateToChild<UI::GoalProgressBar>(maxDistance, playerTransform);
+		UI::GoalProgressBar* goalProgressBar = CreateToChild<UI::GoalProgressBar>(maxDistance, playerTransform, font);
 		goalProgressBar->GetRectTransform()->localPosition = kGoalProgressBarPos;
 		goalProgressBar->GetRectTransform()->SetAnchor(RectTransform::Anchor::RightMiddle);
 
