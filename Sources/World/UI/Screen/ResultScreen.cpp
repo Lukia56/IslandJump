@@ -47,7 +47,7 @@ namespace UI
 
 		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
 
-		BoxObject* bg = itemRoot->CreateToChild<UI::BoxObject>(Color{ 0.0f, 0.0f, 0.0f, 0.5f });
+		BoxObject* bg = itemRoot->CreateToChild<UI::BoxObject>(Color::black);
 		bg->GetRectTransform()->localPosition = kBackgroundPos;
 		bg->GetRectTransform()->SetFullRectAsFixed(kBackgroundRect);
 

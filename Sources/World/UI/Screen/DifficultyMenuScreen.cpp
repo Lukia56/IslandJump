@@ -12,19 +12,19 @@ namespace
 {
 	const char* const kDescText = "Choose difficulty";
 
-	constexpr Vector3 kDescPos{ 0.0f, -300.0f, 0.0f };
+	constexpr Vector3 kDescPos{ 0.0f, 100.0f, 0.0f };
 	constexpr Vector2 kDescRect{ 200.0f, 32.0f };
 
 	const char* const kEasyModeText = "Easy";
-	constexpr Vector3 kEasyModeTextPos{ -250.0f, -150.0f, 0.0f };
+	constexpr Vector3 kEasyModeTextPos{ 200.0f, -100.0f, 0.0f };
 
 	const char* const kHardModeText = "Hard";
-	constexpr Vector3 kHardModeTextPos{ 250.0f, -150.0f, 0.0f };
+	constexpr Vector3 kHardModeTextPos{ -200.0f, -100.0f, 0.0f };
 
 	constexpr Vector2 kButtonRect{ 160.0f, 32.0f };
 
 	constexpr Vector3 kBackgroundPos{ 0.0f, 0.0f, 0.0f };
-	constexpr Vector2 kBackgroundRect{ 800.0f, 750.0f };
+	constexpr Vector2 kBackgroundRect{ 800.0f, 400.0f };
 
 	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
 }
@@ -37,20 +37,22 @@ namespace UI
 
 		// プッシュ時に項目オブジェクトが無いと初期選択がされないため、コンストラクタで生成
 
-		BoxObject* bg = CreateToChild<UI::BoxObject>(Color{ 0.0f, 0.0f, 0.0f, 0.5f });
+		BoxObject* bg = CreateToChild<UI::BoxObject>(Color::black);
 		bg->GetRectTransform()->localPosition = kBackgroundPos;
 		bg->GetRectTransform()->SetFullRectAsFixed(kBackgroundRect);
 
 		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
 
-		TextObject* descText = CreateToChild<UI::TextObject>(font, kDescText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
+		TextObject* descText = bg->CreateToChild<UI::TextObject>(font, kDescText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		descText->GetRectTransform()->localPosition = kDescPos;
 		descText->GetRectTransform()->SetFullRectAsFixed(kDescRect);
+		descText->GetRectTransform()->SetAnchor(RectTransform::Anchor::CenterTop);
 
 		// イージーモード選択ボタン
-		auto easyModeButton = CreateToChild<UI::MenuItem>();
+		auto easyModeButton = bg->CreateToChild<UI::MenuItem>();
 		easyModeButton->GetRectTransform()->localPosition = kEasyModeTextPos;
 		easyModeButton->GetRectTransform()->SetFullRectAsFixed(kButtonRect);
+		easyModeButton->GetRectTransform()->SetAnchor(RectTransform::Anchor::LeftBottom);
 
 		UI::TextObject* easyModeText = easyModeButton->CreateToChild<UI::TextObject>(font, kEasyModeText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		easyModeText->GetRectTransform()->SetAnchor(RectTransform::Anchor::FullStretch);
@@ -69,9 +71,10 @@ namespace UI
 			});
 
 		// ハードモード選択ボタン
-		auto hardModeButton = CreateToChild<UI::MenuItem>();
+		auto hardModeButton = bg->CreateToChild<UI::MenuItem>();
 		hardModeButton->GetRectTransform()->localPosition = kHardModeTextPos;
 		hardModeButton->GetRectTransform()->SetFullRectAsFixed(kButtonRect);
+		hardModeButton->GetRectTransform()->SetAnchor(RectTransform::Anchor::RightBottom);
 
 		UI::TextObject* hardModeText = hardModeButton->CreateToChild<UI::TextObject>(font, kHardModeText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		hardModeText->GetRectTransform()->SetAnchor(RectTransform::Anchor::FullStretch);
