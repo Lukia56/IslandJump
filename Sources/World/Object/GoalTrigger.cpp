@@ -8,7 +8,8 @@
 
 namespace
 {
-	constexpr Vector3 kBodyCollSize{ 300.0f, 200.0f, 200.0f };
+	constexpr Vector3 kBodyCollSize{ 900.0f, 400.0f, 400.0f };
+	constexpr Vector3 kBodyCollOffset{ 0.0f, 200.0f, 0.0f };
 
 	constexpr float kResultTransitionTime = 3.0f;
 }
@@ -25,7 +26,7 @@ GoalTrigger::GoalTrigger() :
 void GoalTrigger::Init()
 {
 	mCollider = std::make_unique<Collider3D>(
-		std::make_unique<Collision::AABB3D>(kBodyCollSize),
+		std::make_unique<Collision::AABB3D>(kBodyCollSize, kBodyCollOffset),
 		this,
 		Collision::Tag::Body
 	);
