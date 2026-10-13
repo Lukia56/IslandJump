@@ -26,9 +26,9 @@ public:
 
 	void Play();
 
-private:
-
 	void Stop();
+
+private:
 
 	bool IsPlaying() const { return mEffectPlayHandle != -1; }
 

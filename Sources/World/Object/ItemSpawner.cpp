@@ -4,17 +4,25 @@
 #include "Utility/Color.h"
 #include "../Character/LandTerrainRecorder.h"
 #include "../Component/Collider3D.h"
+#include "../Component/EffectAnimator.h"
 #include "../Other/ItemObjectManager.h"
+#include "System/TimeManager.h"
 
 namespace
 {
 	constexpr float kTriggerRadius = 25.0f;
+
+	constexpr float kEffectDuration = 2.0f;
+
+	const char* const kEffectPath = "Resources\\Effect\\ItemSpawnerEffect.efk";
 }
 
 ItemSpawner::ItemSpawner(Transform* terrain, LandTerrainRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager) :
 	mTerrain(terrain),
 	mIsTriggered(false),
+	mEffectTimer(0.0f),
 	mCollider(nullptr),
+	mEffectAnimator(nullptr),
 	mLandTerrainRecorder(landTerrainRecorder),
 	mItemObjectManager(itemObjectManager)
 {
@@ -32,6 +40,8 @@ void ItemSpawner::Init()
 		this,
 		Collision::Tag::Sensor
 	);
+
+	mEffectAnimator = std::make_unique<EffectAnimator>(this, kEffectPath);
 }
 
 void ItemSpawner::Update()
@@ -39,15 +49,20 @@ void ItemSpawner::Update()
 	Vector3 worldPos = mTransform->CalculateWorldPosition();
 
 	mCollider->GetShape()->SetPosition(worldPos);
-}
 
-void ItemSpawner::Draw()
-{
-	Vector3 pos = mTransform->CalculateWorldPosition();
+	if (!mIsTriggered)
+	{
+		mEffectTimer -= TimeManager::GetDeltaTime();
+		if (mEffectTimer < 0.0f)
+		{
+			mEffectAnimator->Stop();
+			mEffectAnimator->Play();
 
-	int color = mIsTriggered ? Color::green.GetAsHexRGB() : Color::red.GetAsHexRGB();
+			mEffectTimer = kEffectDuration;
+		}
+	}
 
-	DrawSphere3D(pos.GetAsDxLibVector(), 25.0f, 8, color, color, true);
+	mEffectAnimator->Update();
 }
 
 void ItemSpawner::DebugDraw()
@@ -65,6 +80,7 @@ void ItemSpawner::ResolveCollision(const Collision::Result& result, const Collid
 	mIsTriggered = true;
 
 	mCollider->Disable();
+	mEffectAnimator->Stop();
 
 	Vector3 preTerrainPos = mLandTerrainRecorder->GetPreLandTerrain()->CalculateWorldPosition();
 	mItemObjectManager->CreateItem(preTerrainPos);

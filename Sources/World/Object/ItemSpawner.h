@@ -5,6 +5,7 @@
 class LandTerrainRecorder;
 class ItemObjectManager;
 class Collider3D;
+class EffectAnimator;
 
 /// <summary>
 /// プレイヤーに触れたら前に乗っていた地形にアイテムを生成する
@@ -20,8 +21,6 @@ public:
 
 	void Update() override;
 
-	void Draw() override;
-
 	void DebugDraw() override;
 
 	void ResolveCollision(const Collision::Result& result, const Collider3D* myCollider, const Collider3D* oppCollider) override;
@@ -36,7 +35,11 @@ private:
 
 	bool mIsTriggered;
 
+	float mEffectTimer;
+
 	std::unique_ptr<Collider3D> mCollider;
+
+	std::unique_ptr<EffectAnimator> mEffectAnimator;
 
 	LandTerrainRecorder* mLandTerrainRecorder;
 
