@@ -5,7 +5,6 @@
 #include "../Component/Collider3D.h"
 #include "../Component/ModelAnimator.h"
 #include "../Component/Rendering/ModelRenderer.h"
-#include "../Object/DebugGround.h"
 #include "../Other/ItemObjectManager.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
@@ -91,8 +90,6 @@ void Player::Init()
 			this,
 			Collision::Tag::Foot
 		));
-
-	CreateToChild<DebugGround>();
 }
 
 void Player::Update()
