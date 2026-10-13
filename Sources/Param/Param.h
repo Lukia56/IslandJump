@@ -66,3 +66,9 @@ struct StageDifficultyData
 
 	int itemNum = 0;
 };
+
+struct SoundData
+{
+	int id = -1;
+	std::string filePath = "";
+};

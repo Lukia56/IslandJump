@@ -132,5 +132,17 @@ namespace Data
 				return param;
 			}
 		};
+
+		template <>
+		struct FromCsv<SoundData>
+		{
+			static SoundData Binding(const Row& row)
+			{
+				SoundData param;
+				param.id = Get<int>(row, "ID");
+				param.filePath = Get<std::string>(row, "filePath");
+				return param;
+			}
+		};
 	}
 }
