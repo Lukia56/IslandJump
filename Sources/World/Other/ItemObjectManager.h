@@ -35,6 +35,8 @@ public:
 
 public:
 
+	const std::array<std::shared_ptr<Resource::ResourceBase>, static_cast<int>(ItemType::Length)>& GetTextures() const { return mTextures; }
+
 	const ItemEffectParam& GetEffectParam(ItemType itemType) const { return mEffectParams[static_cast<int>(itemType)]; }
 
 	const std::array<int, static_cast<size_t>(ItemType::Length)>& GetItemUseCounts() const { return mItemUseCounts; }

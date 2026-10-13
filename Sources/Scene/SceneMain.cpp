@@ -64,7 +64,7 @@ void SceneMain::OnInit()
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
 
 	mUIManager = CreateToRoot<UI::UIManager>();
-	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(kGoalY, mPlayer->GetTransform()));
+	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(kGoalY, mPlayer->GetTransform(), itemObjectManager));
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
 	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(resultRecorder));
 	mUIManager->PushScreen<UI::InGameScreen>();

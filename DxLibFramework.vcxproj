@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\World\UI\Widget\ItemUseCountUI.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\GoalProgressBar.cpp" />
     <ClCompile Include="Sources\World\UI\Screen\InGameScreen.cpp" />
     <ClCompile Include="Sources\Camera\CameraRotation.cpp" />
@@ -258,6 +259,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\World\UI\Widget\ItemUseCountUI.h" />
     <ClInclude Include="Sources\World\UI\Widget\GoalProgressBar.h" />
     <ClInclude Include="Sources\World\UI\Screen\InGameScreen.h" />
     <ClInclude Include="Sources\Camera\CameraRotation.h" />
