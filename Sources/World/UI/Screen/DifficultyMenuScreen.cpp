@@ -3,6 +3,7 @@
 #include "../Widget/BoxObject.h"
 #include "../Widget/MenuItem.h"
 #include "../Widget/TextObject.h"
+#include "Observer/Subject.h"
 #include "System/ResourceManager.h"
 #include "System/Input/Literal/InputState.h"
 #include "System/Resource/Font.h"
@@ -32,6 +33,8 @@ namespace UI
 {
 	DifficultyMenuScreen::DifficultyMenuScreen()
 	{
+		mEventSubject = std::make_unique<Observer::Subject>();
+
 		// プッシュ時に項目オブジェクトが無いと初期選択がされないため、コンストラクタで生成
 
 		BoxObject* bg = CreateToChild<UI::BoxObject>(Color{ 0.0f, 0.0f, 0.0f, 0.5f });
@@ -52,11 +55,16 @@ namespace UI
 		UI::TextObject* easyModeText = easyModeButton->CreateToChild<UI::TextObject>(font, kEasyModeText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		easyModeText->GetRectTransform()->SetAnchor(RectTransform::Anchor::FullStretch);
 
-		easyModeButton->SetSelectCallback([easyModeText]() { easyModeText->SetColor(Color::cyan); });
+		easyModeButton->SetSelectCallback([easyModeText, this]()
+			{
+				easyModeText->SetColor(Color::cyan);
+				mEventSubject->Notify(Observer::Event::UIMoveCursor);
+			});
 		easyModeButton->SetDeselectCallback([easyModeText]() { easyModeText->SetColor(Color::white); });
 		easyModeButton->SetSubmitCallback([this]()
 			{
 				this->SetCommand(Command::StartEasyMode);
+				mEventSubject->Notify(Observer::Event::UISubmit);
 				return true;
 			});
 
@@ -68,11 +76,16 @@ namespace UI
 		UI::TextObject* hardModeText = hardModeButton->CreateToChild<UI::TextObject>(font, kHardModeText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		hardModeText->GetRectTransform()->SetAnchor(RectTransform::Anchor::FullStretch);
 
-		hardModeButton->SetSelectCallback([hardModeText]() { hardModeText->SetColor(Color::cyan); });
+		hardModeButton->SetSelectCallback([hardModeText, this]()
+			{
+				hardModeText->SetColor(Color::cyan);
+				mEventSubject->Notify(Observer::Event::UIMoveCursor);
+			});
 		hardModeButton->SetDeselectCallback([hardModeText]() { hardModeText->SetColor(Color::white); });
 		hardModeButton->SetSubmitCallback([this]()
 			{
 				this->SetCommand(Command::StartHardMode);
+				mEventSubject->Notify(Observer::Event::UISubmit);
 				return true;
 			});
 

@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "Camera/CameraRotation.h"
 #include "Camera/CameraManager.h"
+#include "Observer/SoundObserver.h"
+#include "Observer/Subject.h"
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Model.h"
@@ -22,7 +24,8 @@ namespace
 }
 
 SceneTitle::SceneTitle() :
-	mUIManager(nullptr)
+	mUIManager(nullptr),
+	mSoundObserver(nullptr)
 {
 }
 
@@ -31,9 +34,18 @@ void SceneTitle::OnInit()
 	std::shared_ptr<Resource::ResourceBase> skyboxModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kSkyboxModelPath);
 	CreateToRoot<Skybox>(skyboxModel);
 
+	mSoundObserver = std::make_unique<Observer::SoundObserver>();
+
 	mUIManager = CreateToRoot<UI::UIManager>();
-	mUIManager->AddScreenToPool(std::make_unique<UI::TitleMenuScreen>());
-	mUIManager->AddScreenToPool(std::make_unique<UI::DifficultyMenuScreen>());
+
+	std::unique_ptr<UI::TitleMenuScreen> titleMenuScreen = std::make_unique<UI::TitleMenuScreen>();
+	titleMenuScreen->GetEventSubject()->RegisterObserver(mSoundObserver.get());
+	mUIManager->AddScreenToPool(std::move(titleMenuScreen));
+
+	std::unique_ptr<UI::DifficultyMenuScreen> difficultyMenuScreen = std::make_unique<UI::DifficultyMenuScreen>();
+	difficultyMenuScreen->GetEventSubject()->RegisterObserver(mSoundObserver.get());
+	mUIManager->AddScreenToPool(std::move(difficultyMenuScreen));
+
 	mUIManager->PushScreen<UI::TitleMenuScreen>();
 
 	GetCameraManager()->AddCamera(Camera::Type::Rotation, std::make_unique<CameraRotation>(Vector3::Zero, kCameraRotate));

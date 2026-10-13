@@ -3,6 +3,7 @@
 #include "../Widget/ImageObject.h"
 #include "../Widget/MenuItem.h"
 #include "../Widget/TextObject.h"
+#include "Observer/Subject.h"
 #include "System/ResourceManager.h"
 #include "System/Input/Literal/InputState.h"
 #include "System/Resource/Font.h"
@@ -26,8 +27,11 @@ namespace
 
 namespace UI
 {
-	TitleMenuScreen::TitleMenuScreen()
+	TitleMenuScreen::TitleMenuScreen() :
+		mEventSubject(nullptr)
 	{
+		mEventSubject = std::make_unique<Observer::Subject>();
+
 		// プッシュ時に項目オブジェクトが無いと初期選択がされないため、コンストラクタで生成
 
 		UI::UIRoot* itemRoot = GetMenuItemRoot();
@@ -47,13 +51,18 @@ namespace UI
 		UI::TextObject* startText = startButton->CreateToChild<UI::TextObject>(font, kStartText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		startText->GetRectTransform()->SetAnchor(RectTransform::Anchor::FullStretch);
 
-		startButton->SetSelectCallback([startText]() { startText->SetColor(Color::green); });
+		startButton->SetSelectCallback([startText, this]()
+			{
+				startText->SetColor(Color::green);
+				mEventSubject->Notify(Observer::Event::UIMoveCursor);
+			});
 		startButton->SetDeselectCallback([startText]() { startText->SetColor(Color::white); });
 		startButton->SetSubmitCallback([this]()
-									  {
-										  this->SetCommand(Command::StartGame);
-										  return true;
-									  });
+			{
+				this->SetCommand(Command::StartGame);
+				mEventSubject->Notify(Observer::Event::UISubmit);
+				return true;
+			});
 
 		// 終了ボタン
 		auto quitButton = itemRoot->CreateToChild<UI::MenuItem>();
@@ -63,13 +72,18 @@ namespace UI
 		UI::TextObject* quitText = quitButton->CreateToChild<UI::TextObject>(font, kQuitText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		quitText->GetRectTransform()->SetAnchor(RectTransform::Anchor::FullStretch);
 
-		quitButton->SetSelectCallback([quitText]() { quitText->SetColor(Color::green); });
+		quitButton->SetSelectCallback([quitText, this]()
+			{
+				quitText->SetColor(Color::green);
+				mEventSubject->Notify(Observer::Event::UIMoveCursor);
+			});
 		quitButton->SetDeselectCallback([quitText]() { quitText->SetColor(Color::white); });
 		quitButton->SetSubmitCallback([this]()
-									  {
-										  this->SetCommand(Command::QuitGame);
-										  return true;
-									  });
+			{
+				this->SetCommand(Command::QuitGame);
+				mEventSubject->Notify(Observer::Event::UISubmit);
+				return true;
+			});
 
 		AddMenuItem(startButton);
 		AddMenuItem(quitButton);

@@ -6,6 +6,10 @@ namespace UI
 {
 	class UIManager;
 }
+namespace Observer
+{
+	class IObserver;
+}
 
 class SceneTitle : public SceneBase
 {
@@ -21,4 +25,6 @@ public:
 private:
 
 	UI::UIManager* mUIManager;
+
+	std::unique_ptr<Observer::IObserver> mSoundObserver;
 };
