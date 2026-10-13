@@ -24,6 +24,7 @@ namespace Observer
 			Goal,
 			ItemAppear,
 			ItemObtain,
+			Dead,
 			Length,
 		};
 

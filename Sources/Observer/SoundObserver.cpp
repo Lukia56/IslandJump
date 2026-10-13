@@ -56,6 +56,10 @@ namespace Observer
 		case Observer::Event::ItemObtain:
 			SoundManager::GetInstance().PlaySe(mSounds[static_cast<size_t>(Sound::ItemObtain)]);
 			break;
+
+		case Observer::Event::FallCloudPlayer:
+			SoundManager::GetInstance().PlaySe(mSounds[static_cast<size_t>(Sound::Dead)]);
+			break;
 		}
 	}
 }

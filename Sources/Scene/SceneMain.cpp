@@ -101,6 +101,7 @@ void SceneMain::OnInit()
 	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos, mDifficultyData.cloudSpeed);
 	mDeathCloud->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 	mDeathCloud->GetEventSubject()->RegisterObserver(mResultObserver.get());
+	mDeathCloud->GetEventSubject()->RegisterObserver(mSoundObserver.get());
 
 	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder(), itemObjectManager, mDifficultyData.itemNum);
 
