@@ -17,6 +17,7 @@ namespace
 ItemObjectManager::ItemObjectManager(int itemNum) :
 	mActiveItemRoot(nullptr),
 	mPoolItemRoot(nullptr),
+	mItemUseCounts{},
 	mResultRecorder(nullptr)
 {
 	mPoolItemRoot = CreateToChild<RootObject>();
@@ -32,6 +33,7 @@ ItemObjectManager::ItemObjectManager(int itemNum) :
 ItemObjectManager::ItemObjectManager(int itemNum, ResultRecorder* resultRecorder) :
 	mActiveItemRoot(nullptr),
 	mPoolItemRoot(nullptr),
+	mItemUseCounts{},
 	mResultRecorder(resultRecorder)
 {
 	mPoolItemRoot = CreateToChild<RootObject>();
@@ -58,6 +60,8 @@ void ItemObjectManager::Init()
 	}
 
 	mEffectParams = Data::Csv::LoadCsvAs<ItemEffectParam>(kEffectParamPath);
+
+	mItemUseCounts.fill(0);
 }
 
 void ItemObjectManager::Update()

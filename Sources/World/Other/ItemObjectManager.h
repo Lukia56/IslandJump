@@ -37,6 +37,9 @@ public:
 
 	const ItemEffectParam& GetEffectParam(ItemType itemType) const { return mEffectParams[static_cast<int>(itemType)]; }
 
+	const std::array<int, static_cast<size_t>(ItemType::Length)>& GetItemUseCounts() const { return mItemUseCounts; }
+	void AddItemUseCount(ItemType itemType) { mItemUseCounts[static_cast<size_t>(itemType)]++; }
+
 private:
 
 	GameObject* mActiveItemRoot;
@@ -45,6 +48,8 @@ private:
 	std::array<std::shared_ptr<Resource::ResourceBase>, static_cast<int>(ItemType::Length)> mTextures;
 
 	std::vector<ItemEffectParam> mEffectParams;
+
+	std::array<int, static_cast<size_t>(ItemType::Length)> mItemUseCounts;
 
 	std::vector<ItemObject*> mActiveItems;
 	std::stack<ItemObject*> mPoolItems;
