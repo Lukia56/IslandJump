@@ -33,8 +33,6 @@ namespace
 
 	const char* const kHelicopterModelPath = "Resources\\Model\\Helicopter\\helicopter.mv1";
 
-	constexpr int kItemNum = 10;
-
 	constexpr float kGoalY = 5000.0f;
 
 	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -500.0f, 0.0f };
@@ -68,7 +66,7 @@ void SceneMain::OnInit()
 
 	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>();
 
-	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(kItemNum, resultRecorder);
+	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, resultRecorder);
 
 	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(itemObjectManager);
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
@@ -93,7 +91,7 @@ void SceneMain::OnInit()
 	mDeathCloud->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 	mDeathCloud->GetEventSubject()->RegisterObserver(mResultObserver.get());
 
-	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder(), itemObjectManager, kItemNum);
+	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder(), itemObjectManager, mDifficultyData.itemNum);
 
 	GetCameraManager()->AddCamera(Camera::Type::Follow, std::make_unique<CameraFollow>(mPlayer->GetTransform()));
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Follow);
