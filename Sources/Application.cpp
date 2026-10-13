@@ -9,6 +9,7 @@
 #include "System/ImGuiRenderer.h"
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
+#include "System/SoundManager.h"
 #include "System/TimeManager.h"
 #include "Utility/Random.h"
 #include "Utility/Data/CSV/CsvLoader.h"
@@ -128,6 +129,8 @@ void Application::ProcessOutput()
 			mSceneManager->DebugDraw();
 		});
 #endif
+
+	SoundManager::GetInstance().Update();
 
 	// ‰æ–Ê‚É•\Ž¦
 	ScreenFlip();

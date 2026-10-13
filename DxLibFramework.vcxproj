@@ -140,6 +140,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Scene\Test\SceneSoundTest.cpp" />
+    <ClCompile Include="Sources\System\SoundManager.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\ItemUseCountUI.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\GoalProgressBar.cpp" />
     <ClCompile Include="Sources\World\UI\Screen\InGameScreen.cpp" />
@@ -259,6 +261,8 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Scene\Test\SceneSoundTest.h" />
+    <ClInclude Include="Sources\System\SoundManager.h" />
     <ClInclude Include="Sources\World\UI\Widget\ItemUseCountUI.h" />
     <ClInclude Include="Sources\World\UI\Widget\GoalProgressBar.h" />
     <ClInclude Include="Sources\World\UI\Screen\InGameScreen.h" />
