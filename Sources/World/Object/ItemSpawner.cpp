@@ -10,7 +10,7 @@
 
 namespace
 {
-	constexpr float kTriggerRadius = 25.0f;
+	constexpr float kTriggerRadius = 250.0f;
 
 	constexpr float kEffectDuration = 2.0f;
 
