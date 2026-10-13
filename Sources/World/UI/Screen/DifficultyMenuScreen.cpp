@@ -34,20 +34,18 @@ namespace UI
 	{
 		// プッシュ時に項目オブジェクトが無いと初期選択がされないため、コンストラクタで生成
 
-		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
-
 		BoxObject* bg = CreateToChild<UI::BoxObject>(Color{ 0.0f, 0.0f, 0.0f, 0.5f });
 		bg->GetRectTransform()->localPosition = kBackgroundPos;
 		bg->GetRectTransform()->SetFullRectAsFixed(kBackgroundRect);
+
+		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
 
 		TextObject* descText = CreateToChild<UI::TextObject>(font, kDescText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		descText->GetRectTransform()->localPosition = kDescPos;
 		descText->GetRectTransform()->SetFullRectAsFixed(kDescRect);
 
-		UI::UIRoot* itemRoot = GetMenuItemRoot();
-
 		// イージーモード選択ボタン
-		auto easyModeButton = itemRoot->CreateToChild<UI::MenuItem>();
+		auto easyModeButton = CreateToChild<UI::MenuItem>();
 		easyModeButton->GetRectTransform()->localPosition = kEasyModeTextPos;
 		easyModeButton->GetRectTransform()->SetFullRectAsFixed(kButtonRect);
 
@@ -63,7 +61,7 @@ namespace UI
 			});
 
 		// ハードモード選択ボタン
-		auto hardModeButton = itemRoot->CreateToChild<UI::MenuItem>();
+		auto hardModeButton = CreateToChild<UI::MenuItem>();
 		hardModeButton->GetRectTransform()->localPosition = kHardModeTextPos;
 		hardModeButton->GetRectTransform()->SetFullRectAsFixed(kButtonRect);
 
