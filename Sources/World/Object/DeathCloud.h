@@ -16,6 +16,7 @@ class DeathCloud : public GameObject
 public:
 
 	DeathCloud(const Vector3& initPos, const Vector3& goalPos);
+	DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed);
 	~DeathCloud() = default;
 
 	void Init() override;
@@ -39,6 +40,8 @@ private:
 	Vector3 mVelocity;
 
 	Vector3 mGoalPos;
+
+	float mMoveSpeed;
 
 	float mResultTransitionTimer;
 

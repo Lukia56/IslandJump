@@ -87,7 +87,7 @@ void SceneMain::OnInit()
 
 	Vector3 cloudInitPos = mPlayer->GetTransform()->localPosition + kDeathCloudOffsetPlayer;
 	Vector3 goalPos = stageManager->GetGoalObject()->GetTransform()->CalculateWorldPosition();
-	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos);
+	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos, mDifficultyData.cloudSpeed);
 	mDeathCloud->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 	mDeathCloud->GetEventSubject()->RegisterObserver(mResultObserver.get());
 

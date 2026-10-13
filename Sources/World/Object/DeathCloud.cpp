@@ -7,8 +7,6 @@
 
 namespace
 {
-	constexpr float kMoveSpeed = 100.0f;
-
 	constexpr Vector3 kBodyCollSize{ 3000.0f, 100.0f, 3000.0f };
 
 	constexpr float kResultTransitionTime = 1.0f;
@@ -16,6 +14,19 @@ namespace
 
 DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos) :
 	mGoalPos(goalPos),
+	mMoveSpeed(0.0f),
+	mResultTransitionTimer(0.0f),
+	mIsStartTransitionResult(false),
+	mIsTriggered(false),
+	mCollider(nullptr)
+{
+	mTransform->localPosition = initPos;
+	mEventSubject = std::make_unique<Observer::Subject>();
+}
+
+DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed) :
+	mGoalPos(goalPos),
+	mMoveSpeed(moveSpeed),
 	mResultTransitionTimer(0.0f),
 	mIsStartTransitionResult(false),
 	mIsTriggered(false),
@@ -42,7 +53,7 @@ void DeathCloud::Update()
 
 	if (worldPos.y < mGoalPos.y)
 	{
-		mVelocity.y = kMoveSpeed * TimeManager::GetDeltaTime();
+		mVelocity.y = mMoveSpeed * TimeManager::GetDeltaTime();
 	}
 
 	if (mIsTriggered && !mIsStartTransitionResult)
