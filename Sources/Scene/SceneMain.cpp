@@ -5,6 +5,7 @@
 #include "Factory/PlayerCreator.h"
 #include "Observer/GoalObserver.h"
 #include "Observer/ResultObserver.h"
+#include "Observer/SoundObserver.h"
 #include "Observer/Subject.h"
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
@@ -43,7 +44,10 @@ SceneMain::SceneMain() :
 	mSkybox(nullptr),
 	mDeathCloud(nullptr),
 	mUIManager(nullptr),
-	mDifficultyData{}
+	mDifficultyData{},
+	mGoalObserver(nullptr),
+	mResultObserver(nullptr),
+	mSoundObserver(nullptr)
 {
 }
 
@@ -52,7 +56,10 @@ SceneMain::SceneMain(const StageDifficultyData& difficultyData) :
 	mSkybox(nullptr),
 	mDeathCloud(nullptr),
 	mUIManager(nullptr),
-	mDifficultyData(difficultyData)
+	mDifficultyData(difficultyData),
+	mGoalObserver(nullptr),
+	mResultObserver(nullptr),
+	mSoundObserver(nullptr)
 {
 }
 
@@ -79,11 +86,15 @@ void SceneMain::OnInit()
 
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
 	mResultObserver = std::make_unique<Observer::ResultObserver>(resultRecorder, mUIManager, mPlayer->GetTransform());
+	mSoundObserver = std::make_unique<Observer::SoundObserver>();
+
+	mPlayer->GetEventSubject()->RegisterObserver(mSoundObserver.get());
 
 	GoalTrigger* goalTrigger = stageManager->GetGoalObject()->GetTrigger();
 	goalTrigger->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());
 	goalTrigger->GetEventSubject()->RegisterObserver(mGoalObserver.get());
 	goalTrigger->GetEventSubject()->RegisterObserver(mResultObserver.get());
+	goalTrigger->GetEventSubject()->RegisterObserver(mSoundObserver.get());
 
 	Vector3 cloudInitPos = mPlayer->GetTransform()->localPosition + kDeathCloudOffsetPlayer;
 	Vector3 goalPos = stageManager->GetGoalObject()->GetTransform()->CalculateWorldPosition();

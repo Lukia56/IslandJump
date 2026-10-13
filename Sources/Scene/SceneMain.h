@@ -12,8 +12,7 @@ namespace UI
 }
 namespace Observer
 {
-	class GoalObserver;
-	class ResultObserver;
+	class IObserver;
 }
 
 class SceneMain : public SceneBase
@@ -40,7 +39,9 @@ private:
 
 	StageDifficultyData mDifficultyData;
 
-	std::unique_ptr<Observer::GoalObserver> mGoalObserver;
+	std::unique_ptr<Observer::IObserver> mGoalObserver;
 
-	std::unique_ptr<Observer::ResultObserver> mResultObserver;
+	std::unique_ptr<Observer::IObserver> mResultObserver;
+
+	std::unique_ptr<Observer::IObserver> mSoundObserver;
 };
