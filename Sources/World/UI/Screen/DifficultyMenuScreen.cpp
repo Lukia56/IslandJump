@@ -59,7 +59,7 @@ namespace UI
 
 		easyModeButton->SetSelectCallback([easyModeText, this]()
 			{
-				easyModeText->SetColor(Color::cyan);
+				easyModeText->SetColor(Color::green);
 				mEventSubject->Notify(Observer::Event::UIMoveCursor);
 			});
 		easyModeButton->SetDeselectCallback([easyModeText]() { easyModeText->SetColor(Color::white); });
@@ -85,7 +85,7 @@ namespace UI
 
 		hardModeButton->SetSelectCallback([hardModeText, this]()
 			{
-				hardModeText->SetColor(Color::cyan);
+				hardModeText->SetColor(Color::green);
 				mEventSubject->Notify(Observer::Event::UIMoveCursor);
 			});
 		hardModeButton->SetDeselectCallback([hardModeText]() { hardModeText->SetColor(Color::white); });
