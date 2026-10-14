@@ -14,12 +14,12 @@ namespace
 }
 
 SoundManager::SoundManager() :
-	m_currentBgmHandle(nullptr),
-	m_nextBgmHandle(nullptr),
-	m_currentBgmVolume(kMaxVolume),
-	m_nextBgmVolume(kMinVolume),
-	m_bgmFadeSpeed(kDefaultFadeSpeed),
-	m_doCrossFading(false)
+	mCurrentBgmResource(nullptr),
+	mNextBgmResource(nullptr),
+	mCurrentBgmVolume(kMaxVolume),
+	mNextBgmVolume(kMinVolume),
+	mBgmFadeSpeed(kDefaultFadeSpeed),
+	mDoCrossFading(false)
 {
 }
 
@@ -27,9 +27,9 @@ void SoundManager::Update()
 {
 	CrossFading();
 
-	if (m_currentBgmHandle) ChangeVolumeSoundMem(m_currentBgmVolume, m_currentBgmHandle->GetHandle());
+	if (mCurrentBgmResource) ChangeVolumeSoundMem(mCurrentBgmVolume, mCurrentBgmResource->GetHandle());
 
-	if (m_nextBgmHandle) ChangeVolumeSoundMem(m_nextBgmVolume, m_nextBgmHandle->GetHandle());
+	if (mNextBgmResource) ChangeVolumeSoundMem(mNextBgmVolume, mNextBgmResource->GetHandle());
 }
 
 void SoundManager::PlaySe(std::shared_ptr<Resource::ResourceBase> sound)
@@ -63,7 +63,7 @@ void SoundManager::PlayBGM(std::shared_ptr<Resource::ResourceBase> bgm)
 	int handle = bgm->GetHandle();
 
 	// Œ»ÝÄ¶’†‚ÌBGM‚Æ“¯‚¶BGM‚ðÄ¶‚µ‚æ‚¤‚Æ‚µ‚½‚çˆ—‚ðs‚í‚È‚¢
-	if (m_currentBgmHandle && m_currentBgmHandle->GetHandle() == handle) return;
+	if (mCurrentBgmResource && !mNextBgmResource && mCurrentBgmResource->GetHandle() == handle) return;
 
 	if (handle == -1)
 	{
@@ -71,31 +71,38 @@ void SoundManager::PlayBGM(std::shared_ptr<Resource::ResourceBase> bgm)
 		return;
 	}
 
-	if (!m_currentBgmHandle)
+	if (!mCurrentBgmResource)
 	{
-		m_currentBgmHandle = bgm;
+		mCurrentBgmResource = bgm;
 
-		PlaySoundMem(m_currentBgmHandle->GetHandle(), DX_PLAYTYPE_LOOP);
+		PlaySoundMem(mCurrentBgmResource->GetHandle(), DX_PLAYTYPE_LOOP);
 	}
 	else
 	{
-		m_nextBgmHandle = bgm;
+		if (mDoCrossFading)
+		{
+			StopBGM();
 
-		m_currentBgmVolume = kMaxVolume;
-		m_nextBgmVolume = kMinVolume;
+			mCurrentBgmResource = mNextBgmResource;
+		}
 
-		m_doCrossFading = true;
+		mNextBgmResource = bgm;
 
-		PlaySoundMem(m_nextBgmHandle->GetHandle(), DX_PLAYTYPE_LOOP);
+		mCurrentBgmVolume = kMaxVolume;
+		mNextBgmVolume = kMinVolume;
+
+		mDoCrossFading = true;
+
+		PlaySoundMem(mNextBgmResource->GetHandle(), DX_PLAYTYPE_LOOP);
 	}
 }
 
 void SoundManager::StopBGM()
 {
-	if (!m_currentBgmHandle) return;
+	if (!mCurrentBgmResource) return;
 
-	StopSoundMem(m_currentBgmHandle->GetHandle());
-	m_currentBgmHandle = nullptr;
+	StopSoundMem(mCurrentBgmResource->GetHandle());
+	mCurrentBgmResource = nullptr;
 }
 
 SoundManager& SoundManager::GetInstance()
@@ -107,22 +114,22 @@ SoundManager& SoundManager::GetInstance()
 
 void SoundManager::CrossFading()
 {
-	if (!m_doCrossFading) return;
+	if (!mDoCrossFading) return;
 
-	float fadeSpeed = m_bgmFadeSpeed * TimeManager::GetDeltaTime();
+	float fadeSpeed = mBgmFadeSpeed * TimeManager::GetDeltaTime();
 
-	m_currentBgmVolume = Math::Approach(m_currentBgmVolume, kMinVolume, fadeSpeed);
-	m_nextBgmVolume = Math::Approach(m_nextBgmVolume, kMaxVolume, fadeSpeed);
+	mCurrentBgmVolume = Math::Approach(mCurrentBgmVolume, kMinVolume, fadeSpeed);
+	mNextBgmVolume = Math::Approach(mNextBgmVolume, kMaxVolume, fadeSpeed);
 
-	if (static_cast<int>(m_nextBgmVolume) >= kMaxVolume)
+	if (static_cast<int>(mNextBgmVolume) >= kMaxVolume)
 	{
 		StopBGM();
 
-		m_currentBgmHandle = m_nextBgmHandle;
-		m_nextBgmHandle = nullptr;
+		mCurrentBgmResource = mNextBgmResource;
+		mNextBgmResource = nullptr;
 
-		m_currentBgmVolume = kMaxVolume;
+		mCurrentBgmVolume = kMaxVolume;
 
-		m_doCrossFading = false;
+		mDoCrossFading = false;
 	}
 }

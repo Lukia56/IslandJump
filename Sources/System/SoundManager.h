@@ -40,15 +40,15 @@ private:
 
 private:
 
-	std::shared_ptr<Resource::ResourceBase> m_currentBgmHandle;
+	std::shared_ptr<Resource::ResourceBase> mCurrentBgmResource;
 
-	std::shared_ptr<Resource::ResourceBase> m_nextBgmHandle;
+	std::shared_ptr<Resource::ResourceBase> mNextBgmResource;
 
-	float m_currentBgmVolume;
+	float mCurrentBgmVolume;
 
-	float m_nextBgmVolume;
+	float mNextBgmVolume;
 
-	float m_bgmFadeSpeed;
+	float mBgmFadeSpeed;
 
-	bool m_doCrossFading;
+	bool mDoCrossFading;
 };
