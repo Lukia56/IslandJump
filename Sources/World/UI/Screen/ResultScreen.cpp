@@ -15,10 +15,10 @@ namespace
 	const char* const kFailText = "FAILED...";
 	const char* const kExitText = "Back to title";
 
-	constexpr Vector3 kResultPos{ 0.0f, -300.0f, 0.0f };
-	constexpr Vector3 kProgressPos{ 0.0f, -100.0f, 0.0f };
-	constexpr Vector3 kItemUseCountPos{ 0.0f, 0.0f, 0.0f };
-	constexpr Vector3 kPlayTimePos{ 0.0f, 100.0f, 0.0f };
+	constexpr Vector3 kResultPos{ -50.0f, -300.0f, 0.0f };
+	constexpr Vector3 kProgressPos{ -50.0f, -100.0f, 0.0f };
+	constexpr Vector3 kItemUseCountPos{ -50.0f, 0.0f, 0.0f };
+	constexpr Vector3 kPlayTimePos{ -50.0f, 100.0f, 0.0f };
 	constexpr Vector3 kExitPos{ 0.0f, 300.0f, 0.0f };
 
 	constexpr Vector2 kTextRect{ 500.0f, 100.0f };
