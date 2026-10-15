@@ -76,3 +76,9 @@ struct SoundData
 	int id = -1;
 	std::string filePath = "";
 };
+
+struct SaveData
+{
+	int easyHighscore = 0;
+	int hardHighscore = 0;
+};

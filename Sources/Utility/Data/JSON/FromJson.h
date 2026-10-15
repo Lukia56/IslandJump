@@ -33,5 +33,19 @@ namespace Data
 				return param;
 			}
 		};
+
+		template <>
+		struct FromJson<SaveData>
+		{
+			static SaveData Binding(const JsonObject& json)
+			{
+				SaveData data;
+
+				data.easyHighscore = Get<int>(json, "easyHighscore");
+				data.hardHighscore = Get<int>(json, "hardHighscore");
+
+				return data;
+			}
+		};
 	}
 }
