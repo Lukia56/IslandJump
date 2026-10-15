@@ -127,6 +127,7 @@ namespace Data
 			static StageDifficultyData Binding(const Row& row)
 			{
 				StageDifficultyData param;
+				param.difficulty = static_cast<StageDifficultyData::Difficulty>(Get<int>(row, "difficulty"));
 				param.cloudSpeed = Get<float>(row, "cloudSpeed");
 				param.itemNum = Get<int>(row, "itemNum");
 				param.goalPosY = Get<float>(row, "goalPosY");

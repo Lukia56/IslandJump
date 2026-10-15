@@ -132,8 +132,7 @@ namespace UI
 		mPlayTimeText->SetDisplayText("Play Time " + minutes + ": " + seconds);
 		mScoreTimeText->SetDisplayText(std::to_string(result.timeScore) + kScorePostfixText);
 
-		int overallScore = result.distanceScore + result.itemScore + result.timeScore;
-		mOverallScoreText->SetDisplayText(std::to_string(overallScore) + kScorePostfixText);
+		mOverallScoreText->SetDisplayText(std::to_string(result.overallScore) + kScorePostfixText);
 	}
 
 	bool ResultScreen::ProcessInput(const Input::UIInputState& input)

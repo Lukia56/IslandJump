@@ -10,6 +10,8 @@ namespace
 	constexpr float kDistanceScoreCoef = 0.5f;
 	constexpr float kItemScoreCoef = 1000.0f;
 	constexpr float kTimeScoreCoef = 3.5f;
+
+	constexpr float kHardModeScoreCoef = 2.0f;
 }
 
 ResultRecorder::ResultRecorder(Transform* playerTransform) :
@@ -65,11 +67,14 @@ ResultData ResultRecorder::CreateResultData() const
 	result.playSeconds = static_cast<int>(std::floor(mPlayTime - result.playMinutes * kOneMinuteSec));
 
 	// スコアを計算
-	result.distanceScore = mProgressDistance * kDistanceScoreCoef;
-	result.itemScore = mItemUseCount * kItemScoreCoef;
+	result.distanceScore = static_cast<int>(mProgressDistance * kDistanceScoreCoef);
+	result.itemScore = static_cast<int>(mItemUseCount * kItemScoreCoef);
 
 	float progress = mDifficultyData->goalPosY / mDifficultyData->cloudSpeed;
-	result.timeScore = Math::Sqr(Math::Max(0.0f, progress - mPlayTime)) * kTimeScoreCoef * mIsSuccessed;
+	result.timeScore = static_cast<int>(Math::Sqr(Math::Max(0.0f, progress - mPlayTime)) * kTimeScoreCoef * mIsSuccessed);
+
+	float scoreCoef = mDifficultyData->difficulty == StageDifficultyData::Difficulty::Hard ? kHardModeScoreCoef : 1.0f ;
+	result.overallScore = static_cast<int>((result.distanceScore + result.itemScore + result.timeScore) * scoreCoef);
 	
 	return result;
 }

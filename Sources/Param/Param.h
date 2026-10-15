@@ -62,6 +62,8 @@ struct StageDifficultyData
 		Hard,
 	};
 
+	Difficulty difficulty = Difficulty::Easy;
+
 	float cloudSpeed = 0.0f;
 
 	int itemNum = 0;

@@ -14,4 +14,6 @@ struct ResultData
 	int distanceScore = 0;
 	int itemScore = 0;
 	int timeScore = 0;
+
+	int overallScore = 0;
 };
