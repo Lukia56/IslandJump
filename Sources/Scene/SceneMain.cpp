@@ -1,4 +1,5 @@
 #include "SceneMain.h"
+#include <filesystem>
 #include "SceneTitle.h"
 #include "Camera/CameraFollow.h"
 #include "Camera/CameraManager.h"
@@ -14,6 +15,7 @@
 #include "System/Resource/Model.h"
 #include "System/Resource/Sound.h"
 #include "Utility/Data/JSON/JsonLoader.h"
+#include "Utility/Data/JSON/JsonExporter.h"
 #include "World/Character/Player.h"
 #include "World/Object/DeathCloud.h"
 #include "World/Object/GoalObject.h"
@@ -80,7 +82,7 @@ void SceneMain::OnInit()
 	std::shared_ptr<Resource::ResourceBase> goalModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kHelicopterModelPath);
 	StageManager* stageManager = CreateToRoot<StageManager>(goalModel, mDifficultyData.goalPosY);
 
-	ResultRecorder* mResultRecorder = CreateToRoot<ResultRecorder>(&mDifficultyData);
+	mResultRecorder = CreateToRoot<ResultRecorder>(&mDifficultyData);
 
 	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, mResultRecorder);
 
@@ -145,7 +147,11 @@ std::unique_ptr<SceneBase> SceneMain::OnUpdate()
 	{
 		int score = mResultRecorder->CreateResultData().overallScore;
 
-		SaveData data = Data::Json::LoadJsonAs<SaveData>(kSaveDataPath)[0];
+		SaveData data{};
+		if (std::filesystem::is_regular_file(kSaveDataPath))
+		{
+			data = Data::Json::LoadJsonAs<SaveData>(kSaveDataPath)[0];
+		}
 
 		switch (mDifficultyData.difficulty)
 		{
@@ -158,7 +164,7 @@ std::unique_ptr<SceneBase> SceneMain::OnUpdate()
 			break;
 		}
 
-		// TODO: ï€ë∂èàóù
+		Data::Json::ExportJsonAs<SaveData>(kSaveDataPath, data);
 
 		return std::make_unique<SceneTitle>();
 	}
