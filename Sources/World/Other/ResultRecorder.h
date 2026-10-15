@@ -3,6 +3,7 @@
 #include "../GameObject.h"
 #include "ResultData.h"
 
+struct StageDifficultyData;
 class ItemObjectManager;
 
 class ResultRecorder : public GameObject
@@ -10,7 +11,7 @@ class ResultRecorder : public GameObject
 public:
 
 	ResultRecorder(Transform* playerTransform);
-	ResultRecorder();
+	ResultRecorder(StageDifficultyData* difficultyData);
 	~ResultRecorder() = default;
 
 	void Init() override;
@@ -46,4 +47,6 @@ private:
 	bool mIsCountPlayTime;
 
 	Transform* mPlayerTransform;
+
+	StageDifficultyData* mDifficultyData;
 };

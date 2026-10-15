@@ -75,7 +75,7 @@ void SceneMain::OnInit()
 	std::shared_ptr<Resource::ResourceBase> goalModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kHelicopterModelPath);
 	StageManager* stageManager = CreateToRoot<StageManager>(goalModel, mDifficultyData.goalPosY);
 
-	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>();
+	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>(&mDifficultyData);
 
 	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, resultRecorder);
 

@@ -1,10 +1,15 @@
 #include "ResultRecorder.h"
 #include <cmath>
+#include "Param/Param.h"
 #include "System/TimeManager.h"
 
 namespace
 {
 	constexpr float kOneMinuteSec = 60.0f;
+
+	constexpr float kDistanceScoreCoef = 0.5f;
+	constexpr float kItemScoreCoef = 1000.0f;
+	constexpr float kTimeScoreCoef = 3.5f;
 }
 
 ResultRecorder::ResultRecorder(Transform* playerTransform) :
@@ -13,17 +18,19 @@ ResultRecorder::ResultRecorder(Transform* playerTransform) :
 	mItemUseCount(0),
 	mPlayTime(0.0f),
 	mIsCountPlayTime(true),
-	mPlayerTransform(nullptr)
+	mPlayerTransform(nullptr),
+	mDifficultyData(nullptr)
 {
 }
 
-ResultRecorder::ResultRecorder() :
+ResultRecorder::ResultRecorder(StageDifficultyData* difficultyData) :
 	mProgressDistance(0),
 	mIsSuccessed(false),
 	mItemUseCount(0),
 	mPlayTime(0.0f),
 	mIsCountPlayTime(true),
-	mPlayerTransform(nullptr)
+	mPlayerTransform(nullptr),
+	mDifficultyData(difficultyData)
 {
 }
 
@@ -41,7 +48,7 @@ void ResultRecorder::Update()
 	if (!mPlayerTransform) return;
 
 	int playerY = static_cast<int>(mPlayerTransform->CalculateWorldPosition().y);
-	mProgressDistance = Math::Max(mProgressDistance, playerY);
+	mProgressDistance = Math::Clamp(mProgressDistance, playerY, static_cast<int>(mDifficultyData->goalPosY));
 }
 
 ResultData ResultRecorder::CreateResultData() const
@@ -56,6 +63,13 @@ ResultData ResultRecorder::CreateResultData() const
 
 	result.playMinutes = static_cast<int>(std::floor(mPlayTime / kOneMinuteSec));
 	result.playSeconds = static_cast<int>(std::floor(mPlayTime - result.playMinutes * kOneMinuteSec));
+
+	// スコアを計算
+	result.distanceScore = mProgressDistance * kDistanceScoreCoef;
+	result.itemScore = mItemUseCount * kItemScoreCoef;
+
+	float progress = mDifficultyData->goalPosY / mDifficultyData->cloudSpeed;
+	result.timeScore = Math::Sqr(Math::Max(0.0f, progress - mPlayTime)) * kTimeScoreCoef * mIsSuccessed;
 	
 	return result;
 }
