@@ -27,6 +27,8 @@ public:
 
 	void SetSuccessed(bool flag) { mIsSuccessed = flag; }
 
+	void SetPlayerTransform(Transform* transform) { mPlayerTransform = transform; }
+
 private:
 
 	int mProgressDistance;
@@ -36,4 +38,6 @@ private:
 	int mItemUseCount;
 
 	float mPlayTime;
+
+	Transform* mPlayerTransform;
 };

@@ -26,7 +26,5 @@ namespace Observer
 		ResultRecorder* mResultRecorder;
 
 		UI::UIManager* mUIManager;
-
-		Transform* mPlayerTransform;
 	};
 }

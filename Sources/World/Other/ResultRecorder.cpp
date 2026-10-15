@@ -11,7 +11,8 @@ ResultRecorder::ResultRecorder(Transform* playerTransform) :
 	mProgressDistance(0),
 	mIsSuccessed(false),
 	mItemUseCount(0),
-	mPlayTime(0.0f)
+	mPlayTime(0.0f),
+	mPlayerTransform(nullptr)
 {
 }
 
@@ -19,7 +20,8 @@ ResultRecorder::ResultRecorder() :
 	mProgressDistance(0),
 	mIsSuccessed(false),
 	mItemUseCount(0),
-	mPlayTime(0.0f)
+	mPlayTime(0.0f),
+	mPlayerTransform(nullptr)
 {
 }
 
@@ -30,6 +32,11 @@ void ResultRecorder::Init()
 void ResultRecorder::Update()
 {
 	mPlayTime += TimeManager::GetDeltaTime();
+
+	if (!mPlayerTransform) return;
+
+	int playerY = static_cast<int>(mPlayerTransform->CalculateWorldPosition().y);
+	mProgressDistance = Math::Max(mProgressDistance, playerY);
 }
 
 ResultData ResultRecorder::CreateResultData() const
@@ -38,7 +45,7 @@ ResultData ResultRecorder::CreateResultData() const
 
 	result.isSuccessed = mIsSuccessed;
 
-	result.progressDistance = Math::Max(0, mProgressDistance);
+	result.progressDistance = mProgressDistance;
 
 	result.itemUseCount = mItemUseCount;
 

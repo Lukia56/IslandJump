@@ -82,6 +82,8 @@ void SceneMain::OnInit()
 	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(itemObjectManager);
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
 
+	resultRecorder->SetPlayerTransform(mPlayer->GetTransform());
+
 	Vector3 cloudInitPos = mPlayer->GetTransform()->localPosition + kDeathCloudOffsetPlayer;
 	Vector3 goalPos = stageManager->GetGoalObject()->GetTransform()->CalculateWorldPosition();
 	std::shared_ptr<Resource::ResourceBase> cloudModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kCloudModelPath);
@@ -94,7 +96,7 @@ void SceneMain::OnInit()
 	mUIManager->PushScreen<UI::InGameScreen>();
 
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
-	mResultObserver = std::make_unique<Observer::ResultObserver>(resultRecorder, mUIManager, mPlayer->GetTransform());
+	mResultObserver = std::make_unique<Observer::ResultObserver>(resultRecorder, mUIManager);
 	mSoundObserver = std::make_unique<Observer::SoundObserver>();
 
 	mPlayer->GetEventSubject()->RegisterObserver(mSoundObserver.get());
