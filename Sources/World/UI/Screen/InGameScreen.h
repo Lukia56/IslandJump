@@ -3,6 +3,7 @@
 #include "../Core/Screen.h"
 
 class ItemObjectManager;
+class ResultRecorder;
 
 namespace UI
 {
@@ -10,7 +11,7 @@ namespace UI
 	{
 	public:
 
-		InGameScreen(float maxDistance, Transform* playerTransform, ItemObjectManager* itemObjectManager);
+		InGameScreen(float maxDistance, Transform* playerTransform, ItemObjectManager* itemObjectManager, ResultRecorder* resultRecorder);
 		~InGameScreen() = default;
 
 		void Init() override;

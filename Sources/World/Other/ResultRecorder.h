@@ -27,6 +27,8 @@ public:
 
 	void SetSuccessed(bool flag) { mIsSuccessed = flag; }
 
+	float GetPlayTime() const { return mPlayTime; }
+
 	void SetPlayerTransform(Transform* transform) { mPlayerTransform = transform; }
 
 private:

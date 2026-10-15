@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\World\UI\Widget\PlayTimerUI.cpp" />
     <ClCompile Include="Sources\World\Object\CloudModel.cpp" />
     <ClCompile Include="Sources\Observer\SoundObserver.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneSoundTest.cpp" />
@@ -263,6 +264,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\World\UI\Widget\PlayTimerUI.h" />
     <ClInclude Include="Sources\World\Object\CloudModel.h" />
     <ClInclude Include="Sources\Observer\SoundObserver.h" />
     <ClInclude Include="Sources\Scene\Test\SceneSoundTest.h" />
