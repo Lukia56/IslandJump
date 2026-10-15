@@ -6,6 +6,7 @@
 class Player;
 class Skybox;
 class DeathCloud;
+class ResultRecorder;
 namespace UI
 {
 	class UIManager;
@@ -36,6 +37,8 @@ private:
 	DeathCloud* mDeathCloud;
 
 	UI::UIManager* mUIManager;
+
+	ResultRecorder* mResultRecorder;
 
 	StageDifficultyData mDifficultyData;
 

@@ -13,6 +13,7 @@
 #include "System/Input/Mouse.h"
 #include "System/Resource/Model.h"
 #include "System/Resource/Sound.h"
+#include "Utility/Data/JSON/JsonLoader.h"
 #include "World/Character/Player.h"
 #include "World/Object/DeathCloud.h"
 #include "World/Object/GoalObject.h"
@@ -40,6 +41,8 @@ namespace
 
 	const char* const kBGMPath = "Resources\\Sound\\BGM\\InGame.ogg";
 
+	const char* const kSaveDataPath = "SaveData\\SaveData.json";
+
 	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -500.0f, 0.0f };
 }
 
@@ -48,6 +51,7 @@ SceneMain::SceneMain() :
 	mSkybox(nullptr),
 	mDeathCloud(nullptr),
 	mUIManager(nullptr),
+	mResultRecorder(nullptr),
 	mDifficultyData{},
 	mGoalObserver(nullptr),
 	mResultObserver(nullptr),
@@ -60,6 +64,7 @@ SceneMain::SceneMain(const StageDifficultyData& difficultyData) :
 	mSkybox(nullptr),
 	mDeathCloud(nullptr),
 	mUIManager(nullptr),
+	mResultRecorder(nullptr),
 	mDifficultyData(difficultyData),
 	mGoalObserver(nullptr),
 	mResultObserver(nullptr),
@@ -75,14 +80,14 @@ void SceneMain::OnInit()
 	std::shared_ptr<Resource::ResourceBase> goalModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kHelicopterModelPath);
 	StageManager* stageManager = CreateToRoot<StageManager>(goalModel, mDifficultyData.goalPosY);
 
-	ResultRecorder* resultRecorder = CreateToRoot<ResultRecorder>(&mDifficultyData);
+	ResultRecorder* mResultRecorder = CreateToRoot<ResultRecorder>(&mDifficultyData);
 
-	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, resultRecorder);
+	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, mResultRecorder);
 
 	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(itemObjectManager);
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
 
-	resultRecorder->SetPlayerTransform(mPlayer->GetTransform());
+	mResultRecorder->SetPlayerTransform(mPlayer->GetTransform());
 
 	Vector3 cloudInitPos = mPlayer->GetTransform()->localPosition + kDeathCloudOffsetPlayer;
 	Vector3 goalPos = stageManager->GetGoalObject()->GetTransform()->CalculateWorldPosition();
@@ -90,13 +95,13 @@ void SceneMain::OnInit()
 	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos, mDifficultyData.cloudSpeed, cloudModel);
 
 	mUIManager = CreateToRoot<UI::UIManager>();
-	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(mDifficultyData.goalPosY, mPlayer->GetTransform(), itemObjectManager, resultRecorder));
+	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(mDifficultyData.goalPosY, mPlayer->GetTransform(), itemObjectManager, mResultRecorder));
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
-	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(resultRecorder));
+	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(mResultRecorder));
 	mUIManager->PushScreen<UI::InGameScreen>();
 
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
-	mResultObserver = std::make_unique<Observer::ResultObserver>(resultRecorder, mUIManager);
+	mResultObserver = std::make_unique<Observer::ResultObserver>(mResultRecorder, mUIManager);
 	mSoundObserver = std::make_unique<Observer::SoundObserver>();
 
 	mPlayer->GetEventSubject()->RegisterObserver(mSoundObserver.get());
@@ -137,7 +142,26 @@ std::unique_ptr<SceneBase> SceneMain::OnUpdate()
 	switch (command)
 	{
 	case UI::Command::ExitResult:
+	{
+		int score = mResultRecorder->CreateResultData().overallScore;
+
+		SaveData data = Data::Json::LoadJsonAs<SaveData>(kSaveDataPath)[0];
+
+		switch (mDifficultyData.difficulty)
+		{
+		case StageDifficultyData::Difficulty::Easy:
+			if (data.easyHighscore < score) data.easyHighscore = score;
+			break;
+
+		case StageDifficultyData::Difficulty::Hard:
+			if (data.hardHighscore < score) data.hardHighscore = score;
+			break;
+		}
+
+		// TODO: •Û‘¶ˆ—
+
 		return std::make_unique<SceneTitle>();
+	}
 	}
 
 	return nullptr;
