@@ -12,6 +12,7 @@ ResultRecorder::ResultRecorder(Transform* playerTransform) :
 	mIsSuccessed(false),
 	mItemUseCount(0),
 	mPlayTime(0.0f),
+	mIsCountPlayTime(true),
 	mPlayerTransform(nullptr)
 {
 }
@@ -21,6 +22,7 @@ ResultRecorder::ResultRecorder() :
 	mIsSuccessed(false),
 	mItemUseCount(0),
 	mPlayTime(0.0f),
+	mIsCountPlayTime(true),
 	mPlayerTransform(nullptr)
 {
 }
@@ -31,7 +33,10 @@ void ResultRecorder::Init()
 
 void ResultRecorder::Update()
 {
-	mPlayTime += TimeManager::GetDeltaTime();
+	if (mIsCountPlayTime)
+	{
+		mPlayTime += TimeManager::GetDeltaTime();
+	}
 
 	if (!mPlayerTransform) return;
 

@@ -29,6 +29,8 @@ public:
 
 	float GetPlayTime() const { return mPlayTime; }
 
+	void SetCountPlayTimer(bool flag) { mIsCountPlayTime = flag; }
+
 	void SetPlayerTransform(Transform* transform) { mPlayerTransform = transform; }
 
 private:
@@ -40,6 +42,8 @@ private:
 	int mItemUseCount;
 
 	float mPlayTime;
+
+	bool mIsCountPlayTime;
 
 	Transform* mPlayerTransform;
 };
