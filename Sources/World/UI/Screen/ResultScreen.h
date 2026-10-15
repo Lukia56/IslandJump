@@ -28,10 +28,14 @@ namespace UI
         TextObject* mResultText;
 
         TextObject* mProgressText;
-
         TextObject* mItemUseCountText;
-
         TextObject* mPlayTimeText;
+
+        TextObject* mScoreDistanceText;
+        TextObject* mScoreItemText;
+        TextObject* mScoreTimeText;
+
+        TextObject* mOverallScoreText;
 
         TextObject* mExitText;
 
