@@ -108,7 +108,7 @@ void Application::ProcessOutput()
 {
 	ClearDrawScreen();
 	clsDx();
-
+	
 	mSceneManager->Draw();
 	EffekseerManager::Draw();
 
@@ -126,7 +126,9 @@ void Application::ProcessOutput()
 				ImGui::End();
 			}
 
+			SetUseLighting(false);
 			mSceneManager->DebugDraw();
+			SetUseLighting(true);
 		});
 #endif
 
