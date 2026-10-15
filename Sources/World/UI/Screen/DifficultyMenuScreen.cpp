@@ -1,5 +1,5 @@
 #include "DifficultyMenuScreen.h"
-#include "../Core/UIRoot.h"
+#include <filesystem>
 #include "../Widget/BoxObject.h"
 #include "../Widget/MenuItem.h"
 #include "../Widget/TextObject.h"
@@ -7,10 +7,12 @@
 #include "System/ResourceManager.h"
 #include "System/Input/Literal/InputState.h"
 #include "System/Resource/Font.h"
+#include "Utility/Data/JSON/JsonLoader.h"
 
 namespace
 {
 	const char* const kDescText = "Choose difficulty";
+	const char* const kHighscoreDescText = "Highscore";
 
 	constexpr Vector3 kDescPos{ 0.0f, 100.0f, 0.0f };
 	constexpr Vector2 kDescRect{ 200.0f, 32.0f };
@@ -21,12 +23,18 @@ namespace
 	const char* const kHardModeText = "Hard";
 	constexpr Vector3 kHardModeTextPos{ -200.0f, -100.0f, 0.0f };
 
+	constexpr Vector3 kHighscorePos{ 0.0f, -100.0f, 0.0f };
+	constexpr Vector3 kHighscoreDescPos{ 0.0f, -25.0f, 0.0f };
+
 	constexpr Vector2 kButtonRect{ 160.0f, 32.0f };
 
 	constexpr Vector3 kBackgroundPos{ 0.0f, 0.0f, 0.0f };
-	constexpr Vector2 kBackgroundRect{ 800.0f, 400.0f };
+	constexpr Vector2 kBackgroundRect{ 800.0f, 500.0f };
 
 	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
+	const char* const kFontSmallPath = "Resources\\Font\\ShowcardGothicSmall.dft";
+
+	const char* const kSaveDataPath = "SaveData\\SaveData.json";
 }
 
 namespace UI
@@ -42,6 +50,7 @@ namespace UI
 		bg->GetRectTransform()->SetFullRectAsFixed(kBackgroundRect);
 
 		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
+		std::shared_ptr<Resource::ResourceBase> fontSmall = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontSmallPath);
 
 		TextObject* descText = bg->CreateToChild<UI::TextObject>(font, kDescText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		descText->GetRectTransform()->localPosition = kDescPos;
@@ -49,7 +58,7 @@ namespace UI
 		descText->GetRectTransform()->SetAnchor(RectTransform::Anchor::CenterTop);
 
 		// イージーモード選択ボタン
-		auto easyModeButton = bg->CreateToChild<UI::MenuItem>();
+		UI::MenuItem* easyModeButton = bg->CreateToChild<UI::MenuItem>();
 		easyModeButton->GetRectTransform()->localPosition = kEasyModeTextPos;
 		easyModeButton->GetRectTransform()->SetFullRectAsFixed(kButtonRect);
 		easyModeButton->GetRectTransform()->SetAnchor(RectTransform::Anchor::LeftBottom);
@@ -102,6 +111,20 @@ namespace UI
 
 		AddMenuItem(easyModeButton);
 		AddMenuItem(hardModeButton);
+
+		if (std::filesystem::is_regular_file(kSaveDataPath))
+		{
+			SaveData saveData = Data::Json::LoadJsonAs<SaveData>(kSaveDataPath)[0];
+
+			UI::TextObject* highscoreDescText = bg->CreateToChild<UI::TextObject>(fontSmall, kHighscoreDescText, Color::yellow, HolizontalAlignment::Center, VerticalAlignment::Middle);
+			highscoreDescText->GetRectTransform()->localPosition = kHighscoreDescPos;
+
+			UI::TextObject* easyHighscore = easyModeButton->CreateToChild<UI::TextObject>(fontSmall, std::to_string(saveData.easyHighscore), Color::yellow, HolizontalAlignment::Center, VerticalAlignment::Middle);
+			easyHighscore->GetRectTransform()->localPosition = kHighscorePos;
+
+			UI::TextObject* hardHighscore = hardModeButton->CreateToChild<UI::TextObject>(fontSmall, std::to_string(saveData.hardHighscore), Color::yellow, HolizontalAlignment::Center, VerticalAlignment::Middle);
+			hardHighscore->GetRectTransform()->localPosition = kHighscorePos;
+		}
 	}
 
 	void DifficultyMenuScreen::Init()
