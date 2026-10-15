@@ -6,6 +6,11 @@
 #include "Stage/StageLoader.h"
 #include "World/Object/GoalObject.h"
 
+namespace
+{
+	constexpr Vector3 kGoalOffset{ 0.0f, 100.0f, 0.0f };
+}
+
 StageManager::StageManager(const std::string& objectDataPath) :
 	mGoalObject(nullptr)
 {
@@ -30,7 +35,7 @@ StageManager::StageManager() :
 	}
 
 	mGoalObject = CreateToChild<GoalObject>();
-	mGoalObject->GetTransform()->localPosition = goalPos;
+	mGoalObject->GetTransform()->localPosition = goalPos + kGoalOffset;
 }
 
 StageManager::StageManager(std::shared_ptr<Resource::ResourceBase> goalModel, float goalY) :
@@ -46,7 +51,7 @@ StageManager::StageManager(std::shared_ptr<Resource::ResourceBase> goalModel, fl
 	}
 
 	mGoalObject = CreateToChild<GoalObject>(goalModel);
-	mGoalObject->GetTransform()->localPosition = goalPos;
+	mGoalObject->GetTransform()->localPosition = goalPos + kGoalOffset;
 }
 
 void StageManager::Init()
