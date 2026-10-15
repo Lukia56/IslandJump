@@ -60,7 +60,7 @@ namespace Stage
 				island->AddToChild(std::move(object));
 			}
 
-			dir = Random::Range(-generateRangeRad * 0.5f, generateRangeRad * 0.5f);
+			dir += Random::Range(-generateRangeRad * 0.5f, generateRangeRad * 0.5f);
 			float distance = Random::Range(kGenerateRangeHMinDistance, kGenerateRangeHMaxDistance);
 			generatePos += Vector3(
 				std::sin(dir) * distance,
