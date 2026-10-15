@@ -845,5 +845,11 @@
     <ClInclude Include="Sources\World\UI\Widget\PlayTimerUI.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\Utility\Data\JSON\ToJson.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Utility\Data\JSON\JsonExporter.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
