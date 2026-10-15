@@ -183,7 +183,9 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 	switch (oppCollider->GetOwner()->GetTag())
 	{
 	case Tag::Terrain:
-		mCollisionPush += result.normal * result.penetration;
+		mCollisionPush.x = Math::Max(result.normal.x * result.penetration, mCollisionPush.x);
+		mCollisionPush.y = Math::Max(result.normal.y * result.penetration, mCollisionPush.y);
+		mCollisionPush.z = Math::Max(result.normal.z * result.penetration, mCollisionPush.z);
 
 		// �ǂƂ̏Փ�
 		if (!Math::IsNearZero(result.normal.x))
