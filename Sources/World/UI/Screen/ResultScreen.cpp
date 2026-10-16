@@ -13,7 +13,7 @@ namespace
 {
 	const char* const kSuccessText = "CLEAR!";
 	const char* const kFailText = "FAILED...";
-	const char* const kExitText = "Press Z to back to title";
+	const char* const kExitText = "Press Space to back to title";
 	const char* const kScorePostfixText = " pt";
 
 	constexpr Vector3 kResultPos{ 0.0f, 50.0f, 0.0f };
