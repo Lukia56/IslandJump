@@ -10,7 +10,7 @@ namespace
 	constexpr float kInitFOV = 70.0f;
 
 	constexpr float kInitNearClip = 5.0f;
-	constexpr float kInitFarClip = 5000.0f;
+	constexpr float kInitFarClip = 10000.0f;
 }
 
 CameraManager::CameraManager() :
