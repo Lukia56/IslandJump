@@ -13,8 +13,8 @@ namespace
 
 	constexpr float kResultTransitionTime = 1.0f;
 
-	constexpr int kCloudXNum = 3;
-	constexpr int kCloudZNum = 5;
+	constexpr int kCloudXNum = 5;
+	constexpr int kCloudZNum = 15;
 
 	constexpr float kCloudXSpace = 1000.0f;
 	constexpr float kCloudZSpace = 400.0f;
@@ -72,7 +72,9 @@ void DeathCloud::Init()
 	mCollider = std::make_unique<Collider3D>(
 		std::make_unique<Collision::AABB3D>(kBodyCollSize),
 		this,
-		Collision::Tag::Body
+		Collision::Tag::Body,
+		true,
+		false
 	);
 }
 

@@ -38,7 +38,9 @@ void ItemSpawner::Init()
 	mCollider = std::make_unique<Collider3D>(
 		std::make_unique<Collision::Sphere3D>(kTriggerRadius),
 		this,
-		Collision::Tag::Sensor
+		Collision::Tag::Sensor,
+		true,
+		false
 	);
 
 	mEffectAnimator = std::make_unique<EffectAnimator>(this, kEffectPath);

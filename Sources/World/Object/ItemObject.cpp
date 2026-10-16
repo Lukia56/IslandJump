@@ -27,7 +27,9 @@ void ItemObject::Init()
 	mCollider = std::make_unique<Collider3D>(
 		std::make_unique<Collision::Sphere3D>(kBodyCollRadius),
 		this,
-		Collision::Tag::Body
+		Collision::Tag::Body,
+		true,
+		false
 	);
 }
 

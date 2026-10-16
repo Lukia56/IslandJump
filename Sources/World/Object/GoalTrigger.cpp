@@ -28,7 +28,9 @@ void GoalTrigger::Init()
 	mCollider = std::make_unique<Collider3D>(
 		std::make_unique<Collision::AABB3D>(kBodyCollSize, kBodyCollOffset),
 		this,
-		Collision::Tag::Body
+		Collision::Tag::Body,
+		true,
+		false
 	);
 }
 
