@@ -9,7 +9,7 @@ namespace
 {
 	constexpr Vector3 kOffsetPos{ 0.0f, 100.0f, 0.0f };
 
-	constexpr float kBodyCollRadius = 50.0f;
+	constexpr float kBodyCollRadius = 100.0f;
 }
 
 ItemObject::ItemObject() :
