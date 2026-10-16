@@ -15,8 +15,8 @@ namespace
 	constexpr float kMinPitch = -80.0f;
 
 	constexpr float kMoveViewLatency = 0.25f;
-	
-	constexpr float kSensitivity = 0.25f;
+
+	constexpr Vector2 kSensitivity{ 0.1f, 0.15f };
 }
 
 CameraFollow::CameraFollow(Transform* target) :
@@ -30,7 +30,9 @@ CameraFollow::CameraFollow(Transform* target) :
 void CameraFollow::Update(Camera::View& view)
 {
 	// 視点を移動する
-	Vector2 relative = Mouse::GetInstance().GetRelativePos() * kSensitivity;
+	Vector2 relative = Mouse::GetInstance().GetRelativePos();
+	relative.x *= kSensitivity.x;
+	relative.y *= kSensitivity.y;
 	mTargetRotation += Vector3(relative.y, relative.x, 0.0f) * Math::ToRadian(1.0f);
 
 	// ピッチを制限する
