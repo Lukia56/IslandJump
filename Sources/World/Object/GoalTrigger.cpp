@@ -8,8 +8,8 @@
 
 namespace
 {
-	constexpr Vector3 kBodyCollSize{ 900.0f, 400.0f, 400.0f };
-	constexpr Vector3 kBodyCollOffset{ 0.0f, 200.0f, 0.0f };
+	constexpr Vector3 kBodyCollSize{ 1300.0f, 400.0f, 400.0f };
+	constexpr Vector3 kBodyCollOffset{ 150.0f, 200.0f, 0.0f };
 
 	constexpr float kResultTransitionTime = 3.0f;
 }
