@@ -152,6 +152,10 @@ std::unique_ptr<SceneBase> SceneMain::OnUpdate()
 		{
 			data = Data::Json::LoadJsonAs<SaveData>(kSaveDataPath)[0];
 		}
+		else
+		{
+			std::filesystem::create_directory("SaveData");
+		}
 
 		switch (mDifficultyData.difficulty)
 		{
