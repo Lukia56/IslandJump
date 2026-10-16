@@ -10,6 +10,7 @@ struct ResultData
 
 	int playMinutes = 0;
 	int playSeconds = 0;
+	int playTenMilliSeconds = 0;
 
 	int distanceScore = 0;
 	int itemScore = 0;

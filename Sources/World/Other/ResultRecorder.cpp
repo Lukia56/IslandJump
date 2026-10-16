@@ -65,6 +65,7 @@ ResultData ResultRecorder::CreateResultData() const
 
 	result.playMinutes = static_cast<int>(std::floor(mPlayTime / kOneMinuteSec));
 	result.playSeconds = static_cast<int>(std::floor(mPlayTime - result.playMinutes * kOneMinuteSec));
+	result.playTenMilliSeconds = static_cast<int>(std::floor((mPlayTime - result.playSeconds - result.playMinutes * kOneMinuteSec) * 100.0f));
 
 	// スコアを計算
 	result.distanceScore = static_cast<int>(mProgressDistance * kDistanceScoreCoef);
@@ -73,7 +74,7 @@ ResultData ResultRecorder::CreateResultData() const
 	float progress = mDifficultyData->goalPosY / mDifficultyData->cloudSpeed;
 	result.timeScore = static_cast<int>(Math::Sqr(Math::Max(0.0f, progress - mPlayTime)) * kTimeScoreCoef * mIsSuccessed);
 
-	float scoreCoef = mDifficultyData->difficulty == StageDifficultyData::Difficulty::Hard ? kHardModeScoreCoef : 1.0f ;
+	float scoreCoef = mDifficultyData->difficulty == StageDifficultyData::Difficulty::Hard ? kHardModeScoreCoef : 1.0f;
 	result.overallScore = static_cast<int>((result.distanceScore + result.itemScore + result.timeScore) * scoreCoef);
 	
 	return result;

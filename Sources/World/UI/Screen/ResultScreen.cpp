@@ -129,7 +129,8 @@ namespace UI
 
 		std::string minutes = std::to_string(result.playMinutes);
 		std::string seconds = (result.playSeconds < 10 ? "0" : "") + std::to_string(result.playSeconds);
-		mPlayTimeText->SetDisplayText("Play Time " + minutes + ": " + seconds);
+		std::string tenMilliseconds = (result.playTenMilliSeconds < 10 ? "0" : "") + std::to_string(result.playTenMilliSeconds);
+		mPlayTimeText->SetDisplayText("Play Time " + minutes + ":" + seconds + "." + tenMilliseconds);
 		mScoreTimeText->SetDisplayText(std::to_string(result.timeScore) + kScorePostfixText);
 
 		mOverallScoreText->SetDisplayText(std::to_string(result.overallScore) + kScorePostfixText);
