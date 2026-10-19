@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Ray.h"
 
 class Collider3D;
 
@@ -26,6 +27,12 @@ public:
 	/// <para>所有者が非アクティブであったり、お互いの所有者が同じなら調べない</para>
 	/// </summary>
 	void CheckAllCollision();
+
+	/// <summary>
+	/// レイに衝突したオブジェクトとの情報を取得する
+	/// レイの始点からの距離の昇順で返す
+	/// </summary>
+	std::vector<Collision::RaycastResult> Raycast(const Collision::Ray& ray);
 
 	void Register(Collider3D* collider);
 
