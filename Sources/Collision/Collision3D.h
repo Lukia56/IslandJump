@@ -128,6 +128,8 @@ namespace Collision
 
 		Collision::Result CheckCollision(const IShape3D* other) const override { return other->Check(this); }
 
+		Collision::RaycastResult Raycast(const Ray& ray) const override;
+
 		void DebugDraw(const Color& color = Color::white) const override;
 
 	public:
