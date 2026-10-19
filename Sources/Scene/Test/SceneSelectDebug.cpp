@@ -7,6 +7,7 @@
 #include "SceneLoadStageTest.h"
 #include "SceneResultTest.h"
 #include "SceneSoundTest.h"
+#include "SceneRayTest.h"
 #include "../SceneTitle.h"
 #include "../SceneMain.h"
 #include "System/InputManager.h"
@@ -48,6 +49,10 @@ void SceneSelectDebug::OnInit()
 
 	info.name = "SoundTest";
 	info.createSceneFunc = []() { return std::make_unique<SceneSoundTest>(); };
+	mSceneList.emplace_back(info);
+
+	info.name = "RayTest";
+	info.createSceneFunc = []() { return std::make_unique<SceneRayTest>(); };
 	mSceneList.emplace_back(info);
 
 	info.name = "Title";
