@@ -264,6 +264,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Collision\Ray.h" />
     <ClInclude Include="Sources\Utility\Data\JSON\JsonExporter.h" />
     <ClInclude Include="Sources\Utility\Data\JSON\ToJson.h" />
     <ClInclude Include="Sources\World\UI\Widget\PlayTimerUI.h" />
