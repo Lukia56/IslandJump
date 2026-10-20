@@ -1,6 +1,7 @@
 #include "ItemObject.h"
 #include "../Component/Collider3D.h"
 #include "../Component/Rendering/BillboardRenderer.h"
+#include "../Other/EffectManager.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "System/Resource/ResourceBase.h"
@@ -10,12 +11,15 @@ namespace
 	constexpr Vector3 kOffsetPos{ 0.0f, 100.0f, 0.0f };
 
 	constexpr float kBodyCollRadius = 100.0f;
+
+	const char* const kEffectPath = "Resources\\Effect\\ItemConsumeEffect_AerialControl.efk";
 }
 
-ItemObject::ItemObject() :
+ItemObject::ItemObject(EffectManager* effectManager) :
 	mItemType(ItemType::Invalid),
 	mCollider(nullptr),
-	mBillboard(nullptr)
+	mBillboard(nullptr),
+	mEffectManager(effectManager)
 {
 	mBillboard = std::make_unique<BillboardRenderer>(this, nullptr);
 }
@@ -57,4 +61,9 @@ void ItemObject::Setup(const Vector3& spawnPos, std::shared_ptr<Resource::Resour
 	mBillboard->SetResource(texture);
 
 	mItemType = itemType;
+}
+
+void ItemObject::Consume()
+{
+	mEffectManager->Play(kEffectPath, mTransform->CalculateWorldPosition() - kOffsetPos);
 }

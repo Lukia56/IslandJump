@@ -12,6 +12,7 @@
 #include "System/ResourceManager.h"
 #include "System/SoundManager.h"
 #include "System/Input/Mouse.h"
+#include "System/Resource/Effect.h"
 #include "System/Resource/Model.h"
 #include "System/Resource/Sound.h"
 #include "Utility/Data/JSON/JsonLoader.h"
@@ -21,6 +22,7 @@
 #include "World/Object/GoalObject.h"
 #include "World/Object/GoalTrigger.h"
 #include "World/Object/Skybox.h"
+#include "World/Other/EffectManager.h"
 #include "World/Other/ItemObjectManager.h"
 #include "World/Other/ItemSpawnerManager.h"
 #include "World/Other/ResultRecorder.h"
@@ -41,11 +43,15 @@ namespace
 
 	const char* const kHelicopterModelPath = "Resources\\Model\\Helicopter\\helicopter.mv1";
 
+	const char* const kAerialControlEffectPath = "Resources\\Effect\\ItemConsumeEffect_AerialControl.efk";
+
 	const char* const kBGMPath = "Resources\\Sound\\BGM\\InGame.ogg";
 
 	const char* const kSaveDataPath = "SaveData\\SaveData.json";
 
 	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -500.0f, 0.0f };
+
+	constexpr int kMaxEffect = 100;
 }
 
 SceneMain::SceneMain() :
@@ -84,7 +90,10 @@ void SceneMain::OnInit()
 
 	mResultRecorder = CreateToRoot<ResultRecorder>(&mDifficultyData);
 
-	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, mResultRecorder);
+	EffectManager* effectManager = CreateToRoot<EffectManager>(kMaxEffect);
+	effectManager->RegisterEffect(ResourceManager::GetInstance().GetResource<Resource::Effect>(kAerialControlEffectPath));
+
+	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, mResultRecorder, effectManager);
 
 	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(itemObjectManager);
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
