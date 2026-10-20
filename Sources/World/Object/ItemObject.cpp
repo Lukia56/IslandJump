@@ -12,7 +12,11 @@ namespace
 
 	constexpr float kBodyCollRadius = 100.0f;
 
-	const char* const kEffectPath = "Resources\\Effect\\ItemConsumeEffect_AerialControl.efk";
+	std::string kEffectPaths[] = {
+		"Resources\\Effect\\ItemConsumeEffect_JumpBoost.efk",
+		"Resources\\Effect\\ItemConsumeEffect_SpeedBoost.efk",
+		"Resources\\Effect\\ItemConsumeEffect_AerialControl.efk"
+	};
 }
 
 ItemObject::ItemObject(EffectManager* effectManager) :
@@ -65,5 +69,5 @@ void ItemObject::Setup(const Vector3& spawnPos, std::shared_ptr<Resource::Resour
 
 void ItemObject::Consume()
 {
-	mEffectManager->Play(kEffectPath, mTransform->CalculateWorldPosition() - kOffsetPos);
+	mEffectManager->Play(kEffectPaths[static_cast<int>(mItemType)], mTransform->CalculateWorldPosition() - kOffsetPos);
 }

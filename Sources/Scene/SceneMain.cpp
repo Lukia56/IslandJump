@@ -43,6 +43,8 @@ namespace
 
 	const char* const kHelicopterModelPath = "Resources\\Model\\Helicopter\\helicopter.mv1";
 
+	const char* const kJumpBoostEffectPath = "Resources\\Effect\\ItemConsumeEffect_JumpBoost.efk";
+	const char* const kSpeedBoostEffectPath = "Resources\\Effect\\ItemConsumeEffect_SpeedBoost.efk";
 	const char* const kAerialControlEffectPath = "Resources\\Effect\\ItemConsumeEffect_AerialControl.efk";
 
 	const char* const kBGMPath = "Resources\\Sound\\BGM\\InGame.ogg";
@@ -91,6 +93,8 @@ void SceneMain::OnInit()
 	mResultRecorder = CreateToRoot<ResultRecorder>(&mDifficultyData);
 
 	EffectManager* effectManager = CreateToRoot<EffectManager>(kMaxEffect);
+	effectManager->RegisterEffect(ResourceManager::GetInstance().GetResource<Resource::Effect>(kJumpBoostEffectPath));
+	effectManager->RegisterEffect(ResourceManager::GetInstance().GetResource<Resource::Effect>(kSpeedBoostEffectPath));
 	effectManager->RegisterEffect(ResourceManager::GetInstance().GetResource<Resource::Effect>(kAerialControlEffectPath));
 
 	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, mResultRecorder, effectManager);
