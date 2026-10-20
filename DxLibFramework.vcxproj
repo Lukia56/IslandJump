@@ -140,8 +140,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Scene\Test\SceneEffectTest.cpp" />
+    <ClCompile Include="Sources\World\Other\EffectInstance.cpp" />
     <ClCompile Include="Sources\World\Other\BlobShadow.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneRayTest.cpp" />
+    <ClCompile Include="Sources\World\Other\EffectManager.cpp" />
     <ClCompile Include="Sources\World\Test\TestCollider.cpp" />
     <ClCompile Include="Sources\World\Test\TestRay.cpp" />
     <ClCompile Include="Sources\World\Object\CloudModel.cpp" />
@@ -267,11 +270,14 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Scene\Test\SceneEffectTest.h" />
+    <ClInclude Include="Sources\World\Other\EffectInstance.h" />
     <ClInclude Include="Sources\World\Other\BlobShadow.h" />
     <ClInclude Include="Sources\Collision\Ray.h" />
     <ClInclude Include="Sources\Scene\Test\SceneRayTest.h" />
     <ClInclude Include="Sources\Utility\Data\JSON\JsonExporter.h" />
     <ClInclude Include="Sources\Utility\Data\JSON\ToJson.h" />
+    <ClInclude Include="Sources\World\Other\EffectManager.h" />
     <ClInclude Include="Sources\World\Test\TestCollider.h" />
     <ClInclude Include="Sources\World\Test\TestRay.h" />
     <ClInclude Include="Sources\World\Object\CloudModel.h" />
