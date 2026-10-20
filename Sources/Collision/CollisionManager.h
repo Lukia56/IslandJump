@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <vector>
 #include "Ray.h"
 
@@ -33,6 +34,7 @@ public:
 	/// ƒŒƒC‚Ìn“_‚©‚ç‚Ì‹——£‚Ì¸‡‚Å•Ô‚·
 	/// </summary>
 	std::vector<Collision::RaycastResult> Raycast(const Collision::Ray& ray);
+	std::vector<Collision::RaycastResult> Raycast(const Collision::Ray& ray, std::function<bool(Collider3D*)> pred);
 
 	void Register(Collider3D* collider);
 

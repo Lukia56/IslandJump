@@ -45,10 +45,17 @@ void CollisionManager::CheckAllCollision()
 
 std::vector<Collision::RaycastResult> CollisionManager::Raycast(const Collision::Ray& ray)
 {
+	return Raycast(ray, [](Collider3D*) { return true; });
+}
+
+std::vector<Collision::RaycastResult> CollisionManager::Raycast(const Collision::Ray& ray, std::function<bool(Collider3D*)> pred)
+{
 	std::vector<Collision::RaycastResult> results;
 
 	for (const auto& collider : mColliders)
 	{
+		if (!pred(collider)) continue;
+
 		Collision::RaycastResult result = collider->GetShape()->Raycast(ray);
 
 		if (!result.isHit) continue;
