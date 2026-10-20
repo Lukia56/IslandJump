@@ -23,12 +23,10 @@ namespace Observer
 		{
 		case Observer::Event::ReachGoal:
 			mResultRecorder->SetSuccessed(true);
-			mResultRecorder->SetCountPlayTimer(false);
 			break;
 
 		case Observer::Event::FallCloudPlayer:
 			mResultRecorder->SetSuccessed(false);
-			mResultRecorder->SetCountPlayTimer(false);
 			break;
 
 		case Observer::Event::TransitionResult:

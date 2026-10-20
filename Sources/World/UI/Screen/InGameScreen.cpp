@@ -1,7 +1,6 @@
 #include "InGameScreen.h"
 #include "../Widget/GoalProgressBar.h"
 #include "../Widget/ItemUseCountUI.h"
-#include "../Widget/PlayTimerUI.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Font.h"
 #include "World/Other/ItemObjectManager.h"
@@ -10,9 +9,6 @@
 namespace
 {
 	constexpr Vector3 kGoalProgressBarPos{ -100.0f, 0.0f, 0.0f };
-
-	constexpr Vector3 kPlayTimerPos{ 0.0f, 100.0f, 0.0f };
-	constexpr Vector2 kPlayTimerRect{ 200.0f, 100.0f };
 
 	constexpr Vector3 kJumpBoostPos{ -200.0f, -75.0f, 0.0f };
 	constexpr Vector3 kSpeedBoostPos{ 0.0f, -75.0f, 0.0f };
@@ -30,11 +26,6 @@ namespace UI
 		UI::GoalProgressBar* goalProgressBar = CreateToChild<UI::GoalProgressBar>(maxDistance, playerTransform, font);
 		goalProgressBar->GetRectTransform()->localPosition = kGoalProgressBarPos;
 		goalProgressBar->GetRectTransform()->SetAnchor(RectTransform::Anchor::RightMiddle);
-
-		UI::PlayTimerUI* playTimer = CreateToChild<UI::PlayTimerUI>(resultRecorder, font);
-		playTimer->GetRectTransform()->localPosition = kPlayTimerPos;
-		playTimer->GetRectTransform()->SetFullRectAsFixed(kPlayTimerRect);
-		playTimer->GetRectTransform()->SetAnchor(RectTransform::Anchor::CenterTop);
 
 		UI::ItemUseCountUI* jumpBoost = CreateToChild<UI::ItemUseCountUI>(ItemType::JumpBoost, itemObjectManager, font);
 		jumpBoost->GetRectTransform()->localPosition = kJumpBoostPos;

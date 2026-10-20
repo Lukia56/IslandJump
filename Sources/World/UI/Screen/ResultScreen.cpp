@@ -19,7 +19,6 @@ namespace
 	constexpr Vector3 kResultPos{ 0.0f, 50.0f, 0.0f };
 	constexpr Vector3 kProgressPos{ 50.0f, 200.0f, 0.0f };
 	constexpr Vector3 kItemUseCountPos{ 50.0f, 300.0f, 0.0f };
-	constexpr Vector3 kPlayTimePos{ 50.0f, 400.0f, 0.0f };
 	constexpr float kScorePosX = -250.0f;
 	constexpr Vector3 kOverallScorePos{ 0.0f, -150.0f, 0.0f };
 	constexpr Vector3 kExitPos{ 0.0f, -50.0f, 0.0f };
@@ -27,7 +26,7 @@ namespace
 	constexpr Vector2 kTextRect{ 400.0f, 100.0f };
 
 	constexpr Vector3 kBackgroundPos{ 0.0f, 0.0f, 0.0f };
-	constexpr Vector2 kBackgroundRect{ 750.0f, 700.0f };
+	constexpr Vector2 kBackgroundRect{ 750.0f, 550.0f };
 
 	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
 	const char* const kFontSmallPath = "Resources\\Font\\ShowcardGothicSmall.dft";
@@ -39,10 +38,8 @@ namespace UI
 		mResultText(nullptr),
 		mProgressText(nullptr),
 		mItemUseCountText(nullptr),
-		mPlayTimeText(nullptr),
 		mScoreDistanceText(nullptr),
 		mScoreItemText(nullptr),
-		mScoreTimeText(nullptr),
 		mOverallScoreText(nullptr),
 		mExitText(nullptr),
 		mResultRecorder(resultRecorder)
@@ -71,10 +68,6 @@ namespace UI
 		mItemUseCountText->GetRectTransform()->localPosition = kItemUseCountPos;
 		mItemUseCountText->GetRectTransform()->SetAnchor(RectTransform::Anchor::LeftTop);
 
-		mPlayTimeText = bg->CreateToChild<UI::TextObject>(fontSmall, "", Color::white, HolizontalAlignment::Left, VerticalAlignment::Middle);
-		mPlayTimeText->GetRectTransform()->localPosition = kPlayTimePos;
-		mPlayTimeText->GetRectTransform()->SetAnchor(RectTransform::Anchor::LeftTop);
-
 		// 各スコア
 		mScoreDistanceText = bg->CreateToChild<UI::TextObject>(fontSmall, "", Color::white, HolizontalAlignment::Left, VerticalAlignment::Middle);
 		mScoreDistanceText->GetRectTransform()->localPosition = Vector3(kScorePosX, kProgressPos.y, 0.0f);
@@ -83,10 +76,6 @@ namespace UI
 		mScoreItemText = bg->CreateToChild<UI::TextObject>(fontSmall, "", Color::white, HolizontalAlignment::Left, VerticalAlignment::Middle);
 		mScoreItemText->GetRectTransform()->localPosition = Vector3(kScorePosX, kItemUseCountPos.y, 0.0f);
 		mScoreItemText->GetRectTransform()->SetAnchor(RectTransform::Anchor::RightTop);
-
-		mScoreTimeText = bg->CreateToChild<UI::TextObject>(fontSmall, "", Color::white, HolizontalAlignment::Left, VerticalAlignment::Middle);
-		mScoreTimeText->GetRectTransform()->localPosition = Vector3(kScorePosX, kPlayTimePos.y, 0.0f);
-		mScoreTimeText->GetRectTransform()->SetAnchor(RectTransform::Anchor::RightTop);
 
 		mOverallScoreText = bg->CreateToChild<UI::TextObject>(font, "", Color::yellow, HolizontalAlignment::Center, VerticalAlignment::Middle);
 		mOverallScoreText->GetRectTransform()->localPosition = kOverallScorePos;
@@ -126,12 +115,6 @@ namespace UI
 
 		mItemUseCountText->SetDisplayText("Item Used " + std::to_string(result.itemUseCount));
 		mScoreItemText->SetDisplayText(std::to_string(result.itemScore) + kScorePostfixText);
-
-		std::string minutes = std::to_string(result.playMinutes);
-		std::string seconds = (result.playSeconds < 10 ? "0" : "") + std::to_string(result.playSeconds);
-		std::string tenMilliseconds = (result.playTenMilliSeconds < 10 ? "0" : "") + std::to_string(result.playTenMilliSeconds);
-		mPlayTimeText->SetDisplayText("Play Time " + minutes + ":" + seconds + "." + tenMilliseconds);
-		mScoreTimeText->SetDisplayText(std::to_string(result.timeScore) + kScorePostfixText);
 
 		mOverallScoreText->SetDisplayText(std::to_string(result.overallScore) + kScorePostfixText);
 	}

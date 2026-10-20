@@ -378,9 +378,6 @@
     <ClCompile Include="Sources\World\UI\Widget\ItemUseCountUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\UI\Widget\PlayTimerUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\World\Test\TestCollider.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -852,9 +849,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\UI\Widget\ItemUseCountUI.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\World\UI\Widget\PlayTimerUI.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Utility\Data\JSON\ToJson.h">

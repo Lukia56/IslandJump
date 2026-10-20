@@ -29,11 +29,9 @@ namespace UI
 
         TextObject* mProgressText;
         TextObject* mItemUseCountText;
-        TextObject* mPlayTimeText;
 
         TextObject* mScoreDistanceText;
         TextObject* mScoreItemText;
-        TextObject* mScoreTimeText;
 
         TextObject* mOverallScoreText;
 

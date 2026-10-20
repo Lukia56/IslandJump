@@ -144,7 +144,6 @@
     <ClCompile Include="Sources\Scene\Test\SceneRayTest.cpp" />
     <ClCompile Include="Sources\World\Test\TestCollider.cpp" />
     <ClCompile Include="Sources\World\Test\TestRay.cpp" />
-    <ClCompile Include="Sources\World\UI\Widget\PlayTimerUI.cpp" />
     <ClCompile Include="Sources\World\Object\CloudModel.cpp" />
     <ClCompile Include="Sources\Observer\SoundObserver.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneSoundTest.cpp" />
@@ -275,7 +274,6 @@
     <ClInclude Include="Sources\Utility\Data\JSON\ToJson.h" />
     <ClInclude Include="Sources\World\Test\TestCollider.h" />
     <ClInclude Include="Sources\World\Test\TestRay.h" />
-    <ClInclude Include="Sources\World\UI\Widget\PlayTimerUI.h" />
     <ClInclude Include="Sources\World\Object\CloudModel.h" />
     <ClInclude Include="Sources\Observer\SoundObserver.h" />
     <ClInclude Include="Sources\Scene\Test\SceneSoundTest.h" />
