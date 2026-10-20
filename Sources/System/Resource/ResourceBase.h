@@ -18,6 +18,8 @@ namespace Resource
 
 		int GetHandle() const { return mHandle; }
 
+		const std::string& GetPath() const { return mPath; }
+
 	protected:
 
 		/// <summary>
