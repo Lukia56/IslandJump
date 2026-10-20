@@ -52,6 +52,7 @@ EffectInstance* EffectManager::Play(std::string filePath, const Vector3& pos)
 	// ƒv[ƒ‹‚©‚çŽæ‚èo‚·
 	EffectInstance* effect = mPoolEffects.top();
 
+	effect->GetTransform()->localPosition = pos;
 	effect->GetTransform()->ChangeParent(mActiveEffectRoot->GetTransform());
 
 	mPoolEffects.pop();
