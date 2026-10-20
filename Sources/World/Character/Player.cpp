@@ -5,6 +5,7 @@
 #include "../Component/Collider3D.h"
 #include "../Component/ModelAnimator.h"
 #include "../Component/Rendering/ModelRenderer.h"
+#include "../Other/BlobShadow.h"
 #include "../Other/ItemObjectManager.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
@@ -44,7 +45,7 @@ namespace
 	constexpr float kModelAnimationFPS = 30.0f;
 }
 
-Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::vector<AnimationParam> animationParams, ItemObjectManager* itemObjectManager) :
+Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::shared_ptr<Resource::ResourceBase> shadowTexture, std::vector<AnimationParam> animationParams, ItemObjectManager* itemObjectManager) :
 	mJumpBufferTimer(0.0f),
 	mForceJumpTimer(0.0f),
 	mIsJumping(false),
@@ -69,6 +70,8 @@ Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::vector<Animat
 	mEventSubject = std::make_unique<Observer::Subject>();
 
 	mModel = std::make_unique<ModelRenderer>(this, model);
+
+	CreateToChild<BlobShadow>(shadowTexture);
 }
 
 void Player::Init()

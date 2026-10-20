@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\World\Other\BlobShadow.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneRayTest.cpp" />
     <ClCompile Include="Sources\World\Test\TestCollider.cpp" />
     <ClCompile Include="Sources\World\Test\TestRay.cpp" />
@@ -267,6 +268,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\World\Other\BlobShadow.h" />
     <ClInclude Include="Sources\Collision\Ray.h" />
     <ClInclude Include="Sources\Scene\Test\SceneRayTest.h" />
     <ClInclude Include="Sources\Utility\Data\JSON\JsonExporter.h" />
