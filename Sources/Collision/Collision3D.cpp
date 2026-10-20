@@ -207,8 +207,8 @@ namespace Collision
 	{
 		Collision::RaycastResult result;
 
-		Vector3 aabbMinPos = GetPosition() - GetHalfSize();
-		Vector3 aabbMaxPos = GetPosition() + GetHalfSize();
+		Vector3 aabbMinPos = GetWorldPos() - GetHalfSize();
+		Vector3 aabbMaxPos = GetWorldPos() + GetHalfSize();
 
 		float tMin = -FLT_MAX;
 		float tMax = FLT_MAX;
@@ -249,7 +249,7 @@ namespace Collision
 			// Œð·‚µ‚Ä‚¢‚È‚¢
 			if (tMin >= tMax) return result;
 
-			if (tMin < 0.0f) return result;
+			if (tMin < -Math::Epsilon) return result;
 
 			// ƒŒƒC‚Ì‹——£ŒÀŠE‚ð’´‚¦‚Ä‚¢‚é
 			if (tMin > ray.maxDistance) return result;
