@@ -39,6 +39,7 @@ namespace
 	const char* const kPlayerAnimationParamPath = "Resources\\MasterData\\PlayerAnimationParam.csv";
 
 	const char* const kSkyboxModelPath = "Resources\\Model\\Skybox\\Skybox.mv1";
+	const char* const kSkyboxHardModeModelPath = "Resources\\Model\\SkyboxHardMode\\Skybox.mv1";
 
 	const char* const kCloudModelPath = "Resources\\Model\\Cloud.mv1";
 
@@ -89,7 +90,8 @@ SceneMain::SceneMain(const StageDifficultyData& difficultyData) :
 
 void SceneMain::OnInit()
 {
-	std::shared_ptr<Resource::ResourceBase> skyboxModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kSkyboxModelPath);
+	std::string skyboxModelPath = mDifficultyData.difficulty == StageDifficultyData::Difficulty::Easy ? kSkyboxModelPath : kSkyboxHardModeModelPath;
+	std::shared_ptr<Resource::ResourceBase> skyboxModel = ResourceManager::GetInstance().GetResource<Resource::Model>(skyboxModelPath);
 	mSkybox = CreateToRoot<Skybox>(skyboxModel);
 
 	std::shared_ptr<Resource::ResourceBase> goalModel = ResourceManager::GetInstance().GetResource<Resource::Model>(kHelicopterModelPath);
