@@ -16,7 +16,7 @@ namespace UI
 	{
 	public:
 
-		GoalProgressBar(float maxDistance, Transform* playerTransform, std::shared_ptr<Resource::ResourceBase> font);
+		GoalProgressBar(float maxDistance, Transform* playerTransform, Transform* cloudTransform, std::shared_ptr<Resource::ResourceBase> font);
 		~GoalProgressBar() = default;
 
 		void Init() override;
@@ -29,9 +29,13 @@ namespace UI
 
 		Transform* mPlayerTransform;
 
+		Transform* mCloudTransform;
+
 		BoxObject* mMaxBar;
 
 		BoxObject* mCurrentBar;
+
+		BoxObject* mCloudBar;
 
 		TextObject* mProgressText;
 	};

@@ -11,7 +11,7 @@ namespace UI
 	{
 	public:
 
-		InGameScreen(float maxDistance, Transform* playerTransform, ItemObjectManager* itemObjectManager, ResultRecorder* resultRecorder);
+		InGameScreen(float maxDistance, Transform* playerTransform, Transform* cloudTransform, ItemObjectManager* itemObjectManager, ResultRecorder* resultRecorder);
 		~InGameScreen() = default;
 
 		void Init() override;

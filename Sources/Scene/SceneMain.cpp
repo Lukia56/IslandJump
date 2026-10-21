@@ -117,7 +117,7 @@ void SceneMain::OnInit()
 	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos, mDifficultyData.cloudSpeed, cloudModel);
 
 	mUIManager = CreateToRoot<UI::UIManager>();
-	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(mDifficultyData.goalPosY, mPlayer->GetTransform(), itemObjectManager, mResultRecorder));
+	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(mDifficultyData.goalPosY, mPlayer->GetTransform(), mDeathCloud->GetTransform(), itemObjectManager, mResultRecorder));
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
 	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(mResultRecorder));
 	mUIManager->PushScreen<UI::InGameScreen>();

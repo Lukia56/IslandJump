@@ -15,11 +15,13 @@ namespace
 
 namespace UI
 {
-	GoalProgressBar::GoalProgressBar(float maxDistance, Transform* playerTransform, std::shared_ptr<Resource::ResourceBase> font) :
+	GoalProgressBar::GoalProgressBar(float maxDistance, Transform* playerTransform, Transform* cloudTransform, std::shared_ptr<Resource::ResourceBase> font) :
 		mMaxDistance(maxDistance),
 		mPlayerTransform(playerTransform),
+		mCloudTransform(cloudTransform),
 		mMaxBar(nullptr),
 		mCurrentBar(nullptr),
+		mCloudBar(nullptr),
 		mProgressText(nullptr)
 	{
 		mProgressText = CreateToChild<UI::TextObject>(font, kProgressText, Color::white, HolizontalAlignment::Right);
@@ -37,13 +39,20 @@ namespace UI
 		mCurrentBar->GetRectTransform()->localPosition = kBoxPos;
 		mCurrentBar->GetRectTransform()->SetFullRectAsFixed(kBoxSize);
 		mCurrentBar->GetRectTransform()->SetPivot(Vector2(0.0f, 1.0f));
+
+		mCloudBar = CreateToChild<UI::BoxObject>(Color::gray);
+		mCloudBar->GetRectTransform()->localPosition = kBoxPos;
+		mCloudBar->GetRectTransform()->SetFullRectAsFixed(kBoxSize);
+		mCloudBar->GetRectTransform()->SetPivot(Vector2(0.0f, 1.0f));
 	}
 
 	void GoalProgressBar::Update()
 	{
 		float progressRate = Math::Clamp(mPlayerTransform->CalculateWorldPosition().y / mMaxDistance, 0.0f, 1.0f);
-
 		mCurrentBar->GetRectTransform()->SetRectHeightAsFixed(kBoxSize.y * progressRate);
+
+		float cloudPosRate = Math::Clamp(mCloudTransform->CalculateWorldPosition().y / mMaxDistance, 0.0f, 1.0f);
+		mCloudBar->GetRectTransform()->SetRectHeightAsFixed(kBoxSize.y * cloudPosRate);
 
 		float distance = mMaxDistance - mPlayerTransform->CalculateWorldPosition().y;
 		int clampedDistance = Math::Max(static_cast<int>(distance), 0);
