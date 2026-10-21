@@ -120,7 +120,7 @@ void SceneMain::OnInit()
 	mUIManager->PushScreen<UI::InGameScreen>();
 
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
-	mResultObserver = std::make_unique<Observer::ResultObserver>(mResultRecorder, mUIManager);
+	mResultObserver = std::make_unique<Observer::ResultObserver>(mResultRecorder, mUIManager, GetCameraManager());
 	mSoundObserver = std::make_unique<Observer::SoundObserver>();
 
 	mPlayer->GetEventSubject()->RegisterObserver(mSoundObserver.get());

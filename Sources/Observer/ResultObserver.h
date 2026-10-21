@@ -3,6 +3,7 @@
 #include "IObserver.h"
 
 class ResultRecorder;
+class CameraManager;
 class Transform;
 namespace UI
 {
@@ -15,7 +16,7 @@ namespace Observer
 	{
 	public:
 
-		ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager);
+		ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, CameraManager* cameraManager);
 		ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, Transform* playerTransform);
 		~ResultObserver() = default;
 
@@ -26,5 +27,7 @@ namespace Observer
 		ResultRecorder* mResultRecorder;
 
 		UI::UIManager* mUIManager;
+
+		CameraManager* mCameraManager;
 	};
 }
