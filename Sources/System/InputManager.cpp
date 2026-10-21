@@ -1,6 +1,5 @@
 #include "InputManager.h"
 #include <array>
-#include <cmath>
 #include <memory>
 #include <unordered_map>
 #include <vector>
@@ -14,7 +13,6 @@
 #include "Input/Literal/InputProperty.h"
 #include "Input/Modifier/InputModifierNegate.h"
 #include "Input/Modifier/InputModifierSwizzleAxis.h"
-#include "Utility/Math.h"
 #include "Utility/Vector.h"
 
 bool InputManager::Initialize()
@@ -29,8 +27,6 @@ bool InputManager::Initialize()
 	mActions[static_cast<size_t>(Input::Action::Move)].map = Input::ActionMap::Player;
 	mActions[static_cast<size_t>(Input::Action::Look)].map = Input::ActionMap::Player;
 	mActions[static_cast<size_t>(Input::Action::Jump)].map = Input::ActionMap::Player;
-	mActions[static_cast<size_t>(Input::Action::Dash)].map = Input::ActionMap::Player;
-	mActions[static_cast<size_t>(Input::Action::Spin)].map = Input::ActionMap::Player;
 	mActions[static_cast<size_t>(Input::Action::Up)].map = Input::ActionMap::UI;
 	mActions[static_cast<size_t>(Input::Action::Down)].map = Input::ActionMap::UI;
 	mActions[static_cast<size_t>(Input::Action::Left)].map = Input::ActionMap::UI;
@@ -40,9 +36,7 @@ bool InputManager::Initialize()
 	mActions[static_cast<size_t>(Input::Action::Fly)].map = Input::ActionMap::Debug;
 
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::W,
-		{
-			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::ZYX)
-		});
+		{ std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::ZYX) });
 	Bind(Input::Action::Move, Input::Device::Keyboard, KeyCode::Button::S,
 		{
 			std::make_shared<InputModifierNegate>(true, true, true),
@@ -56,19 +50,12 @@ bool InputManager::Initialize()
 	Bind(Input::Action::Move, Input::Device::Gamepad, KeyCode::Button::GpLeftThumb,
 		{ std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::XZY) });
 
-	Bind(Input::Action::Look, Input::Device::Mouse, KeyCode::Button::MbDelta,
-		{
-			std::make_shared<InputModifierNegate>(false, true, false),
-			std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::YXZ)
-		});
 	Bind(Input::Action::Look, Input::Device::Gamepad, KeyCode::Button::GpRightThumb,
 		{ std::make_shared<InputModifierSwizzleAxis>(InputModifierSwizzleAxis::Order::YXZ) });
 
 	Bind(Input::Action::Jump, Input::Device::Keyboard, KeyCode::Button::Space);
 	Bind(Input::Action::Jump, Input::Device::Gamepad, KeyCode::Button::GpFaceDown);
-	Bind(Input::Action::Dash, Input::Device::Keyboard, KeyCode::Button::LShift);
-	Bind(Input::Action::Dash, Input::Device::Gamepad, KeyCode::Button::GpFaceLeft);
-	Bind(Input::Action::Spin, Input::Device::Mouse, KeyCode::Button::MbRightClick);
+	Bind(Input::Action::Jump, Input::Device::Gamepad, KeyCode::Button::GpFaceRight);
 
 	Bind(Input::Action::Up, Input::Device::Keyboard, KeyCode::Button::W);
 	Bind(Input::Action::Up, Input::Device::Keyboard, KeyCode::Button::UpArrow);
@@ -78,10 +65,14 @@ bool InputManager::Initialize()
 	Bind(Input::Action::Left, Input::Device::Keyboard, KeyCode::Button::LeftArrow);
 	Bind(Input::Action::Right, Input::Device::Keyboard, KeyCode::Button::D);
 	Bind(Input::Action::Right, Input::Device::Keyboard, KeyCode::Button::RightArrow);
-	Bind(Input::Action::Up, Input::Device::Gamepad, KeyCode::Button::GpFaceUp);
-	Bind(Input::Action::Down, Input::Device::Gamepad, KeyCode::Button::GpFaceDown);
-	Bind(Input::Action::Left, Input::Device::Gamepad, KeyCode::Button::GpFaceLeft);
-	Bind(Input::Action::Right, Input::Device::Gamepad, KeyCode::Button::GpFaceRight);
+	Bind(Input::Action::Up, Input::Device::Gamepad, KeyCode::Button::GpDPadUp);
+	Bind(Input::Action::Up, Input::Device::Gamepad, KeyCode::Button::GpLeftThumbUp);
+	Bind(Input::Action::Down, Input::Device::Gamepad, KeyCode::Button::GpDPadDown);
+	Bind(Input::Action::Down, Input::Device::Gamepad, KeyCode::Button::GpLeftThumbDown);
+	Bind(Input::Action::Left, Input::Device::Gamepad, KeyCode::Button::GpDPadLeft);
+	Bind(Input::Action::Left, Input::Device::Gamepad, KeyCode::Button::GpLeftThumbLeft);
+	Bind(Input::Action::Right, Input::Device::Gamepad, KeyCode::Button::GpDPadRight);
+	Bind(Input::Action::Right, Input::Device::Gamepad, KeyCode::Button::GpLeftThumbRight);
 	Bind(Input::Action::Submit, Input::Device::Keyboard, KeyCode::Button::Space);
 	Bind(Input::Action::Submit, Input::Device::Keyboard, KeyCode::Button::Z);
 	Bind(Input::Action::Submit, Input::Device::Gamepad, KeyCode::Button::GpFaceRight);
@@ -91,8 +82,8 @@ bool InputManager::Initialize()
 
 	Bind(Input::Action::Fly, Input::Device::Keyboard, KeyCode::Button::Space);
 	Bind(Input::Action::Fly, Input::Device::Keyboard, KeyCode::Button::LShift, { std::make_shared<InputModifierNegate>(true, false, false) });
-	Bind(Input::Action::Fly, Input::Device::Gamepad, KeyCode::Button::GpFaceRight);
-	Bind(Input::Action::Fly, Input::Device::Gamepad, KeyCode::Button::GpFaceDown, { std::make_shared<InputModifierNegate>(true, false, false) });
+	Bind(Input::Action::Fly, Input::Device::Gamepad, KeyCode::Button::GpFaceDown);
+	Bind(Input::Action::Fly, Input::Device::Gamepad, KeyCode::Button::GpLeftThumbPress, { std::make_shared<InputModifierNegate>(true, false, false) });
 
 	return true;
 }

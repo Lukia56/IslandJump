@@ -10,8 +10,6 @@ namespace Input
 		Move,
 		Look,
 		Jump,
-		Dash,
-		Spin,
 		Up,
 		Down,
 		Left,
