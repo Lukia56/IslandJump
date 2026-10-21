@@ -186,9 +186,11 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 	switch (oppCollider->GetOwner()->GetTag())
 	{
 	case Tag::Terrain:
-		mCollisionPush.x = Math::Max(result.normal.x * result.penetration, mCollisionPush.x);
-		mCollisionPush.y = Math::Max(result.normal.y * result.penetration, mCollisionPush.y);
-		mCollisionPush.z = Math::Max(result.normal.z * result.penetration, mCollisionPush.z);
+	{
+		Vector3 tempPush = result.normal * result.penetration;
+		mCollisionPush.x = (std::abs(tempPush.x) > std::abs(mCollisionPush.x) ? tempPush.x : mCollisionPush.x);
+		mCollisionPush.y = (std::abs(tempPush.y) > std::abs(mCollisionPush.y) ? tempPush.y : mCollisionPush.y);
+		mCollisionPush.z = (std::abs(tempPush.z) > std::abs(mCollisionPush.z) ? tempPush.z : mCollisionPush.z);
 
 		// �ǂƂ̏Փ�
 		if (!Math::IsNearZero(result.normal.x))
@@ -211,7 +213,7 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 			mVelocity.y = Math::Min(mVelocity.y, 0.0f);
 		}
 		break;
-
+	}
 	case Tag::ItemSpawner:
 
 		if (mOnGround) mEventSubject->Notify(Observer::Event::ItemAppear);
