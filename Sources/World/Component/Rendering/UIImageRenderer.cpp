@@ -5,9 +5,10 @@
 #include "Utility/Rect.h"
 #include "Utility/Vector.h"
 
-UIImageRenderer::UIImageRenderer(GameObject* owner, std::shared_ptr<Resource::ResourceBase> resource, RectTransform* rectTransform) :
+UIImageRenderer::UIImageRenderer(GameObject* owner, std::shared_ptr<Resource::ResourceBase> resource, RectTransform* rectTransform, float alpha) :
 	Renderer(owner, resource),
 	mTexSize(Vector2::Zero),
+	mAlpha(alpha),
 	mRectTransform(rectTransform)
 {
 	if (resource)
@@ -24,12 +25,16 @@ void UIImageRenderer::Draw() const
 
 	Rect rect = mRectTransform->CalculateRect();
 
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, mAlpha * 255);
+
 	DrawModiGraphF(
 		rect.xMin, rect.yMin,
 		rect.xMin + rect.width, rect.yMin,
 		rect.xMin + rect.width, rect.yMin + rect.height,
 		rect.xMin, rect.yMin + rect.height,
 		mResource->GetHandle(), true);
+
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
 
 void UIImageRenderer::SetResource(std::shared_ptr<Resource::ResourceBase> resource)

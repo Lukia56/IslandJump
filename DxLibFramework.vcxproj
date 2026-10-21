@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\World\UI\Widget\CloudInvasionEffect.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneEffectTest.cpp" />
     <ClCompile Include="Sources\World\Other\EffectInstance.cpp" />
     <ClCompile Include="Sources\World\Other\BlobShadow.cpp" />
@@ -270,6 +271,7 @@
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\World\UI\Widget\CloudInvasionEffect.h" />
     <ClInclude Include="Sources\Scene\Test\SceneEffectTest.h" />
     <ClInclude Include="Sources\World\Other\EffectInstance.h" />
     <ClInclude Include="Sources\World\Other\BlobShadow.h" />
