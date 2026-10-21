@@ -20,8 +20,11 @@ CameraRotation::CameraRotation(Transform* targetTransform, const Vector3& rotate
 	mRotateSpeed.z = Math::ToRadian(rotateSpeed.z);
 }
 
-void CameraRotation::Setup()
+void CameraRotation::Setup(Camera::View& view)
 {
+	Vector3 diff = view.targetPosition - view.eyePosition;
+
+	mRotation.y = std::atan2(diff.x, diff.z) + Math::kPi;
 }
 
 void CameraRotation::Update(Camera::View& view)

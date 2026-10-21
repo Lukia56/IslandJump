@@ -42,7 +42,7 @@ void CameraManager::Update()
 	// ƒJƒƒ‰Ø‚è‘Ö‚¦‚ðŒŸ’m‚·‚é
 	if (mCurrentCameraType != mPrevCameraType)
 	{
-		camera->Setup();
+		camera->Setup(mView);
 		mPrevCameraType = mCurrentCameraType;
 	}
 

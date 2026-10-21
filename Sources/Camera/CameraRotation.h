@@ -11,7 +11,7 @@ public:
 	CameraRotation(Transform* targetTransform, const Vector3& rotateSpeed, float distance);
 	~CameraRotation() = default;
 
-	void Setup() override;
+	void Setup(Camera::View& view) override;
 
 	void Update(Camera::View& view) override;
 

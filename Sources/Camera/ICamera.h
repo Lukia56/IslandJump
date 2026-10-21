@@ -9,7 +9,7 @@ public:
 	ICamera() = default;
 	virtual ~ICamera() = default;
 
-	virtual void Setup() {};
+	virtual void Setup(Camera::View& view) {};
 
 	virtual void Update(Camera::View& view) = 0;
 
