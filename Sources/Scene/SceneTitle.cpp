@@ -12,6 +12,7 @@
 #include "System/Resource/Sound.h"
 #include "Utility/Data/CSV/CsvLoader.h"
 #include "World/Object/Skybox.h"
+#include "World/Other/RootObject.h"
 #include "World/UI/Core/UIManager.h"
 #include "World/UI/Screen/TitleMenuScreen.h"
 #include "World/UI/Screen/DifficultyMenuScreen.h"
@@ -19,6 +20,7 @@
 namespace
 {
 	constexpr Vector3 kCameraRotate{ 0.0f, 10.0f, 0.0f };
+	constexpr float kCameraDistance = 0.1f;
 
 	const char* const kSkyboxModelPath = "Resources\\Model\\Skybox\\Skybox.mv1";
 
@@ -52,7 +54,9 @@ void SceneTitle::OnInit()
 
 	mUIManager->PushScreen<UI::TitleMenuScreen>();
 
-	GetCameraManager()->AddCamera(Camera::Type::Rotation, std::make_unique<CameraRotation>(Vector3::Zero, kCameraRotate));
+	GameObject* cameraRoot = CreateToRoot<RootObject>();
+
+	GetCameraManager()->AddCamera(Camera::Type::Rotation, std::make_unique<CameraRotation>(cameraRoot->GetTransform(), kCameraRotate, kCameraDistance));
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Rotation);
 
 	std::shared_ptr<Resource::ResourceBase> bgm = ResourceManager::GetInstance().GetResource<Resource::Sound>(kBGMPath);

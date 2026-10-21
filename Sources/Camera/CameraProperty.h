@@ -68,6 +68,8 @@ namespace Camera
 		DebugFree,
 		Follow,
 		Rotation,
+		RotationPlayer,
+		RotationGoal,
 		Max,
 	};
 }
