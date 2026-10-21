@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Observer\ItemObserver.cpp" />
+    <ClCompile Include="Sources\World\UI\Screen\OptionsMenuScreen.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\CloudInvasionEffect.cpp" />
     <ClCompile Include="Sources\Scene\Test\SceneEffectTest.cpp" />
     <ClCompile Include="Sources\World\Other\EffectInstance.cpp" />
@@ -274,6 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Observer\ItemObserver.h" />
+    <ClInclude Include="Sources\World\UI\Screen\OptionsMenuScreen.h" />
     <ClInclude Include="Sources\World\UI\Widget\CloudInvasionEffect.h" />
     <ClInclude Include="Sources\Scene\Test\SceneEffectTest.h" />
     <ClInclude Include="Sources\World\Other\EffectInstance.h" />
