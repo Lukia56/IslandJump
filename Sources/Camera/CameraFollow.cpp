@@ -7,7 +7,7 @@
 
 namespace
 {
-	constexpr Vector3 kInitRot{ 0.0f, Math::kPi, 0.0f };
+	constexpr Vector3 kInitRot{ 0.0f, 0.0f, 0.0f };
 
 	constexpr float kDistance = 700.0f;
 
