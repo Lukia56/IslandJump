@@ -38,7 +38,7 @@ void CameraFollow::Update(Camera::View& view)
 	{
 		viewMoveDir.x *= kMouseSensitivity.x;
 		viewMoveDir.y *= kMouseSensitivity.y;
-		mTargetRotation += Vector3(viewMoveDir.y, viewMoveDir.x, 0.0f) * Math::ToRadian(1.0f);
+		mTargetRotation += Vector3(-viewMoveDir.y, viewMoveDir.x, 0.0f) * Math::ToRadian(1.0f);
 	}
 	else
 	{
