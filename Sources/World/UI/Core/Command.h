@@ -9,9 +9,10 @@ namespace UI
 	{
 		None = -1,
 		ExitTestScene,
-		OpenOptions,
 		ExitResult,
 		StartGame,
+		OpenOptions,
+		ExitOptions,
 		QuitGame,
 		StartEasyMode,
 		StartHardMode,

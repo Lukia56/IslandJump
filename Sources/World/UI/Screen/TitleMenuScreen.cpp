@@ -12,11 +12,13 @@
 namespace
 {
 	const char* const kStartText = "Start Game";
+	const char* const kOptionsText = "Options";
 	const char* const kQuitText = "Quit";
 
 	constexpr Vector3 kLogoSpritePos{ 0.0f, -100.0f, 0.0f };
 	constexpr Vector3 kStartTextPos{ 0.0f, 300.0f, 0.0f };
-	constexpr Vector3 kQuitTextPos{ 0.0f, 400.0f, 0.0f };
+	constexpr Vector3 kOptionsTextPos{ 0.0f, 400.0f, 0.0f };
+	constexpr Vector3 kQuitTextPos{ 0.0f, 500.0f, 0.0f };
 
 	constexpr Vector2 kButtonRect{ 160.0f, 32.0f };
 
@@ -64,6 +66,27 @@ namespace UI
 				return true;
 			});
 
+		// 設定ボタン
+		auto optionsButton = itemRoot->CreateToChild<UI::MenuItem>();
+		optionsButton->GetRectTransform()->localPosition = kOptionsTextPos;
+		optionsButton->GetRectTransform()->SetFullRectAsFixed(kButtonRect);
+
+		UI::TextObject* optionsText = optionsButton->CreateToChild<UI::TextObject>(font, kOptionsText, Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
+		optionsText->GetRectTransform()->SetAnchor(RectTransform::Anchor::FullStretch);
+
+		optionsButton->SetSelectCallback([optionsText, this]()
+			{
+				optionsText->SetColor(Color::green);
+				mEventSubject->Notify(Observer::Event::UIMoveCursor);
+			});
+		optionsButton->SetDeselectCallback([optionsText]() { optionsText->SetColor(Color::white); });
+		optionsButton->SetSubmitCallback([this]()
+			{
+				this->SetCommand(Command::OpenOptions);
+				mEventSubject->Notify(Observer::Event::UISubmit);
+				return true;
+			});
+
 		// 終了ボタン
 		auto quitButton = itemRoot->CreateToChild<UI::MenuItem>();
 		quitButton->GetRectTransform()->localPosition = kQuitTextPos;
@@ -86,6 +109,7 @@ namespace UI
 			});
 
 		AddMenuItem(startButton);
+		AddMenuItem(optionsButton);
 		AddMenuItem(quitButton);
 	}
 

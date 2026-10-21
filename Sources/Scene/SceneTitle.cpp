@@ -16,6 +16,7 @@
 #include "World/UI/Core/UIManager.h"
 #include "World/UI/Screen/TitleMenuScreen.h"
 #include "World/UI/Screen/DifficultyMenuScreen.h"
+#include "World/UI/Screen/OptionsMenuScreen.h"
 
 namespace
 {
@@ -51,6 +52,7 @@ void SceneTitle::OnInit()
 	std::unique_ptr<UI::DifficultyMenuScreen> difficultyMenuScreen = std::make_unique<UI::DifficultyMenuScreen>();
 	difficultyMenuScreen->GetEventSubject()->RegisterObserver(mSoundObserver.get());
 	mUIManager->AddScreenToPool(std::move(difficultyMenuScreen));
+	mUIManager->AddScreenToPool(std::make_unique<UI::OptionsMenuScreen>());
 
 	mUIManager->PushScreen<UI::TitleMenuScreen>();
 
@@ -72,6 +74,10 @@ std::unique_ptr<SceneBase> SceneTitle::OnUpdate()
 	{
 	case UI::Command::StartGame:
 		mUIManager->PushScreen<UI::DifficultyMenuScreen>();
+		break;
+
+	case UI::Command::OpenOptions:
+		mUIManager->PushScreen<UI::OptionsMenuScreen>();
 		break;
 
 	case UI::Command::QuitGame:
