@@ -8,7 +8,7 @@ class CameraRotation : public ICamera
 {
 public:
 
-	CameraRotation(Transform* targetTransform, const Vector3& rotateSpeed, float distance);
+	CameraRotation(Transform* targetTransform, const Vector3& rotateSpeed, float distance, const Vector3& eyeOffsetPos = Vector3::Zero);
 	~CameraRotation() = default;
 
 	void Setup(Camera::View& view) override;
@@ -19,11 +19,11 @@ private:
 
 	Transform* mTargetTransform;
 
-	Vector3 mPosition;
-
 	Vector3 mRotation;
 
 	Vector3 mRotateSpeed;
+
+	Vector3 mEyeOffsetPosition;
 
 	float mDistance;
 };

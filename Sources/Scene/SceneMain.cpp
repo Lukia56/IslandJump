@@ -55,6 +55,7 @@ namespace
 	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -500.0f, 0.0f };
 
 	constexpr Vector3 kCameraRotate{ 0.0f, 10.0f, 0.0f };
+	constexpr Vector3 kRotationCameraEyeOffset{ 0.0f, 300.0f, 0.0f };
 	constexpr float kCameraDistance = 1000.0f;
 
 	constexpr int kMaxEffect = 100;
@@ -138,8 +139,8 @@ void SceneMain::OnInit()
 	CreateToRoot<ItemSpawnerManager>(stageManager, mPlayer->GetLandTerrainRecorder(), itemObjectManager, mDifficultyData.itemNum);
 
 	GetCameraManager()->AddCamera(Camera::Type::Follow, std::make_unique<CameraFollow>(mPlayer->GetTransform()));
-	GetCameraManager()->AddCamera(Camera::Type::RotationPlayer, std::make_unique<CameraRotation>(mPlayer->GetTransform(), kCameraRotate, kCameraDistance));
-	GetCameraManager()->AddCamera(Camera::Type::RotationGoal, std::make_unique<CameraRotation>(stageManager->GetGoalObject()->GetTransform(), kCameraRotate, kCameraDistance));
+	GetCameraManager()->AddCamera(Camera::Type::RotationPlayer, std::make_unique<CameraRotation>(mPlayer->GetTransform(), kCameraRotate, kCameraDistance, kRotationCameraEyeOffset));
+	GetCameraManager()->AddCamera(Camera::Type::RotationGoal, std::make_unique<CameraRotation>(stageManager->GetGoalObject()->GetTransform(), kCameraRotate, kCameraDistance, kRotationCameraEyeOffset));
 	GetCameraManager()->SetCurrentCameraType(Camera::Type::Follow);
 
 	Mouse::GetInstance().SetMode(Mouse::Mode::Relative);

@@ -11,8 +11,9 @@ namespace
 	constexpr float kEyePosLatency = 0.05f;
 }
 
-CameraRotation::CameraRotation(Transform* targetTransform, const Vector3& rotateSpeed, float distance) :
+CameraRotation::CameraRotation(Transform* targetTransform, const Vector3& rotateSpeed, float distance, const Vector3& eyeOffsetPos) :
 	mTargetTransform(targetTransform),
+	mEyeOffsetPosition(eyeOffsetPos),
 	mDistance(Math::Max(distance, kMinDistance))
 {
 	mRotateSpeed.x = Math::ToRadian(rotateSpeed.x);
@@ -39,7 +40,7 @@ void CameraRotation::Update(Camera::View& view)
 
 	Vector3 targetPos = mTargetTransform->CalculateWorldPosition();
 
-	view.eyePosition = view.eyePosition.Lerp(targetPos + forward * mDistance, kEyePosLatency);
+	view.eyePosition = view.eyePosition.Lerp(targetPos + forward * mDistance + mEyeOffsetPosition, kEyePosLatency);
 	view.targetPosition = targetPos;
 
 	mRotation += mRotateSpeed * TimeManager::GetDeltaTime();
