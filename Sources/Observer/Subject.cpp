@@ -21,4 +21,14 @@ namespace Observer
 			observer->OnNotify(event);
 		}
 	}
+
+	void Subject::Notify(Event event, int value)
+	{
+		Notify(event);
+
+		for (const auto& observer : mObservers)
+		{
+			observer->OnNotify(event, value);
+		}
+	}
 }

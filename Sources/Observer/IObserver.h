@@ -18,5 +18,7 @@ namespace Observer
 		/// </summary>
 		/// <param name="event">ƒCƒxƒ“ƒgID</param>
 		virtual void OnNotify(Event event) = 0;
+
+		virtual void OnNotify(Event event, int value) {}
 	};
 }

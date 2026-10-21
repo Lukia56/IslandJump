@@ -26,6 +26,7 @@ namespace Observer
 		/// </summary>
 		/// <param name="event">ƒCƒxƒ“ƒgID</param>
 		void Notify(Event event);
+		void Notify(Event event, int value);
 
 	private:
 
