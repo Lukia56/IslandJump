@@ -9,7 +9,6 @@
 
 class ItemObject;
 class ResultRecorder;
-class EffectManager;
 namespace Resource
 {
 	class ResourceBase;
@@ -23,7 +22,7 @@ class ItemObjectManager : public GameObject
 public:
 
 	ItemObjectManager(int itemNum);
-	ItemObjectManager(int itemNum, ResultRecorder* resultRecorder, EffectManager* effectManager);
+	ItemObjectManager(int itemNum, ResultRecorder* resultRecorder);
 	~ItemObjectManager() = default;
 
 	void Init() override;

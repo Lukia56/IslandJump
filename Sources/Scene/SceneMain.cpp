@@ -5,6 +5,7 @@
 #include "Camera/CameraRotation.h"
 #include "Camera/CameraManager.h"
 #include "Factory/PlayerCreator.h"
+#include "Observer/ItemObserver.h"
 #include "Observer/GoalObserver.h"
 #include "Observer/ResultObserver.h"
 #include "Observer/SoundObserver.h"
@@ -71,7 +72,8 @@ SceneMain::SceneMain() :
 	mDifficultyData{},
 	mGoalObserver(nullptr),
 	mResultObserver(nullptr),
-	mSoundObserver(nullptr)
+	mSoundObserver(nullptr),
+	mItemObserver(nullptr)
 {
 }
 
@@ -84,7 +86,8 @@ SceneMain::SceneMain(const StageDifficultyData& difficultyData) :
 	mDifficultyData(difficultyData),
 	mGoalObserver(nullptr),
 	mResultObserver(nullptr),
-	mSoundObserver(nullptr)
+	mSoundObserver(nullptr),
+	mItemObserver(nullptr)
 {
 }
 
@@ -104,7 +107,7 @@ void SceneMain::OnInit()
 	effectManager->RegisterEffect(ResourceManager::GetInstance().GetResource<Resource::Effect>(kSpeedBoostEffectPath));
 	effectManager->RegisterEffect(ResourceManager::GetInstance().GetResource<Resource::Effect>(kAerialControlEffectPath));
 
-	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, mResultRecorder, effectManager);
+	ItemObjectManager* itemObjectManager = CreateToRoot<ItemObjectManager>(mDifficultyData.itemNum, mResultRecorder);
 
 	std::unique_ptr<PlayerCreator> playerCreator = std::make_unique<PlayerCreator>(itemObjectManager);
 	mPlayer = AddToRoot<Player>(std::move(playerCreator->CreateInstance()));
@@ -125,8 +128,10 @@ void SceneMain::OnInit()
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
 	mResultObserver = std::make_unique<Observer::ResultObserver>(mResultRecorder, mUIManager, GetCameraManager(), mDeathCloud);
 	mSoundObserver = std::make_unique<Observer::SoundObserver>();
+	mItemObserver = std::make_unique<Observer::ItemObserver>(mPlayer->GetTransform(), effectManager);
 
 	mPlayer->GetEventSubject()->RegisterObserver(mSoundObserver.get());
+	mPlayer->GetEventSubject()->RegisterObserver(mItemObserver.get());
 
 	GoalTrigger* goalTrigger = stageManager->GetGoalObject()->GetTrigger();
 	goalTrigger->GetEventSubject()->RegisterObserver(mPlayer->GetObserver());

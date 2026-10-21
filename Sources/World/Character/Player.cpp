@@ -226,7 +226,7 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 		{
 			ItemType itemType = mItemObjectManager->ConsumeItem(oppCollider->GetOwner()->GetTransform());
 			mItemObjectManager->AddItemUseCount(itemType);
-			mEventSubject->Notify(Observer::Event::ItemObtain);
+			mEventSubject->Notify(Observer::Event::ItemObtain, static_cast<int>(itemType));
 
 			switch (itemType)
 			{

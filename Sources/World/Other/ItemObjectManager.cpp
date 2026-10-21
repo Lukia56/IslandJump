@@ -2,7 +2,6 @@
 #include <algorithm>
 #include "../Object/ItemObject.h"
 #include "../Object/ItemTextureDataBase.h"
-#include "../Other/EffectManager.h"
 #include "RootObject.h"
 #include "ResultRecorder.h"
 #include "System/ResourceManager.h"
@@ -26,12 +25,12 @@ ItemObjectManager::ItemObjectManager(int itemNum) :
 
 	for (int i = 0; i < itemNum; i++)
 	{
-		ItemObject* item = mPoolItemRoot->CreateToChild<ItemObject>(nullptr);
+		ItemObject* item = mPoolItemRoot->CreateToChild<ItemObject>();
 		mPoolItems.emplace(item);
 	}
 }
 
-ItemObjectManager::ItemObjectManager(int itemNum, ResultRecorder* resultRecorder, EffectManager* effectManager) :
+ItemObjectManager::ItemObjectManager(int itemNum, ResultRecorder* resultRecorder) :
 	mActiveItemRoot(nullptr),
 	mPoolItemRoot(nullptr),
 	mItemUseCounts{},
@@ -42,7 +41,7 @@ ItemObjectManager::ItemObjectManager(int itemNum, ResultRecorder* resultRecorder
 
 	for (int i = 0; i < itemNum; i++)
 	{
-		ItemObject* item = mPoolItemRoot->CreateToChild<ItemObject>(effectManager);
+		ItemObject* item = mPoolItemRoot->CreateToChild<ItemObject>();
 		mPoolItems.emplace(item);
 	}
 }
@@ -94,7 +93,6 @@ ItemType ItemObjectManager::ConsumeItem(Transform* itemTransform)
 	if (iter == mActiveItems.end()) return ItemType::Invalid;
 
 	ItemObject* item = *iter;
-	item->Consume();
 
 	ItemType itemType = item->GetItemType();
 

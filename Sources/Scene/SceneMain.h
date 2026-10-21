@@ -47,4 +47,6 @@ private:
 	std::unique_ptr<Observer::IObserver> mResultObserver;
 
 	std::unique_ptr<Observer::IObserver> mSoundObserver;
+
+	std::unique_ptr<Observer::IObserver> mItemObserver;
 };

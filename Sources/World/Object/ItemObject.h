@@ -5,8 +5,6 @@
 
 class Collider3D;
 class BillboardRenderer;
-class EffectAnimator;
-class EffectManager;
 namespace Resource
 {
 	class ResourceBase;
@@ -19,7 +17,7 @@ class ItemObject : public GameObject
 {
 public:
 
-	ItemObject(EffectManager* effectManager);
+	ItemObject();
 	~ItemObject() = default;
 
 	void Init() override;
@@ -32,8 +30,6 @@ public:
 
 	void Setup(const Vector3& spawnPos, std::shared_ptr<Resource::ResourceBase> texture, ItemType itemType);
 
-	void Consume();
-
 public:
 
 	ItemType GetItemType() const { return mItemType; }
@@ -45,6 +41,4 @@ private:
 	std::unique_ptr<Collider3D> mCollider;
 
 	std::unique_ptr<BillboardRenderer> mBillboard;
-
-	EffectManager* mEffectManager;
 };
