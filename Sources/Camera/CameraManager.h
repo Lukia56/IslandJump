@@ -41,6 +41,8 @@ private:
 
 	Camera::Type mCurrentCameraType;
 
+	Camera::Type mPrevCameraType;
+
 	Camera::View mView;
 
 	std::array<std::unique_ptr<ICamera>, static_cast<size_t>(Camera::Type::Max)> mCameras;

@@ -15,6 +15,7 @@ namespace
 
 CameraManager::CameraManager() :
 	mCurrentCameraType(Camera::Type::Static),
+	mPrevCameraType(mCurrentCameraType),
 	mView{ .fov = Math::ToRadian(kInitFOV), .nearClip = kInitNearClip, .farClip = kInitFarClip }
 {
 	// .fillだとエラーになるためforループ
@@ -36,6 +37,13 @@ void CameraManager::Update()
 	{
 		assert(false && "CameraManager // 現在のカメラがnullptrです");
 		return;
+	}
+
+	// カメラ切り替えを検知する
+	if (mCurrentCameraType != mPrevCameraType)
+	{
+		camera->Setup();
+		mPrevCameraType = mCurrentCameraType;
 	}
 
 	camera->Update(mView);
