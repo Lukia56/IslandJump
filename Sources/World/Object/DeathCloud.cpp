@@ -27,6 +27,7 @@ DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos) :
 	mMoveSpeed(0.0f),
 	mResultTransitionTimer(0.0f),
 	mIsStartTransitionResult(false),
+	mDoMove(true),
 	mIsTriggered(false),
 	mCollider(nullptr)
 {
@@ -39,6 +40,7 @@ DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos, float mov
 	mMoveSpeed(moveSpeed),
 	mResultTransitionTimer(0.0f),
 	mIsStartTransitionResult(false),
+	mDoMove(true),
 	mIsTriggered(false),
 	mCollider(nullptr)
 {
@@ -51,6 +53,7 @@ DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos, float mov
 	mMoveSpeed(moveSpeed),
 	mResultTransitionTimer(0.0f),
 	mIsStartTransitionResult(false),
+	mDoMove(true),
 	mIsTriggered(false),
 	mCollider(nullptr)
 {
@@ -84,7 +87,7 @@ void DeathCloud::Update()
 
 	Vector3 worldPos = mTransform->CalculateWorldPosition();
 
-	if (worldPos.y < mGoalPos.y)
+	if (worldPos.y < mGoalPos.y && mDoMove)
 	{
 		mVelocity.y = mMoveSpeed * TimeManager::GetDeltaTime();
 	}

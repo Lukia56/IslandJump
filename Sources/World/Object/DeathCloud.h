@@ -38,6 +38,8 @@ public:
 
 	Observer::Subject* GetEventSubject() const { return mEventSubject.get(); }
 
+	void SetDoMove(bool flag) { mDoMove = flag; }
+
 private:
 
 	Vector3 mVelocity;
@@ -49,6 +51,8 @@ private:
 	float mResultTransitionTimer;
 
 	bool mIsStartTransitionResult;
+
+	bool mDoMove;
 
 	bool mIsTriggered;
 

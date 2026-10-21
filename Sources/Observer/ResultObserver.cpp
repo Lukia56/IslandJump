@@ -1,22 +1,25 @@
 #include "ResultObserver.h"
 #include "Camera/CameraManager.h"
+#include "World/Object/DeathCloud.h"
 #include "World/Other/ResultRecorder.h"
 #include "World/UI/Core/UIManager.h"
 #include "World/UI/Screen/ResultScreen.h"
 
 namespace Observer
 {
-	ResultObserver::ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, CameraManager* cameraManager) :
+	ResultObserver::ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, CameraManager* cameraManager, DeathCloud* deathCloud) :
 		mResultRecorder(resultRecorder),
 		mUIManager(uiManager),
-		mCameraManager(cameraManager)
+		mCameraManager(cameraManager),
+		mDeathCloud(deathCloud)
 	{
 	}
 
 	ResultObserver::ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, Transform* playerTransform) :
 		mResultRecorder(resultRecorder),
 		mUIManager(uiManager),
-		mCameraManager(nullptr)
+		mCameraManager(nullptr),
+		mDeathCloud(nullptr)
 	{
 	}
 
@@ -27,11 +30,13 @@ namespace Observer
 		case Observer::Event::ReachGoal:
 			mResultRecorder->SetSuccessed(true);
 			mCameraManager->SetCurrentCameraType(Camera::Type::RotationGoal);
+			mDeathCloud->SetDoMove(false);
 			break;
 
 		case Observer::Event::FallCloudPlayer:
 			mResultRecorder->SetSuccessed(false);
 			mCameraManager->SetCurrentCameraType(Camera::Type::RotationPlayer);
+			mDeathCloud->SetDoMove(false);
 			break;
 
 		case Observer::Event::TransitionResult:

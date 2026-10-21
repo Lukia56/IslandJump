@@ -4,6 +4,7 @@
 
 class ResultRecorder;
 class CameraManager;
+class DeathCloud;
 class Transform;
 namespace UI
 {
@@ -16,7 +17,7 @@ namespace Observer
 	{
 	public:
 
-		ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, CameraManager* cameraManager);
+		ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, CameraManager* cameraManager, DeathCloud* deathCloud);
 		ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, Transform* playerTransform);
 		~ResultObserver() = default;
 
@@ -29,5 +30,7 @@ namespace Observer
 		UI::UIManager* mUIManager;
 
 		CameraManager* mCameraManager;
+
+		DeathCloud* mDeathCloud;
 	};
 }
