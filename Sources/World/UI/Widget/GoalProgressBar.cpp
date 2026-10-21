@@ -17,6 +17,7 @@ namespace UI
 {
 	GoalProgressBar::GoalProgressBar(float maxDistance, Transform* playerTransform, Transform* cloudTransform, std::shared_ptr<Resource::ResourceBase> font) :
 		mMaxDistance(maxDistance),
+		mCurrentDistance(0.0f),
 		mPlayerTransform(playerTransform),
 		mCloudTransform(cloudTransform),
 		mMaxBar(nullptr),
@@ -48,7 +49,8 @@ namespace UI
 
 	void GoalProgressBar::Update()
 	{
-		float progressRate = Math::Clamp(mPlayerTransform->CalculateWorldPosition().y / mMaxDistance, 0.0f, 1.0f);
+		mCurrentDistance = Math::Max(mCurrentDistance, mPlayerTransform->CalculateWorldPosition().y);
+		float progressRate = Math::Clamp(mCurrentDistance / mMaxDistance, 0.0f, 1.0f);
 		mCurrentBar->GetRectTransform()->SetRectHeightAsFixed(kBoxSize.y * progressRate);
 
 		float cloudPosRate = Math::Clamp(mCloudTransform->CalculateWorldPosition().y / mMaxDistance, 0.0f, 1.0f);

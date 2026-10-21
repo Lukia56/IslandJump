@@ -27,6 +27,8 @@ namespace UI
 
 		float mMaxDistance;
 
+		float mCurrentDistance;
+
 		Transform* mPlayerTransform;
 
 		Transform* mCloudTransform;
