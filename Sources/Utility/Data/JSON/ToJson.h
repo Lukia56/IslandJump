@@ -10,3 +10,9 @@ inline void to_json(Data::Json::JsonObject& j, const SaveData& val)
 		{ "hardHighscore", val.hardHighscore }
 	};
 }
+
+inline void to_json(Data::Json::JsonObject& j, const OptionsData& val)
+{
+	j = Data::Json::JsonObject{
+	};
+}

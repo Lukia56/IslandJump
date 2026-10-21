@@ -270,6 +270,7 @@
     <ClCompile Include="Sources\World\Test\TestTerrain.cpp" />
     <ClCompile Include="Sources\Observer\Subject.cpp" />
     <ClCompile Include="Sources\Stage\StageGenerator.cpp" />
+    <ClCompile Include="Sources\System\UserDataManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Observer\ItemObserver.h" />
@@ -437,6 +438,7 @@
     <ClInclude Include="Sources\World\Test\TestTerrain.h" />
     <ClInclude Include="Sources\Observer\Subject.h" />
     <ClInclude Include="Sources\Stage\StageGenerator.h" />
+    <ClInclude Include="Sources\System\UserDataManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

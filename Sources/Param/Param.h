@@ -82,3 +82,8 @@ struct SaveData
 	int easyHighscore = 0;
 	int hardHighscore = 0;
 };
+
+struct OptionsData
+{
+
+};

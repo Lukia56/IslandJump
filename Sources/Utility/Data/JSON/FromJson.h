@@ -47,5 +47,16 @@ namespace Data
 				return data;
 			}
 		};
+
+		template <>
+		struct FromJson<OptionsData>
+		{
+			static OptionsData Binding(const JsonObject& json)
+			{
+				OptionsData data;
+
+				return data;
+			}
+		};
 	}
 }
