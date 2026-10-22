@@ -11,6 +11,7 @@
 #include "System/ResourceManager.h"
 #include "System/SoundManager.h"
 #include "System/TimeManager.h"
+#include "System/UserDataManager.h"
 #include "Utility/Random.h"
 #include "Utility/Data/CSV/CsvLoader.h"
 
@@ -50,6 +51,8 @@ bool Application::Initialize()
 	InputManager::GetInstance().Initialize();
 
 	ResourceManager::GetInstance().Initialize();
+
+	UserDataManager::GetInstance().Initialize();
 
 	Random::Init();
 
