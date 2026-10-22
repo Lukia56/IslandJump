@@ -5,9 +5,9 @@
 #include "../Widget/TextObject.h"
 #include "Observer/Subject.h"
 #include "System/ResourceManager.h"
+#include "System/UserDataManager.h"
 #include "System/Input/Literal/InputState.h"
 #include "System/Resource/Font.h"
-#include "Utility/Data/JSON/JsonLoader.h"
 
 namespace
 {
@@ -33,8 +33,6 @@ namespace
 
 	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
 	const char* const kFontSmallPath = "Resources\\Font\\ShowcardGothicSmall.dft";
-
-	const char* const kSaveDataPath = "SaveData\\SaveData.json";
 }
 
 namespace UI
@@ -112,10 +110,9 @@ namespace UI
 		AddMenuItem(easyModeButton);
 		AddMenuItem(hardModeButton);
 
-		if (std::filesystem::is_regular_file(kSaveDataPath))
+		const SaveData& saveData = UserDataManager::GetInstance().GetSaveData();
+		if (saveData.easyHighscore != 0 || saveData.hardHighscore != 0)
 		{
-			SaveData saveData = Data::Json::LoadJsonAs<SaveData>(kSaveDataPath)[0];
-
 			UI::TextObject* highscoreDescText = bg->CreateToChild<UI::TextObject>(fontSmall, kHighscoreDescText, Color::yellow, HolizontalAlignment::Center, VerticalAlignment::Middle);
 			highscoreDescText->GetRectTransform()->localPosition = kHighscoreDescPos;
 

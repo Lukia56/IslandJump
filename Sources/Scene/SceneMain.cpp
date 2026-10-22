@@ -13,12 +13,11 @@
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
 #include "System/SoundManager.h"
+#include "System/UserDataManager.h"
 #include "System/Input/Mouse.h"
 #include "System/Resource/Effect.h"
 #include "System/Resource/Model.h"
 #include "System/Resource/Sound.h"
-#include "Utility/Data/JSON/JsonLoader.h"
-#include "Utility/Data/JSON/JsonExporter.h"
 #include "World/Character/Player.h"
 #include "World/Object/DeathCloud.h"
 #include "World/Object/GoalObject.h"
@@ -51,8 +50,6 @@ namespace
 	const char* const kAerialControlEffectPath = "Resources\\Effect\\ItemConsumeEffect_AerialControl.efk";
 
 	const char* const kBGMPath = "Resources\\Sound\\BGM\\InGame.ogg";
-
-	const char* const kSaveDataPath = "SaveData\\SaveData.json";
 
 	constexpr Vector3 kDeathCloudOffsetPlayer{ 0.0f, -500.0f, 0.0f };
 
@@ -174,15 +171,7 @@ std::unique_ptr<SceneBase> SceneMain::OnUpdate()
 	{
 		int score = mResultRecorder->CreateResultData().overallScore;
 
-		SaveData data{};
-		if (std::filesystem::is_regular_file(kSaveDataPath))
-		{
-			data = Data::Json::LoadJsonAs<SaveData>(kSaveDataPath)[0];
-		}
-		else
-		{
-			std::filesystem::create_directory("SaveData");
-		}
+		SaveData& data = UserDataManager::GetInstance().GetTempSaveData();
 
 		switch (mDifficultyData.difficulty)
 		{
@@ -195,7 +184,8 @@ std::unique_ptr<SceneBase> SceneMain::OnUpdate()
 			break;
 		}
 
-		Data::Json::ExportJsonAs<SaveData>(kSaveDataPath, data);
+		UserDataManager::GetInstance().ApplyTempSaveData();
+		UserDataManager::GetInstance().ExportSaveData();
 
 		return std::make_unique<SceneTitle>();
 	}
