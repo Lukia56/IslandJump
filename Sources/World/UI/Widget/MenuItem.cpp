@@ -40,4 +40,32 @@ namespace UI
 
 		return mOnCancel();
 	}
+
+	void MenuItem::InvokePressUp()
+	{
+		if (!mOnPressUp) return;
+
+		return mOnPressUp();
+	}
+
+	void MenuItem::InvokePressDown()
+	{
+		if (!mOnPressDown) return;
+
+		return mOnPressDown();
+	}
+
+	void MenuItem::InvokePressLeft()
+	{
+		if (!mOnPressLeft) return;
+
+		return mOnPressLeft();
+	}
+
+	void MenuItem::InvokePressRight()
+	{
+		if (!mOnPressRight) return;
+
+		return mOnPressRight();
+	}
 }

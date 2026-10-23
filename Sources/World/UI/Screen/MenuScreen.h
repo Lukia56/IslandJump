@@ -39,6 +39,11 @@ namespace UI
 		/// <returns>‰æ–Ê‚ð•Â‚¶‚é‚È‚çfalse‚ð•Ô‚·</returns>
 		bool InvokeCancel();
 
+		void InvokePressUp();
+		void InvokePressDown();
+		void InvokePressLeft();
+		void InvokePressRight();
+
 		void AddMenuItem(MenuItem* menuItem);
 
 	protected:

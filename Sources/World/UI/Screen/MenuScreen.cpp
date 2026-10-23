@@ -44,6 +44,34 @@ namespace UI
 		return mMenuItems[mCursorPos]->InvokeCancel();
 	}
 
+	void MenuScreen::InvokePressUp()
+	{
+		if (mMenuItems.size() <= mCursorPos) return;
+
+		return mMenuItems[mCursorPos]->InvokePressUp();
+	}
+
+	void MenuScreen::InvokePressDown()
+	{
+		if (mMenuItems.size() <= mCursorPos) return;
+
+		return mMenuItems[mCursorPos]->InvokePressDown();
+	}
+
+	void MenuScreen::InvokePressLeft()
+	{
+		if (mMenuItems.size() <= mCursorPos) return;
+
+		return mMenuItems[mCursorPos]->InvokePressLeft();
+	}
+
+	void MenuScreen::InvokePressRight()
+	{
+		if (mMenuItems.size() <= mCursorPos) return;
+
+		return mMenuItems[mCursorPos]->InvokePressRight();
+	}
+
 	void MenuScreen::AddMenuItem(MenuItem* menuItem)
 	{
 		mMenuItems.emplace_back(menuItem);

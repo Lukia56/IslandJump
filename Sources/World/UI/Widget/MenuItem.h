@@ -40,12 +40,22 @@ namespace UI
 		/// <returns>‰æ–Ê‚ð•Â‚¶‚é‚È‚çfalse‚ð•Ô‚·</returns>
 		bool InvokeCancel();
 
+		void InvokePressUp();
+		void InvokePressDown();
+		void InvokePressLeft();
+		void InvokePressRight();
+
 	public:
 
 		void SetSelectCallback(const std::function<void(void)>& onSelect) { mOnSelect = onSelect; }
 		void SetDeselectCallback(const std::function<void(void)>& onDeselect) { mOnDeselect = onDeselect; }
 		void SetSubmitCallback(const std::function<bool(void)>& onSubmit) { mOnSubmit = onSubmit; }
 		void SetCancelCallback(const std::function<bool(void)>& onCancel) { mOnCancel = onCancel; }
+
+		void SetPressUpCallback(const std::function<void(void)>& onPressUp) { mOnPressUp = onPressUp; }
+		void SetPressDownCallback(const std::function<void(void)>& onPressDown) { mOnPressDown = onPressDown; }
+		void SetPressLeftCallback(const std::function<void(void)>& onPressLeft) { mOnPressLeft = onPressLeft; }
+		void SetPressRightCallback(const std::function<void(void)>& onPressRight) { mOnPressRight = onPressRight; }
 
 	private:
 
@@ -56,5 +66,10 @@ namespace UI
 		std::function<bool(void)> mOnSubmit;
 
 		std::function<bool(void)> mOnCancel;
+
+		std::function<void(void)> mOnPressUp;
+		std::function<void(void)> mOnPressDown;
+		std::function<void(void)> mOnPressLeft;
+		std::function<void(void)> mOnPressRight;
 	};
 }
