@@ -40,7 +40,7 @@ void UserDataManager::ExportSaveData()
 {
 	if (!std::filesystem::is_regular_file(kSaveDataPath))
 	{
-		std::filesystem::create_directory("UserData");
+		std::filesystem::create_directory(kFolderName);
 	}
 
 	Data::Json::ExportJsonAs(kSaveDataPath, mTempSaveData);
@@ -50,7 +50,7 @@ void UserDataManager::ExportOptionsData()
 {
 	if (!std::filesystem::is_regular_file(kOptionsDataPath))
 	{
-		std::filesystem::create_directory("UserData");
+		std::filesystem::create_directory(kFolderName);
 	}
 
 	Data::Json::ExportJsonAs(kOptionsDataPath, mTempOptionsData);
