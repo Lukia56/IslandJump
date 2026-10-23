@@ -21,7 +21,12 @@ namespace UI
 	{
 		if (mActiveScreens.empty()) return;
 
-		if (!mActiveScreens.top()->ProcessInput(input)) PopScreen();
+		if (!mActiveScreens.top()->ProcessInput(input))
+		{
+			Command command = ConsumeCommand();
+			PopScreen();
+			mActiveScreens.top()->SetCommand(command);
+		}
 	}
 
 	void UIManager::PopScreen()

@@ -37,7 +37,7 @@ namespace UI
 		/// </summary>
 		Command ConsumeCommand();
 
-	protected:
+	public:
 
 		void SetCommand(Command command) { mCommand = command; }
 
