@@ -85,5 +85,6 @@ struct SaveData
 
 struct OptionsData
 {
-
+	int mouseSensitivityX = 100;
+	int mouseSensitivityY = 100;
 };

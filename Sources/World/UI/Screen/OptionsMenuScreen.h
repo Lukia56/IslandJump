@@ -3,6 +3,8 @@
 
 namespace UI
 {
+	class TextObject;
+
 	class OptionsMenuScreen : public MenuScreen
 	{
 	public:
@@ -20,6 +22,7 @@ namespace UI
 
 	private:
 
-
+		TextObject* mMouseSensitivityXValueText;
+		TextObject* mMouseSensitivityYValueText;
 	};
 }

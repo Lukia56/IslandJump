@@ -14,5 +14,7 @@ inline void to_json(Data::Json::JsonObject& j, const SaveData& val)
 inline void to_json(Data::Json::JsonObject& j, const OptionsData& val)
 {
 	j = Data::Json::JsonObject{
+		{ "mouseSensitivityX", val.mouseSensitivityX },
+		{ "mouseSensitivityY", val.mouseSensitivityY }
 	};
 }

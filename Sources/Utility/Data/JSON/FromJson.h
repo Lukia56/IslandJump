@@ -55,6 +55,9 @@ namespace Data
 			{
 				OptionsData data;
 
+				data.mouseSensitivityX = Get<int>(json, "mouseSensitivityX");
+				data.mouseSensitivityY = Get<int>(json, "mouseSensitivityY");
+
 				return data;
 			}
 		};
