@@ -274,6 +274,7 @@
     <ClCompile Include="Sources\System\UserDataManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Sources\Observer\ItemObserver.h" />
     <ClInclude Include="Sources\World\UI\Screen\OptionsMenuScreen.h" />
     <ClInclude Include="Sources\World\UI\Widget\CloudInvasionEffect.h" />
@@ -441,6 +442,12 @@
     <ClInclude Include="Sources\Observer\Subject.h" />
     <ClInclude Include="Sources\Stage\StageGenerator.h" />
     <ClInclude Include="Sources\System\UserDataManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

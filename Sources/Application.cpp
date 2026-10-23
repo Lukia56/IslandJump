@@ -163,6 +163,8 @@ bool Application::InitDxLib()
 
 	SetUseDirect3DVersion(DX_DIRECT3D_11);
 
+	SetWindowIconID(101);
+
 	if (DxLib_Init() == -1) return false;
 
 	SetDrawScreen(DX_SCREEN_BACK);
