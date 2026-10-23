@@ -26,5 +26,7 @@ private:
 
 	Vector3 mTargetRotation;
 
+	Vector2 mMouseSensitivity;
+
 	Transform* mTarget;
 };

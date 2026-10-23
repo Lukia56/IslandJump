@@ -1,6 +1,7 @@
 #include "CameraFollow.h"
 #include <imgui.h>
 #include "System/InputManager.h"
+#include "System/UserDataManager.h"
 #include "System/Input/Mouse.h"
 #include "Utility/Math.h"
 #include "World/Component/Transform.h"
@@ -28,6 +29,8 @@ CameraFollow::CameraFollow(Transform* target) :
 	mTargetRotation(kInitRot),
 	mTarget(target)
 {
+	mMouseSensitivity.x = static_cast<float>(UserDataManager::GetInstance().GetOptionsData().mouseSensitivityX) / 100.0f;
+	mMouseSensitivity.y = static_cast<float>(UserDataManager::GetInstance().GetOptionsData().mouseSensitivityY) / 100.0f;
 }
 
 void CameraFollow::Update(Camera::View& view)
@@ -36,8 +39,8 @@ void CameraFollow::Update(Camera::View& view)
 	Vector2 viewMoveDir = Mouse::GetInstance().GetRelativePos();
 	if (viewMoveDir != Vector2::Zero)
 	{
-		viewMoveDir.x *= kMouseSensitivity.x;
-		viewMoveDir.y *= kMouseSensitivity.y;
+		viewMoveDir.x *= kMouseSensitivity.x * mMouseSensitivity.x;
+		viewMoveDir.y *= kMouseSensitivity.y * mMouseSensitivity.y;
 		mTargetRotation += Vector3(-viewMoveDir.y, viewMoveDir.x, 0.0f) * Math::ToRadian(1.0f);
 	}
 	else
