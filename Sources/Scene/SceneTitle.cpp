@@ -8,6 +8,7 @@
 #include "System/InputManager.h"
 #include "System/ResourceManager.h"
 #include "System/SoundManager.h"
+#include "System/UserDataManager.h"
 #include "System/Resource/Model.h"
 #include "System/Resource/Sound.h"
 #include "Utility/Data/CSV/CsvLoader.h"
@@ -91,6 +92,11 @@ std::unique_ptr<SceneBase> SceneTitle::OnUpdate()
 		StageDifficultyData data = Data::Csv::LoadCsvAs<StageDifficultyData>(kStageDifficultyDataPath)[index];
 		return std::make_unique<SceneMain>(data);
 	}
+
+	case UI::Command::ExitOptions:
+		UserDataManager::GetInstance().ApplyTempOptionsData();
+		UserDataManager::GetInstance().ExportOptionsData();
+		break;
 	}
 
 	return nullptr;
