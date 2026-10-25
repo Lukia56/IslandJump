@@ -30,6 +30,7 @@ public:
 	void SetDisplayText(const std::string& text) { mDisplayText = text; }
 	
 	void SetColor(const Color& color) { mColor = color; }
+	const Color& GetColor() { return mColor; }
 
 	void SetHolizontalAlignment(HolizontalAlignment alignment) { mHolizontalAlignment = alignment; }
 	void SetVerticalAlignment(VerticalAlignment alignment) { mVerticalAlignment = alignment; }

@@ -35,6 +35,7 @@ namespace UI
 
 		void SetDisplayText(const std::string& displayText);
 		void SetColor(const Color& color);
+		const Color& GetColor() const;
 		void SetHolizontalAlignment(HolizontalAlignment alignment);
 		void SetVerticalAlignment(VerticalAlignment alignment);
 

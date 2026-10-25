@@ -37,6 +37,11 @@ namespace UI
 		mRenderer->SetColor(color);
 	}
 
+	const Color& TextObject::GetColor() const
+	{
+		return mRenderer->GetColor();
+	}
+
 	void TextObject::SetHolizontalAlignment(HolizontalAlignment alignment)
 	{
 		mRenderer->SetHolizontalAlignment(alignment);
