@@ -27,6 +27,8 @@ void TextRenderer::Draw() const
 	
 	Vector2 pos = Vector2(CalculateStartPosX(rect), CalculateStartPosY(rect));
 
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, mColor.a * 255.0f);
+
 	// フォントが読み込まれていたらフォントを使用してテキストを表示する
 	if (mResource)
 	{
@@ -37,6 +39,8 @@ void TextRenderer::Draw() const
 	{
 		DrawStringF(pos.x, pos.y, mDisplayText.c_str(), mColor.GetAsHexRGB());
 	}
+
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
 
 int TextRenderer::CalculateStartPosX(const Rect& rect) const
