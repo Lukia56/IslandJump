@@ -4,6 +4,10 @@
 
 class Transform;
 class EffectManager;
+namespace UI
+{
+	class ItemEffectTextManager;
+}
 
 namespace Observer
 {
@@ -11,7 +15,7 @@ namespace Observer
 	{
 	public:
 
-		ItemObserver(Transform* playerTransform, EffectManager* effectManager);
+		ItemObserver(Transform* playerTransform, EffectManager* effectManager, UI::ItemEffectTextManager* itemEffectTextManager);
 		~ItemObserver() = default;
 
 		void OnNotify(Event event) override {};
@@ -23,5 +27,7 @@ namespace Observer
 		Transform* mPlayerTransform;
 
 		EffectManager* mEffectManager;
+
+		UI::ItemEffectTextManager* mItemEffectTextManager;
 	};
 }

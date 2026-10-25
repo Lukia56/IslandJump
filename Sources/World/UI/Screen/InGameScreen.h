@@ -7,6 +7,8 @@ class ResultRecorder;
 
 namespace UI
 {
+	class ItemEffectTextManager;
+
 	class InGameScreen : public Screen
 	{
 	public:
@@ -16,5 +18,13 @@ namespace UI
 
 		void Init() override;
 		void Update() override;
+
+	public:
+
+		ItemEffectTextManager* GetItemEffectTextManager() const { return mItemEffectTextManager; }
+
+	private:
+
+		ItemEffectTextManager* mItemEffectTextManager;
 	};
 }

@@ -2,6 +2,7 @@
 #include <string>
 #include "World/Other/EffectInstance.h"
 #include "World/Other/EffectManager.h"
+#include "World/UI/Widget/ItemEffectTextManager.h"
 
 namespace
 {
@@ -14,9 +15,10 @@ namespace
 
 namespace Observer
 {
-	ItemObserver::ItemObserver(Transform* playerTransform, EffectManager* effectManager) :
+	ItemObserver::ItemObserver(Transform* playerTransform, EffectManager* effectManager, UI::ItemEffectTextManager* itemEffectTextManager) :
 		mPlayerTransform(playerTransform),
-		mEffectManager(effectManager)
+		mEffectManager(effectManager),
+		mItemEffectTextManager(itemEffectTextManager)
 	{
 	}
 
@@ -26,5 +28,7 @@ namespace Observer
 
 		GameObject* effectInstance = mEffectManager->Play(kEffectPaths[value], Vector3::Zero);
 		effectInstance->GetTransform()->ChangeParent(mPlayerTransform);
+
+		mItemEffectTextManager->Create(static_cast<ItemType>(value));
 	}
 }

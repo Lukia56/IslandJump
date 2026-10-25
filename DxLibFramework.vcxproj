@@ -140,6 +140,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\World\UI\Widget\ItemEffectText.cpp" />
+    <ClCompile Include="Sources\World\UI\Widget\ItemEffectTextManager.cpp" />
     <ClCompile Include="Sources\Observer\ItemObserver.cpp" />
     <ClCompile Include="Sources\World\UI\Screen\OptionsMenuScreen.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\CloudInvasionEffect.cpp" />
@@ -274,6 +276,8 @@
     <ClCompile Include="Sources\System\UserDataManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\World\UI\Widget\ItemEffectText.h" />
+    <ClInclude Include="Sources\World\UI\Widget\ItemEffectTextManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Sources\Observer\ItemObserver.h" />
     <ClInclude Include="Sources\World\UI\Screen\OptionsMenuScreen.h" />

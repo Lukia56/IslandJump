@@ -2,6 +2,7 @@
 #include "../Widget/CloudInvasionEffect.h"
 #include "../Widget/GoalProgressBar.h"
 #include "../Widget/ItemUseCountUI.h"
+#include "../Widget/ItemEffectTextManager.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Font.h"
 #include "System/Resource/Texture.h"
@@ -15,6 +16,8 @@ namespace
 	constexpr Vector3 kJumpBoostPos{ -200.0f, -75.0f, 0.0f };
 	constexpr Vector3 kSpeedBoostPos{ 0.0f, -75.0f, 0.0f };
 	constexpr Vector3 kAerialControlPos{ 200.0f, -75.0f, 0.0f };
+
+	constexpr int kItemEffectTextNum = 10;
 
 	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
 	const char* const kCloudInvasionEffectTexturePath = "Resources\\Sprite\\InvasionEffect.png";
@@ -44,7 +47,9 @@ namespace UI
 
 		std::shared_ptr<Resource::ResourceBase> cloudInvasionEffectTexture = ResourceManager::GetInstance().GetResource<Resource::Texture>(kCloudInvasionEffectTexturePath);
 
-		auto a = CreateToChild<UI::CloudInvasionEffect>(cloudInvasionEffectTexture, playerTransform, cloudTransform);
+		CreateToChild<UI::CloudInvasionEffect>(cloudInvasionEffectTexture, playerTransform, cloudTransform);
+
+		mItemEffectTextManager = CreateToChild<UI::ItemEffectTextManager>(font, kItemEffectTextNum);
 	}
 
 	void InGameScreen::Init()

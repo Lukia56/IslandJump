@@ -117,7 +117,9 @@ void SceneMain::OnInit()
 	mDeathCloud = CreateToRoot<DeathCloud>(cloudInitPos, goalPos, mDifficultyData.cloudSpeed, cloudModel);
 
 	mUIManager = CreateToRoot<UI::UIManager>();
-	mUIManager->AddScreenToPool(std::make_unique<UI::InGameScreen>(mDifficultyData.goalPosY, mPlayer->GetTransform(), mDeathCloud->GetTransform(), itemObjectManager, mResultRecorder));
+	std::unique_ptr<UI::InGameScreen> inGameScreen = std::make_unique<UI::InGameScreen>(mDifficultyData.goalPosY, mPlayer->GetTransform(), mDeathCloud->GetTransform(), itemObjectManager, mResultRecorder);
+	mItemObserver = std::make_unique<Observer::ItemObserver>(mPlayer->GetTransform(), effectManager, inGameScreen->GetItemEffectTextManager());
+	mUIManager->AddScreenToPool(std::move(inGameScreen));
 	mUIManager->AddScreenToPool(std::make_unique<UI::GoalEventScreen>());
 	mUIManager->AddScreenToPool(std::make_unique<UI::ResultScreen>(mResultRecorder));
 	mUIManager->PushScreen<UI::InGameScreen>();
@@ -125,7 +127,6 @@ void SceneMain::OnInit()
 	mGoalObserver = std::make_unique<Observer::GoalObserver>(mUIManager);
 	mResultObserver = std::make_unique<Observer::ResultObserver>(mResultRecorder, mUIManager, GetCameraManager(), mDeathCloud);
 	mSoundObserver = std::make_unique<Observer::SoundObserver>();
-	mItemObserver = std::make_unique<Observer::ItemObserver>(mPlayer->GetTransform(), effectManager);
 
 	mPlayer->GetEventSubject()->RegisterObserver(mSoundObserver.get());
 	mPlayer->GetEventSubject()->RegisterObserver(mItemObserver.get());
