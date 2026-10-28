@@ -20,7 +20,7 @@ namespace
 	constexpr int kItemEffectTextNum = 10;
 
 	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
-	const char* const kFontJpPath = "Resources\\Font\\NicoKaku.dft";
+	const char* const kFontJpPath = "Resources\\Font\\NicoKakuSmall.dft";
 	const char* const kCloudInvasionEffectTexturePath = "Resources\\Sprite\\InvasionEffect.png";
 }
 

@@ -11,25 +11,25 @@
 
 namespace
 {
-	const char* const kSuccessText = "CLEAR!";
-	const char* const kFailText = "FAILED...";
-	const char* const kExitText = "Press Space to back to title";
-	const char* const kScorePostfixText = " pt";
+	const char* const kSuccessText = "クリア！";
+	const char* const kFailText = "失敗…";
+	const char* const kExitText = "スペースキーでタイトルへ戻る";
+	const char* const kScorePostfixText = "pt";
 
 	constexpr Vector3 kResultPos{ 0.0f, 50.0f, 0.0f };
 	constexpr Vector3 kProgressPos{ 50.0f, 200.0f, 0.0f };
 	constexpr Vector3 kItemUseCountPos{ 50.0f, 300.0f, 0.0f };
-	constexpr float kScorePosX = -250.0f;
+	constexpr float kScorePosX = -300.0f;
 	constexpr Vector3 kOverallScorePos{ 0.0f, -150.0f, 0.0f };
 	constexpr Vector3 kExitPos{ 0.0f, -50.0f, 0.0f };
 
 	constexpr Vector2 kTextRect{ 400.0f, 100.0f };
 
 	constexpr Vector3 kBackgroundPos{ 0.0f, 0.0f, 0.0f };
-	constexpr Vector2 kBackgroundRect{ 750.0f, 550.0f };
+	constexpr Vector2 kBackgroundRect{ 900.0f, 550.0f };
 
-	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
-	const char* const kFontSmallPath = "Resources\\Font\\ShowcardGothicSmall.dft";
+	const char* const kFontPath = "Resources\\Font\\NicoKaku.dft";
+	const char* const kFontSmallPath = "Resources\\Font\\NicoKakuSmall.dft";
 }
 
 namespace UI
@@ -110,10 +110,10 @@ namespace UI
 		mResultText->SetDisplayText(result.isSuccessed ? kSuccessText : kFailText);
 		mResultText->SetColor(result.isSuccessed ? Color::yellow : Color::magenta);
 
-		mProgressText->SetDisplayText("Progress " + std::to_string(result.progressDistance) + "m");
+		mProgressText->SetDisplayText("進んだ距離 " + std::to_string(result.progressDistance) + "m");
 		mScoreDistanceText->SetDisplayText(std::to_string(result.distanceScore) + kScorePostfixText);
 
-		mItemUseCountText->SetDisplayText("Item Used " + std::to_string(result.itemUseCount));
+		mItemUseCountText->SetDisplayText("取得アイテム数 " + std::to_string(result.itemUseCount));
 		mScoreItemText->SetDisplayText(std::to_string(result.itemScore) + kScorePostfixText);
 
 		mOverallScoreText->SetDisplayText(std::to_string(result.overallScore) + kScorePostfixText);
