@@ -10,7 +10,8 @@ namespace
 
 	constexpr Vector3 kProgressPos{ 0.0f, 300.0f, 0.0f };
 
-	const char* const kProgressText = "m to goal";
+	const char* const kProgressTextPrefix = "ÉSÅ[ÉãÇ‹Ç≈Ç†Ç∆";
+	const char* const kProgressTextPostFix = "m";
 }
 
 namespace UI
@@ -25,7 +26,7 @@ namespace UI
 		mCloudBar(nullptr),
 		mProgressText(nullptr)
 	{
-		mProgressText = CreateToChild<UI::TextObject>(font, kProgressText, Color::white, HolizontalAlignment::Right);
+		mProgressText = CreateToChild<UI::TextObject>(font, "", Color::white, HolizontalAlignment::Right);
 		mProgressText->GetRectTransform()->localPosition = kProgressPos;
 	}
 
@@ -58,7 +59,7 @@ namespace UI
 
 		float distance = mMaxDistance - mPlayerTransform->CalculateWorldPosition().y;
 		int clampedDistance = Math::Max(static_cast<int>(distance), 0);
-		mProgressText->SetDisplayText(std::to_string(clampedDistance) + kProgressText);
+		mProgressText->SetDisplayText(kProgressTextPrefix + std::to_string(clampedDistance) + kProgressTextPostFix);
 		mProgressText->GetRectTransform()->localPosition.y = kProgressPos.y + -kBoxSize.y * progressRate;
 	}
 }
