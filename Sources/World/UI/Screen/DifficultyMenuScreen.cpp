@@ -11,16 +11,16 @@
 
 namespace
 {
-	const char* const kDescText = "Choose difficulty";
-	const char* const kHighscoreDescText = "Highscore";
+	const char* const kDescText = "難易度選択";
+	const char* const kHighscoreDescText = "ハイスコア";
 
 	constexpr Vector3 kDescPos{ 0.0f, 100.0f, 0.0f };
 	constexpr Vector2 kDescRect{ 200.0f, 32.0f };
 
-	const char* const kEasyModeText = "Easy";
+	const char* const kEasyModeText = "イージー";
 	constexpr Vector3 kEasyModeTextPos{ 200.0f, -100.0f, 0.0f };
 
-	const char* const kHardModeText = "Hard";
+	const char* const kHardModeText = "ハード";
 	constexpr Vector3 kHardModeTextPos{ -200.0f, -100.0f, 0.0f };
 
 	constexpr Vector3 kHighscorePos{ 0.0f, -100.0f, 0.0f };
@@ -31,8 +31,8 @@ namespace
 	constexpr Vector3 kBackgroundPos{ 0.0f, 0.0f, 0.0f };
 	constexpr Vector2 kBackgroundRect{ 800.0f, 500.0f };
 
-	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
-	const char* const kFontSmallPath = "Resources\\Font\\ShowcardGothicSmall.dft";
+	const char* const kFontPath = "Resources\\Font\\Nicokaku.dft";
+	const char* const kFontSmallPath = "Resources\\Font\\NicokakuSmall.dft";
 }
 
 namespace UI

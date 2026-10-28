@@ -11,18 +11,18 @@
 
 namespace
 {
-	const char* const kStartText = "Start Game";
-	const char* const kOptionsText = "Options";
-	const char* const kQuitText = "Quit";
+	const char* const kStartText = "ゲーム開始";
+	const char* const kOptionsText = "設定";
+	const char* const kQuitText = "ゲーム終了";
 
 	constexpr Vector3 kLogoSpritePos{ 0.0f, -100.0f, 0.0f };
-	constexpr Vector3 kStartTextPos{ 0.0f, 300.0f, 0.0f };
-	constexpr Vector3 kOptionsTextPos{ 0.0f, 400.0f, 0.0f };
-	constexpr Vector3 kQuitTextPos{ 0.0f, 500.0f, 0.0f };
+	constexpr Vector3 kStartTextPos{ 0.0f, 250.0f, 0.0f };
+	constexpr Vector3 kOptionsTextPos{ 0.0f, 350.0f, 0.0f };
+	constexpr Vector3 kQuitTextPos{ 0.0f, 450.0f, 0.0f };
 
 	constexpr Vector2 kButtonRect{ 160.0f, 32.0f };
 
-	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
+	const char* const kFontPath = "Resources\\Font\\Nicokaku.dft";
 
 	const char* const kLogoSpritePath = "Resources\\Sprite\\Logo.png";
 }

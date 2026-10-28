@@ -10,25 +10,26 @@
 
 namespace
 {
-	const char* const kExitText = "Exit";
-	const char* const kMouseSensitivityXText = "Mouse Sensitivity X";
-	const char* const kMouseSensitivityYText = "Mouse Sensitivity Y";
+	const char* const kExitText = "終了";
+	const char* const kMouseSensitivityXText = "水平マウス感度";
+	const char* const kMouseSensitivityYText = "垂直マウス感度";
+	const char* const kSensitivityTextPostfix = "％";
 
-	constexpr Vector3 kExitTextPos{ 25.0f, 100.0f, 0.0f };
-	constexpr Vector3 kMouseSensitivityXTextPos{ 25.0f, 200.0f, 0.0f };
-	constexpr Vector3 kMouseSensitivityYTextPos{ 25.0f, 300.0f, 0.0f };
+	constexpr Vector3 kExitTextPos{ 50.0f, 100.0f, 0.0f };
+	constexpr Vector3 kMouseSensitivityXTextPos{ 50.0f, 175.0f, 0.0f };
+	constexpr Vector3 kMouseSensitivityYTextPos{ 50.0f, 250.0f, 0.0f };
 
-	constexpr Vector3 kMouseSensitivityXValueTextPos{ -200.0f, 200.0f, 0.0f };
-	constexpr Vector3 kMouseSensitivityYValueTextPos{ -200.0f, 300.0f, 0.0f };
+	constexpr Vector3 kMouseSensitivityXValueTextPos{ -250.0f, 175.0f, 0.0f };
+	constexpr Vector3 kMouseSensitivityYValueTextPos{ -250.0f, 250.0f, 0.0f };
 
 	constexpr Vector2 kButtonRect{ 160.0f, 32.0f };
 
 	constexpr Vector2 kBackgroundRect{ 800.0f, 500.0f };
 
-	const char* const kFontPath = "Resources\\Font\\ShowcardGothicSmall.dft";
+	const char* const kFontPath = "Resources\\Font\\NicoKakuSmall.dft";
 
-	constexpr int kMaxSensitivity = 200;
-	constexpr int kMinSensitivity = 50;
+	constexpr int kMaxSensitivity = 300;
+	constexpr int kMinSensitivity = 10;
 
 	constexpr int kSensitivityChange = 10;
 }
@@ -43,7 +44,7 @@ namespace UI
 
 	void OptionsMenuScreen::Init()
 	{
-		BoxObject* bg = CreateToChild<UI::BoxObject>(Color(0.0f, 0.0f, 0.0f, 0.5f));
+		BoxObject* bg = CreateToChild<UI::BoxObject>(Color::black);
 		bg->GetRectTransform()->SetFullRectAsFixed(kBackgroundRect);
 
 		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
@@ -138,8 +139,8 @@ namespace UI
 	{
 		OptionsData& data = UserDataManager::GetInstance().GetTempOptionsData();
 
-		mMouseSensitivityXValueText->SetDisplayText(std::to_string(data.mouseSensitivityX) + "%");
-		mMouseSensitivityYValueText->SetDisplayText(std::to_string(data.mouseSensitivityY) + "%");
+		mMouseSensitivityXValueText->SetDisplayText(std::to_string(data.mouseSensitivityX) + kSensitivityTextPostfix);
+		mMouseSensitivityYValueText->SetDisplayText(std::to_string(data.mouseSensitivityY) + kSensitivityTextPostfix);
 	}
 
 	void OptionsMenuScreen::Draw()
@@ -175,7 +176,8 @@ namespace UI
 		}
 		if (input.cancel)
 		{
-			if (!InvokeCancel()) return false;
+			InvokeCancel();
+			return false;
 		}
 
 		return true;
