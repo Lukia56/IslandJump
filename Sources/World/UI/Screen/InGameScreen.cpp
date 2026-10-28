@@ -20,16 +20,21 @@ namespace
 	constexpr int kItemEffectTextNum = 10;
 
 	const char* const kFontPath = "Resources\\Font\\ShowcardGothic.dft";
+	const char* const kFontJpPath = "Resources\\Font\\NicoKaku.dft";
 	const char* const kCloudInvasionEffectTexturePath = "Resources\\Sprite\\InvasionEffect.png";
 }
 
 namespace UI
 {
-	InGameScreen::InGameScreen(float maxDistance, Transform* playerTransform, Transform* cloudTransform, ItemObjectManager* itemObjectManager, ResultRecorder* resultRecorder)
+	InGameScreen::InGameScreen(float maxDistance, Transform* playerTransform, Transform* cloudTransform, ItemObjectManager* itemObjectManager, ResultRecorder* resultRecorder) :
+		mItemEffectTextManager(nullptr)
 	{
+		std::shared_ptr<Resource::ResourceBase> fontJp = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontJpPath);
+		mItemEffectTextManager = CreateToChild<UI::ItemEffectTextManager>(fontJp, kItemEffectTextNum);
+
 		std::shared_ptr<Resource::ResourceBase> font = ResourceManager::GetInstance().GetResource<Resource::Font>(kFontPath);
 
-		UI::GoalProgressBar* goalProgressBar = CreateToChild<UI::GoalProgressBar>(maxDistance, playerTransform, cloudTransform, font);
+		UI::GoalProgressBar* goalProgressBar = CreateToChild<UI::GoalProgressBar>(maxDistance, playerTransform, cloudTransform, fontJp);
 		goalProgressBar->GetRectTransform()->localPosition = kGoalProgressBarPos;
 		goalProgressBar->GetRectTransform()->SetAnchor(RectTransform::Anchor::RightMiddle);
 
@@ -48,8 +53,6 @@ namespace UI
 		std::shared_ptr<Resource::ResourceBase> cloudInvasionEffectTexture = ResourceManager::GetInstance().GetResource<Resource::Texture>(kCloudInvasionEffectTexturePath);
 
 		CreateToChild<UI::CloudInvasionEffect>(cloudInvasionEffectTexture, playerTransform, cloudTransform);
-
-		mItemEffectTextManager = CreateToChild<UI::ItemEffectTextManager>(font, kItemEffectTextNum);
 	}
 
 	void InGameScreen::Init()

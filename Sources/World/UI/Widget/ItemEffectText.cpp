@@ -8,10 +8,12 @@ namespace
 	constexpr float kMoveSpeed = -100.0f;
 	constexpr float kFadeSpeed = 1.0f;
 
+	constexpr float kStartAlpha = 2.0f;
+
 	std::string kEffectTexts[] = {
-		"Jump Power Increased!",
-		"Speed Increased!",
-		"Enhanced Aerial Control!"
+		"ジャンプ力上昇！",
+		"移動速度上昇！",
+		"空中制御力上昇！"
 	};
 
 	Color kEffectColors[] = {
@@ -27,7 +29,7 @@ namespace UI
 		mAlpha(0.0f),
 		mText(nullptr)
 	{
-		mText = CreateToChild<UI::TextObject>(font, "", Color::white, HolizontalAlignment::Center, VerticalAlignment::Middle);
+		mText = CreateToChild<UI::TextObject>(font, "", Color::white);
 	}
 
 	void ItemEffectText::Init()
@@ -51,11 +53,9 @@ namespace UI
 	{
 		int type = static_cast<int>(itemType);
 
-		mTransform->localPosition = Vector3::Zero;
-
 		mText->SetDisplayText(kEffectTexts[type]);
 		mText->SetColor(kEffectColors[type]);
 
-		mAlpha = 1.0f;
+		mAlpha = kStartAlpha;
 	}
 }

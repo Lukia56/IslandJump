@@ -2,6 +2,11 @@
 #include "ItemEffectText.h"
 #include "../Core/UIRoot.h"
 
+namespace
+{
+	constexpr Vector3 kTextPos{ 100.0f, 50.0f, 0.0f };
+}
+
 namespace UI
 {
 	ItemEffectTextManager::ItemEffectTextManager(std::shared_ptr<Resource::ResourceBase> font, int maxNum) :
@@ -49,6 +54,7 @@ namespace UI
 		ItemEffectText* effect = mPoolTexts.top();
 
 		effect->GetTransform()->ChangeParent(mActiveRoot->GetTransform());
+		effect->GetTransform()->localPosition = kTextPos;
 		effect->Setup(itemType);
 
 		mPoolTexts.pop();
