@@ -1,11 +1,11 @@
 #include "DeathCloud.h"
 #include "CloudModel.h"
-#include "../Component/Collider3D.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "Observer/Subject.h"
 #include "System/TimeManager.h"
 #include "System/Resource/ResourceBase.h"
+#include "World/Component/Collider3D.h"
 
 namespace
 {

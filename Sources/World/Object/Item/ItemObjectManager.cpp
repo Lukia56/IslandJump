@@ -1,13 +1,13 @@
 #include "ItemObjectManager.h"
 #include <algorithm>
-#include "../Object/ItemObject.h"
-#include "../Object/ItemTextureDataBase.h"
-#include "RootObject.h"
-#include "ResultRecorder.h"
+#include "ItemObject.h"
+#include "ItemTextureDataBase.h"
 #include "System/ResourceManager.h"
 #include "System/Resource/Texture.h"
 #include "Utility/Random.h"
 #include "Utility/Data/CSV/CsvLoader.h"
+#include "World/Other/RootObject.h"
+#include "World/Other/Result/ResultRecorder.h"
 
 namespace
 {

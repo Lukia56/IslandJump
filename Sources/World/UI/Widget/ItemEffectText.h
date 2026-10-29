@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Core/UIObject.h"
-#include "World/Object/ItemType.h"
+#include "World/Object/Item/ItemType.h"
 
 namespace Resource
 {

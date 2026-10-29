@@ -3,7 +3,7 @@
 #include "ImageObject.h"
 #include "TextObject.h"
 #include "System/Resource/ResourceBase.h"
-#include "World/Other/ItemObjectManager.h"
+#include "World/Object/Item/ItemObjectManager.h"
 
 namespace
 {

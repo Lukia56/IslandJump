@@ -1,5 +1,5 @@
 #include "CloudModel.h"
-#include "../Component/Rendering/ModelRenderer.h"
+#include "World/Component/Rendering/ModelRenderer.h"
 
 CloudModel::CloudModel(std::shared_ptr<Resource::ResourceBase> model)
 {

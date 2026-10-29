@@ -1,7 +1,7 @@
 #include "ResultObserver.h"
 #include "Camera/CameraManager.h"
-#include "World/Object/DeathCloud.h"
-#include "World/Other/ResultRecorder.h"
+#include "World/Object/Cloud/DeathCloud.h"
+#include "World/Other/Result/ResultRecorder.h"
 #include "World/UI/Core/UIManager.h"
 #include "World/UI/Screen/ResultScreen.h"
 

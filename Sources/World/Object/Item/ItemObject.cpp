@@ -1,9 +1,9 @@
 #include "ItemObject.h"
-#include "../Component/Collider3D.h"
-#include "../Component/Rendering/BillboardRenderer.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "System/Resource/ResourceBase.h"
+#include "World/Component/Collider3D.h"
+#include "World/Component/Rendering/BillboardRenderer.h"
 
 namespace
 {

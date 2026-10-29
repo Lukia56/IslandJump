@@ -5,12 +5,12 @@ class Transform;
 /// <summary>
 /// プレイヤーが着地した地形を記録する
 /// </summary>
-class LandTerrainRecorder
+class PlayerLandRecorder
 {
 public:
 
-	LandTerrainRecorder();
-	~LandTerrainRecorder() = default;
+	PlayerLandRecorder();
+	~PlayerLandRecorder() = default;
 
 	void UpdateLandTerrain(Transform* currentTerrain);
 

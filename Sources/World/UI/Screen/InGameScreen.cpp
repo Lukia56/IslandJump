@@ -6,8 +6,8 @@
 #include "System/ResourceManager.h"
 #include "System/Resource/Font.h"
 #include "System/Resource/Texture.h"
-#include "World/Other/ItemObjectManager.h"
-#include "World/Other/ResultRecorder.h"
+#include "World/Object/Item/ItemObjectManager.h"
+#include "World/Other/Result/ResultRecorder.h"
 
 namespace
 {

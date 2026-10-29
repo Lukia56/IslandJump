@@ -2,7 +2,7 @@
 
 #include "../Core/UIObject.h"
 #include <stack>
-#include "World/Object/ItemType.h"
+#include "World/Object/Item/ItemType.h"
 
 namespace Resource
 {

@@ -7,7 +7,7 @@
 #include "System/Resource/Font.h"
 #include "System/Input/Literal/InputState.h"
 #include "Utility/Color.h"
-#include "World/Other/ResultRecorder.h"
+#include "World/Other/Result/ResultRecorder.h"
 
 namespace
 {

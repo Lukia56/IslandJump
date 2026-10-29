@@ -1,26 +1,32 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "World/GameObject.h"
 
 class Collider3D;
 namespace Observer
 {
 	class Subject;
 }
+namespace Resource
+{
+	class ResourceBase;
+}
 
 /// <summary>
-/// ゴール判定を行い、イベントを送信する
+/// 下から迫る死亡判定を持つオブジェクト
 /// </summary>
-class GoalTrigger : public GameObject
+class DeathCloud : public GameObject
 {
 public:
 
-	GoalTrigger();
-	~GoalTrigger() = default;
+	DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed, std::shared_ptr<Resource::ResourceBase> model);
+	~DeathCloud() = default;
 
 	void Init() override;
 
 	void Update() override;
+
+	void PhysicsUpdate() override;
 
 	void DebugDraw() override;
 
@@ -30,9 +36,21 @@ public:
 
 	Observer::Subject* GetEventSubject() const { return mEventSubject.get(); }
 
+	void SetDoMove(bool flag) { mDoMove = flag; }
+
 private:
 
+	Vector3 mVelocity;
+
+	Vector3 mGoalPos;
+
+	float mMoveSpeed;
+
 	float mResultTransitionTimer;
+
+	bool mIsStartTransitionResult;
+
+	bool mDoMove;
 
 	bool mIsTriggered;
 

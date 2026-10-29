@@ -1,7 +1,7 @@
 #include "ItemObserver.h"
 #include <string>
-#include "World/Other/EffectInstance.h"
-#include "World/Other/EffectManager.h"
+#include "World/Other/Effect/EffectInstance.h"
+#include "World/Other/Effect/EffectManager.h"
 #include "World/UI/Widget/ItemEffectTextManager.h"
 
 namespace

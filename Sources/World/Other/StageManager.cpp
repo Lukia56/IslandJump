@@ -4,7 +4,7 @@
 #include <vector>
 #include "Stage/StageGenerator.h"
 #include "Stage/StageLoader.h"
-#include "World/Object/GoalObject.h"
+#include "World/Object/Goal/GoalObject.h"
 
 namespace
 {

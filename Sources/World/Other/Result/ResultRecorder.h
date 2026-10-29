@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "World/GameObject.h"
 #include "ResultData.h"
 
 struct StageDifficultyData;

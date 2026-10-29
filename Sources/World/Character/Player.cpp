@@ -1,12 +1,11 @@
 #include "Player.h"
 #include <cassert>
 #include <imgui.h>
-#include "LandTerrainRecorder.h"
+#include "PlayerLandRecorder.h"
 #include "../Component/Collider3D.h"
 #include "../Component/ModelAnimator.h"
 #include "../Component/Rendering/ModelRenderer.h"
 #include "../Other/BlobShadow.h"
-#include "../Other/ItemObjectManager.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "Observer/PlayerObserver.h"
@@ -15,6 +14,7 @@
 #include "System/InputManager.h"
 #include "System/TimeManager.h"
 #include "Utility/Math.h"
+#include "World/Object/Item/ItemObjectManager.h"
 
 namespace
 {
@@ -64,7 +64,7 @@ Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::shared_ptr<Re
 	mCameraView{}
 {
 	// ItemSpawnerManagerのコンストラクタで必要なためここで生成
-	mLandTerrainRecorder = std::make_unique<LandTerrainRecorder>();
+	mLandTerrainRecorder = std::make_unique<PlayerLandRecorder>();
 
 	mObserver = std::make_unique<Observer::PlayerObserver>(this);
 	mEventSubject = std::make_unique<Observer::Subject>();

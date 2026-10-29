@@ -135,7 +135,7 @@
     <ClCompile Include="Sources\Camera\CameraFollow.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Object\DebugGround.cpp">
+    <ClCompile Include="Sources\World\Other\DebugGround.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\System\ImGuiRenderer.cpp">
@@ -252,22 +252,22 @@
     <ClCompile Include="Sources\World\Character\Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Object\ItemSpawner.cpp">
+    <ClCompile Include="Sources\World\Object\Item\ItemSpawner.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Other\ItemSpawnerManager.cpp">
+    <ClCompile Include="Sources\World\Object\Item\ItemSpawnerManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Character\LandTerrainRecorder.cpp">
+    <ClCompile Include="Sources\World\Character\PlayerLandRecorder.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Object\ItemObject.cpp">
+    <ClCompile Include="Sources\World\Object\Item\ItemObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Other\ItemObjectManager.cpp">
+    <ClCompile Include="Sources\World\Object\Item\ItemObjectManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Object\GoalTrigger.cpp">
+    <ClCompile Include="Sources\World\Object\Goal\GoalTrigger.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Observer\Subject.cpp">
@@ -282,19 +282,19 @@
     <ClCompile Include="Sources\Observer\PlayerObserver.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Object\DeathCloud.cpp">
+    <ClCompile Include="Sources\World\Object\Cloud\DeathCloud.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Stage\StageGenerator.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Object\ItemTextureDataBase.cpp">
+    <ClCompile Include="Sources\World\Object\Item\ItemTextureDataBase.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\Component\Rendering\BillboardRenderer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Object\GoalObject.cpp">
+    <ClCompile Include="Sources\World\Object\Goal\GoalObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\Object\Skybox.cpp">
@@ -309,7 +309,7 @@
     <ClCompile Include="Sources\Observer\ResultObserver.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Other\ResultRecorder.cpp">
+    <ClCompile Include="Sources\World\Other\Result\ResultRecorder.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\UI\Widget\BoxObject.cpp">
@@ -333,7 +333,7 @@
     <ClCompile Include="Sources\World\UI\Widget\GoalProgressBar.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Object\CloudModel.cpp">
+    <ClCompile Include="Sources\World\Object\Cloud\CloudModel.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Observer\SoundObserver.cpp">
@@ -348,10 +348,7 @@
     <ClCompile Include="Sources\World\Other\BlobShadow.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Other\EffectManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\World\Other\EffectInstance.cpp">
+    <ClCompile Include="Sources\World\Other\Effect\EffectInstance.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\UI\Widget\CloudInvasionEffect.cpp">
@@ -370,6 +367,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\UI\Widget\ItemEffectText.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\World\Other\Effect\EffectManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -518,7 +518,7 @@
     <ClInclude Include="Sources\Camera\CameraFollow.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Object\DebugGround.h">
+    <ClInclude Include="Sources\World\Other\DebugGround.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\System\ImGuiRenderer.h">
@@ -692,22 +692,22 @@
     <ClInclude Include="Sources\World\Character\Player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Object\ItemSpawner.h">
+    <ClInclude Include="Sources\World\Object\Item\ItemSpawner.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Other\ItemSpawnerManager.h">
+    <ClInclude Include="Sources\World\Object\Item\ItemSpawnerManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Character\LandTerrainRecorder.h">
+    <ClInclude Include="Sources\World\Character\PlayerLandRecorder.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Object\ItemObject.h">
+    <ClInclude Include="Sources\World\Object\Item\ItemObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Other\ItemObjectManager.h">
+    <ClInclude Include="Sources\World\Object\Item\ItemObjectManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Object\GoalTrigger.h">
+    <ClInclude Include="Sources\World\Object\Goal\GoalTrigger.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Observer\IObserver.h">
@@ -728,22 +728,22 @@
     <ClInclude Include="Sources\Observer\PlayerObserver.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Object\DeathCloud.h">
+    <ClInclude Include="Sources\World\Object\Cloud\DeathCloud.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Stage\StageGenerator.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Object\ItemTextureDataBase.h">
+    <ClInclude Include="Sources\World\Object\Item\ItemTextureDataBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\Component\Rendering\BillboardRenderer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Object\GoalObject.h">
+    <ClInclude Include="Sources\World\Object\Goal\GoalObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Object\ItemType.h">
+    <ClInclude Include="Sources\World\Object\Item\ItemType.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\Object\Skybox.h">
@@ -761,10 +761,10 @@
     <ClInclude Include="Sources\Observer\ResultObserver.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Other\ResultRecorder.h">
+    <ClInclude Include="Sources\World\Other\Result\ResultRecorder.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Other\ResultData.h">
+    <ClInclude Include="Sources\World\Other\Result\ResultData.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\UI\Widget\BoxObject.h">
@@ -788,7 +788,7 @@
     <ClInclude Include="Sources\World\UI\Widget\GoalProgressBar.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Object\CloudModel.h">
+    <ClInclude Include="Sources\World\Object\Cloud\CloudModel.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Observer\SoundObserver.h">
@@ -812,10 +812,7 @@
     <ClInclude Include="Sources\World\Other\BlobShadow.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Other\EffectManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\World\Other\EffectInstance.h">
+    <ClInclude Include="Sources\World\Other\Effect\EffectInstance.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\UI\Widget\CloudInvasionEffect.h">
@@ -837,6 +834,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\UI\Widget\ItemEffectText.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\World\Other\Effect\EffectManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

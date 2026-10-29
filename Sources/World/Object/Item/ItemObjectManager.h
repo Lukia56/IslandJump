@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "World/GameObject.h"
 #include <array>
 #include <stack>
 #include <vector>
-#include "../Object/ItemType.h"
+#include "ItemType.h"
 #include "Param/Param.h"
 
 class ItemObject;

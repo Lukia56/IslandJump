@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "World/GameObject.h"
 #include "ItemType.h"
 
 class Collider3D;

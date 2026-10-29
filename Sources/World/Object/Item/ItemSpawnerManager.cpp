@@ -2,11 +2,11 @@
 #include <memory>
 #include <vector>
 #include "ItemObjectManager.h"
-#include "RootObject.h"
-#include "../Object/ItemSpawner.h"
+#include "ItemSpawner.h"
 #include "Utility/Random.h"
+#include "World/Other/RootObject.h"
 
-ItemSpawnerManager::ItemSpawnerManager(GameObject* stageManager, LandTerrainRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager, int itemNum) :
+ItemSpawnerManager::ItemSpawnerManager(GameObject* stageManager, PlayerLandRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager, int itemNum) :
 	mSpawnerRoot(nullptr)
 {
 	mSpawnerRoot = CreateToChild<RootObject>();

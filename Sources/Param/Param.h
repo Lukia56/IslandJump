@@ -5,7 +5,7 @@
 #include "TempParam.h"
 #include "Collision/CollisionTag.h"
 #include "Utility/Vector.h"
-#include "World/Object/ItemType.h"
+#include "World/Object/Item/ItemType.h"
 
 struct WindowConfigs
 {

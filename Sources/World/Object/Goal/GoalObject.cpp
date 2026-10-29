@@ -1,8 +1,8 @@
 #include "GoalObject.h"
 #include "GoalTrigger.h"
-#include "../Component/ModelAnimator.h"
-#include "../Component/Rendering/ModelRenderer.h"
 #include "Param/Param.h"
+#include "World/Component/ModelAnimator.h"
+#include "World/Component/Rendering/ModelRenderer.h"
 
 namespace
 {

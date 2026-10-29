@@ -10,7 +10,7 @@
 class ModelRenderer;
 class ModelAnimator;
 class Collider3D;
-class LandTerrainRecorder;
+class PlayerLandRecorder;
 class ItemObjectManager;
 namespace Resource
 {
@@ -43,7 +43,7 @@ public:
 
 public:
 
-	LandTerrainRecorder* GetLandTerrainRecorder() const { return mLandTerrainRecorder.get(); }
+	PlayerLandRecorder* GetLandTerrainRecorder() const { return mLandTerrainRecorder.get(); }
 
 	Observer::IObserver* GetObserver() const { return mObserver.get(); }
 	Observer::Subject* GetEventSubject() const { return mEventSubject.get(); }
@@ -103,7 +103,7 @@ private:
 
 	std::vector<std::unique_ptr<Collider3D>> mColliders;
 
-	std::unique_ptr<LandTerrainRecorder> mLandTerrainRecorder;
+	std::unique_ptr<PlayerLandRecorder> mLandTerrainRecorder;
 
 	std::unique_ptr<Observer::IObserver> mObserver;
 	std::unique_ptr<Observer::Subject> mEventSubject;

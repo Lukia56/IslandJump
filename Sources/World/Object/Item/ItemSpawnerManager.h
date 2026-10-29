@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "World/GameObject.h"
 
-class LandTerrainRecorder;
+class PlayerLandRecorder;
 class ItemObjectManager;
 
 /// <summary>
@@ -12,7 +12,7 @@ class ItemSpawnerManager : public GameObject
 {
 public:
 
-	ItemSpawnerManager(GameObject* stageManager, LandTerrainRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager, int itemNum);
+	ItemSpawnerManager(GameObject* stageManager, PlayerLandRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager, int itemNum);
 	~ItemSpawnerManager() = default;
 
 	void Init() override;

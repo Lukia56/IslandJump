@@ -1,10 +1,10 @@
 #include "GoalTrigger.h"
-#include "../Component/Collider3D.h"
 #include "Collision/Collision3D.h"
 #include "Collision/CollisionTag.h"
 #include "Observer/Subject.h"
 #include "System/TimeManager.h"
 #include "Utility/Color.h"
+#include "World/Component/Collider3D.h"
 
 namespace
 {

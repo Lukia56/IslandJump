@@ -1,12 +1,10 @@
 #include "ItemSpawner.h"
-#include <DxLib.h>
+#include "ItemObjectManager.h"
 #include "Collision/Collision3D.h"
-#include "Utility/Color.h"
-#include "../Character/LandTerrainRecorder.h"
-#include "../Component/Collider3D.h"
-#include "../Component/EffectAnimator.h"
-#include "../Other/ItemObjectManager.h"
 #include "System/TimeManager.h"
+#include "World/Character/PlayerLandRecorder.h"
+#include "World/Component/Collider3D.h"
+#include "World/Component/EffectAnimator.h"
 
 namespace
 {
@@ -17,7 +15,7 @@ namespace
 	const char* const kEffectPath = "Resources\\Effect\\ItemSpawnerEffect.efk";
 }
 
-ItemSpawner::ItemSpawner(Transform* terrain, LandTerrainRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager) :
+ItemSpawner::ItemSpawner(Transform* terrain, PlayerLandRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager) :
 	mTerrain(terrain),
 	mIsTriggered(false),
 	mEffectTimer(0.0f),

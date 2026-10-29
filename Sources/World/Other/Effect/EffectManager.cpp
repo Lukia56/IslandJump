@@ -1,7 +1,7 @@
 #include "EffectManager.h"
 #include <cassert>
 #include "EffectInstance.h"
-#include "RootObject.h"
+#include "../RootObject.h"
 #include "System/Resource/ResourceBase.h"
 
 EffectManager::EffectManager(int maxEffect) :

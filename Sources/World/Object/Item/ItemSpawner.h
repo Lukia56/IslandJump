@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "World/GameObject.h"
 
-class LandTerrainRecorder;
+class PlayerLandRecorder;
 class ItemObjectManager;
 class Collider3D;
 class EffectAnimator;
@@ -14,7 +14,7 @@ class ItemSpawner : public GameObject
 {
 public:
 
-	ItemSpawner(Transform* terrain, LandTerrainRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager);
+	ItemSpawner(Transform* terrain, PlayerLandRecorder* landTerrainRecorder, ItemObjectManager* itemObjectManager);
 	~ItemSpawner() = default;
 
 	void Init() override;
@@ -41,7 +41,7 @@ private:
 
 	std::unique_ptr<EffectAnimator> mEffectAnimator;
 
-	LandTerrainRecorder* mLandTerrainRecorder;
+	PlayerLandRecorder* mLandTerrainRecorder;
 
 	ItemObjectManager* mItemObjectManager;
 };

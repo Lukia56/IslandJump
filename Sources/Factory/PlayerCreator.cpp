@@ -4,7 +4,7 @@
 #include "System/Resource/Texture.h"
 #include "Utility/Data/CSV/CsvLoader.h"
 #include "World/Character/Player.h"
-#include "World/Other/ItemObjectManager.h"
+#include "World/Object/Item/ItemObjectManager.h"
 
 namespace
 {
