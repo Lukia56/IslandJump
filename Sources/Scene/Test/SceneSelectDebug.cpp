@@ -1,14 +1,5 @@
 #include "SceneSelectDebug.h"
 #include <DxLib.h>
-#include "SceneStageTest.h"
-#include "SceneItemSpawnerTest.h"
-#include "SceneGoalTest.h"
-#include "SceneDeathCloudTest.h"
-#include "SceneLoadStageTest.h"
-#include "SceneResultTest.h"
-#include "SceneSoundTest.h"
-#include "SceneRayTest.h"
-#include "SceneEffectTest.h"
 #include "../SceneTitle.h"
 #include "../SceneMain.h"
 #include "System/InputManager.h"
@@ -23,42 +14,6 @@ SceneSelectDebug::SceneSelectDebug() :
 void SceneSelectDebug::OnInit()
 {
 	SceneInfo info;
-
-	info.name = "StageTest";
-	info.createSceneFunc = []() { return std::make_unique<SceneStageTest>(); };
-	mSceneList.emplace_back(info);
-
-	info.name = "ItemSpawnerTest";
-	info.createSceneFunc = []() { return std::make_unique<SceneItemSpawnerTest>(); };
-	mSceneList.emplace_back(info);
-
-	info.name = "GoalTest";
-	info.createSceneFunc = []() { return std::make_unique<SceneGoalTest>(); };
-	mSceneList.emplace_back(info);
-
-	info.name = "DeathCloudTest";
-	info.createSceneFunc = []() { return std::make_unique<SceneDeathCloudTest>(); };
-	mSceneList.emplace_back(info);
-
-	info.name = "LoadStageTest";
-	info.createSceneFunc = []() { return std::make_unique<SceneLoadStageTest>(); };
-	mSceneList.emplace_back(info);
-
-	info.name = "ResultTest";
-	info.createSceneFunc = []() { return std::make_unique<SceneResultTest>(); };
-	mSceneList.emplace_back(info);
-
-	info.name = "SoundTest";
-	info.createSceneFunc = []() { return std::make_unique<SceneSoundTest>(); };
-	mSceneList.emplace_back(info);
-
-	info.name = "RayTest";
-	info.createSceneFunc = []() { return std::make_unique<SceneRayTest>(); };
-	mSceneList.emplace_back(info);
-
-	info.name = "EffectTest";
-	info.createSceneFunc = []() { return std::make_unique<SceneEffectTest>(); };
-	mSceneList.emplace_back(info);
 
 	info.name = "Title";
 	info.createSceneFunc = []() { return std::make_unique<SceneTitle>(); };

@@ -14,22 +14,6 @@ namespace
 	const char* const kEffectParamPath = "Resources\\MasterData\\ItemEffectParam.csv";
 }
 
-ItemObjectManager::ItemObjectManager(int itemNum) :
-	mActiveItemRoot(nullptr),
-	mPoolItemRoot(nullptr),
-	mItemUseCounts{},
-	mResultRecorder(nullptr)
-{
-	mPoolItemRoot = CreateToChild<RootObject>();
-	mPoolItemRoot->SetActive(false);
-
-	for (int i = 0; i < itemNum; i++)
-	{
-		ItemObject* item = mPoolItemRoot->CreateToChild<ItemObject>();
-		mPoolItems.emplace(item);
-	}
-}
-
 ItemObjectManager::ItemObjectManager(int itemNum, ResultRecorder* resultRecorder) :
 	mActiveItemRoot(nullptr),
 	mPoolItemRoot(nullptr),

@@ -19,8 +19,6 @@ class DeathCloud : public GameObject
 {
 public:
 
-	DeathCloud(const Vector3& initPos, const Vector3& goalPos);
-	DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed);
 	DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed, std::shared_ptr<Resource::ResourceBase> model);
 	~DeathCloud() = default;
 

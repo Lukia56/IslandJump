@@ -11,33 +11,6 @@ namespace
 	constexpr Vector3 kGoalOffset{ 0.0f, 100.0f, 0.0f };
 }
 
-StageManager::StageManager(const std::string& objectDataPath) :
-	mGoalObject(nullptr)
-{
-	std::vector<std::unique_ptr<GameObject>> objects = Stage::StageLoader::Load(objectDataPath);
-
-	for (auto& object : objects)
-	{
-		AddToChild(std::move(object));
-	}
-}
-
-StageManager::StageManager() :
-	mGoalObject(nullptr)
-{
-	Vector3 goalPos;
-
-	std::vector<std::unique_ptr<GameObject>> objects = Stage::StageGenerator::Generate(goalPos);
-
-	for (auto& object : objects)
-	{
-		AddToChild(std::move(object));
-	}
-
-	mGoalObject = CreateToChild<GoalObject>();
-	mGoalObject->GetTransform()->localPosition = goalPos + kGoalOffset;
-}
-
 StageManager::StageManager(std::shared_ptr<Resource::ResourceBase> goalModel, float goalY) :
 	mGoalObject(nullptr)
 {

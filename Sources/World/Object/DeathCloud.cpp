@@ -22,32 +22,6 @@ namespace
 	constexpr float kCloudYOffset = -200.0f;
 }
 
-DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos) :
-	mGoalPos(goalPos),
-	mMoveSpeed(0.0f),
-	mResultTransitionTimer(0.0f),
-	mIsStartTransitionResult(false),
-	mDoMove(true),
-	mIsTriggered(false),
-	mCollider(nullptr)
-{
-	mTransform->localPosition = initPos;
-	mEventSubject = std::make_unique<Observer::Subject>();
-}
-
-DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed) :
-	mGoalPos(goalPos),
-	mMoveSpeed(moveSpeed),
-	mResultTransitionTimer(0.0f),
-	mIsStartTransitionResult(false),
-	mDoMove(true),
-	mIsTriggered(false),
-	mCollider(nullptr)
-{
-	mTransform->localPosition = initPos;
-	mEventSubject = std::make_unique<Observer::Subject>();
-}
-
 DeathCloud::DeathCloud(const Vector3& initPos, const Vector3& goalPos, float moveSpeed, std::shared_ptr<Resource::ResourceBase> model) :
 	mGoalPos(goalPos),
 	mMoveSpeed(moveSpeed),

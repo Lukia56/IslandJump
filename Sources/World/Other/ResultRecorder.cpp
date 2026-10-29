@@ -11,15 +11,6 @@ namespace
 	constexpr float kHardModeScoreCoef = 2.0f;
 }
 
-ResultRecorder::ResultRecorder(Transform* playerTransform) :
-	mProgressDistance(0),
-	mIsSuccessed(false),
-	mItemUseCount(0),
-	mPlayerTransform(nullptr),
-	mDifficultyData(nullptr)
-{
-}
-
 ResultRecorder::ResultRecorder(StageDifficultyData* difficultyData) :
 	mProgressDistance(0),
 	mIsSuccessed(false),

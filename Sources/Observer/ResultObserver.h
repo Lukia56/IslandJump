@@ -18,7 +18,6 @@ namespace Observer
 	public:
 
 		ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, CameraManager* cameraManager, DeathCloud* deathCloud);
-		ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, Transform* playerTransform);
 		~ResultObserver() = default;
 
 		void OnNotify(Event event) override;

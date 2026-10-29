@@ -21,7 +21,6 @@ class ItemObjectManager : public GameObject
 {
 public:
 
-	ItemObjectManager(int itemNum);
 	ItemObjectManager(int itemNum, ResultRecorder* resultRecorder);
 	~ItemObjectManager() = default;
 

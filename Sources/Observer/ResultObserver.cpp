@@ -15,14 +15,6 @@ namespace Observer
 	{
 	}
 
-	ResultObserver::ResultObserver(ResultRecorder* resultRecorder, UI::UIManager* uiManager, Transform* playerTransform) :
-		mResultRecorder(resultRecorder),
-		mUIManager(uiManager),
-		mCameraManager(nullptr),
-		mDeathCloud(nullptr)
-	{
-	}
-
 	void ResultObserver::OnNotify(Event event)
 	{
 		switch (event)

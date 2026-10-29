@@ -17,7 +17,6 @@ class GoalObject : public GameObject
 {
 public:
 
-	GoalObject();
 	GoalObject(std::shared_ptr<Resource::ResourceBase> model);
 	~GoalObject() = default;
 

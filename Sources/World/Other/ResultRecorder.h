@@ -10,7 +10,6 @@ class ResultRecorder : public GameObject
 {
 public:
 
-	ResultRecorder(Transform* playerTransform);
 	ResultRecorder(StageDifficultyData* difficultyData);
 	~ResultRecorder() = default;
 
