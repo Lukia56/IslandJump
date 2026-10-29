@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\System\PlayerDataManager.cpp" />
     <ClCompile Include="Sources\World\Other\Effect\EffectManager.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\ItemEffectText.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\ItemEffectTextManager.cpp" />
@@ -261,6 +262,7 @@
     <ClCompile Include="Sources\System\UserDataManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\System\PlayerDataManager.h" />
     <ClInclude Include="Sources\World\Other\Effect\EffectManager.h" />
     <ClInclude Include="Sources\World\UI\Widget\ItemEffectText.h" />
     <ClInclude Include="Sources\World\UI\Widget\ItemEffectTextManager.h" />

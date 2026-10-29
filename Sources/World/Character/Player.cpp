@@ -12,32 +12,13 @@
 #include "Observer/Subject.h"
 #include "Param/Param.h"
 #include "System/InputManager.h"
+#include "System/PlayerDataManager.h"
 #include "System/TimeManager.h"
 #include "Utility/Math.h"
 #include "World/Object/Item/ItemObjectManager.h"
 
 namespace
 {
-	constexpr float kMoveSpeed = 500.0f;
-	constexpr float kMoveAccel = 60.0f;
-
-	constexpr float kJumpForce = 1500.0f;
-	constexpr float kJumpCancelThreshold = 300.0f;
-	constexpr float kJumpBufferTime = 0.15f;
-	constexpr float kForceJumpTime = 0.1f;
-
-	constexpr float kAirResistanceCoef = 0.25f;
-
-	constexpr float kGravity = 980.0f;
-
-	constexpr float kGravityScale = 2.0f;
-
-	constexpr Vector3 kBodyCollSize{ 100.0f, 100.0f, 100.0f };
-	constexpr Vector3 kBodyCollOffset{ 0.0f, 50.0f, 0.0f };
-
-	constexpr Vector3 kFootCollSize{ 100.0f, 10.0f, 100.0f };
-	constexpr Vector3 kFootCollOffset{ 0.0f, -5.0f, 0.0f };
-
 	constexpr Vector3 kInitScale{ 0.5f, 0.5f, 0.5f };
 
 	constexpr float kYawLatency = 0.25;
@@ -45,7 +26,7 @@ namespace
 	constexpr float kModelAnimationFPS = 30.0f;
 }
 
-Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::shared_ptr<Resource::ResourceBase> shadowTexture, std::vector<AnimationParam> animationParams, ItemObjectManager* itemObjectManager) :
+Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::shared_ptr<Resource::ResourceBase> shadowTexture, ItemObjectManager* itemObjectManager) :
 	mJumpBufferTimer(0.0f),
 	mForceJumpTimer(0.0f),
 	mIsJumping(false),
@@ -55,7 +36,6 @@ Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::shared_ptr<Re
 	mAerialControl(0.0f),
 	mOnGround(false),
 	mCurrentAnimation(PlayerAnimation::Idle),
-	mAnimationParams(animationParams),
 	mModel(nullptr),
 	mLandTerrainRecorder(nullptr),
 	mObserver(nullptr),
@@ -83,19 +63,16 @@ void Player::Init()
 	mModelAnimator = std::make_unique<ModelAnimator>(mModel.get(), kModelAnimationFPS);
 	mModelAnimator->Play(AnimationParam{ .animIndex = 3, .isLoop = true, .isForcePlay = false });
 
-	mColliders.emplace_back(
-		std::make_unique<Collider3D>(
-			std::make_unique<Collision::AABB3D>(kBodyCollSize, kBodyCollOffset),
-			this,
-			Collision::Tag::Body
-		));
-
-	mColliders.emplace_back(
-		std::make_unique<Collider3D>(
-			std::make_unique<Collision::AABB3D>(kFootCollSize, kFootCollOffset),
-			this,
-			Collision::Tag::Foot
-		));
+	const std::vector<AABBColliderParam>& aabbParam = PlayerDataManager::GetInstance().GetAABBParams();
+	for (const auto& param : aabbParam)
+	{
+		mColliders.emplace_back(
+			std::make_unique<Collider3D>(
+				std::make_unique<Collision::AABB3D>(param.size, param.offsetPos),
+				this,
+				param.collisionTag
+			));
+	}
 }
 
 void Player::Update()
@@ -173,7 +150,7 @@ void Player::ResolveCollision(const Collision::Result& result, const Collider3D*
 		if (result.normal.y < 0.0f || Math::IsNearZero(result.normal.y)) return;
 
 		// 地面との衝突
-		mJumpBufferTimer = kJumpBufferTime;
+		mJumpBufferTimer = PlayerDataManager::GetInstance().GetPlayerParam().jumpBufferTime;
 		mOnGround = true;
 		if (Math::IsNearZero(mVelocity.y)) mIsJumping = false;
 
@@ -261,8 +238,10 @@ void Player::ResolvePush()
 
 void Player::MoveHorizontal(float deltaTime)
 {
-	float targetSpeed = kMoveSpeed + mBonusMoveSpeed;
-	float accel = kMoveAccel + mBonusMoveSpeed * 0.1f;
+	const PlayerParam& param = PlayerDataManager::GetInstance().GetPlayerParam();
+
+	float targetSpeed = param.moveSpeed + mBonusMoveSpeed;
+	float accel = param.moveAccel + mBonusMoveSpeed * 0.1f;
 
 	Vector3 moveVec = InputManager::GetInstance().GetAsVector3(Input::Action::Move);
 
@@ -273,7 +252,7 @@ void Player::MoveHorizontal(float deltaTime)
 
 	if (moveVec != Vector3::Zero) mLastMoveVec = moveVec;
 
-	float accelCoef = mOnGround ? 1.0f : kAirResistanceCoef + (1.0f - kAirResistanceCoef) * mAerialControl;
+	float accelCoef = mOnGround ? 1.0f : param.airResistanceCoef + (1.0f - param.airResistanceCoef) * mAerialControl;
 
 	// XとZ成分だけ補間させる
 	Vector3 vel = Vector3(mVelocity.x, 0.0f, mVelocity.z);
@@ -285,27 +264,29 @@ void Player::MoveHorizontal(float deltaTime)
 
 void Player::MoveVertical(float deltaTime)
 {
+	const PlayerParam& param = PlayerDataManager::GetInstance().GetPlayerParam();
+
 	// ジャンプ
 	if (InputManager::GetInstance().IsPressed(Input::Action::Jump) && CanJump())
 	{
-		mVelocity.y = kJumpForce + mBonusJumpForce;
+		mVelocity.y = param.jumpForce + mBonusJumpForce;
 		mIsJumping = true;
 		mJumpBufferTimer = 0.0f;
-		mForceJumpTimer = kForceJumpTime;
+		mForceJumpTimer = param.forceJumpTime;
 
 		mEventSubject->Notify(Observer::Event::PlayerJump);
 	}
 	// ジャンプキャンセル
 	if (!InputManager::GetInstance().IsDown(Input::Action::Jump) && CanCancelJump())
 	{
-		mVelocity.y = kJumpCancelThreshold;
+		mVelocity.y = param.jumpCancelThreshold;
 		mIsJumping = false;
 	}
 
 	// 落下処理
 	if (!mOnGround)
 	{
-		mVelocity.y -= kGravity * kGravityScale * deltaTime;
+		mVelocity.y -= param.gravity * param.gravityScale * deltaTime;
 	}
 }
 
@@ -340,7 +321,7 @@ void Player::AnimationUpdate()
 	{
 		mCurrentAnimation = nextAnim;
 
-		mModelAnimator->Play(GetAnimationParam(nextAnim));
+		mModelAnimator->Play(PlayerDataManager::GetInstance().GetAnimationParam(nextAnim));
 	}
 
 	mModelAnimator->Update();
@@ -353,14 +334,5 @@ bool Player::CanJump() const
 
 bool Player::CanCancelJump() const
 {
-	return mIsJumping && mVelocity.y > kJumpCancelThreshold && mForceJumpTimer <= 0;
-}
-
-const AnimationParam& Player::GetAnimationParam(PlayerAnimation anim) const
-{
-	size_t index = static_cast<size_t>(anim);
-
-	assert(index < mAnimationParams.size() && "Player // 存在しないアニメーションデータにアクセスしました");
-
-	return mAnimationParams[index];
+	return mIsJumping && mVelocity.y > PlayerDataManager::GetInstance().GetPlayerParam().jumpCancelThreshold && mForceJumpTimer <= 0;
 }

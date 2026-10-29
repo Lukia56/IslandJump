@@ -26,7 +26,7 @@ class Player : public GameObject
 {
 public:
 
-	Player(std::shared_ptr<Resource::ResourceBase> model, std::shared_ptr<Resource::ResourceBase> shadowTexture, std::vector<AnimationParam> animationParams, ItemObjectManager* itemObjectManager);
+	Player(std::shared_ptr<Resource::ResourceBase> model, std::shared_ptr<Resource::ResourceBase> shadowTexture, ItemObjectManager* itemObjectManager);
 	~Player() = default;
 
 	void Init() override;
@@ -64,11 +64,6 @@ private:
 
 	bool CanCancelJump() const;
 
-	/// <summary>
-	/// æ“¾‚É¸”s‚µ‚½‚çŒx‚ğ•\¦‚·‚é
-	/// </summary>
-	const AnimationParam& GetAnimationParam(PlayerAnimation anim) const;
-
 private:
 
 	Vector3 mVelocity;
@@ -94,8 +89,6 @@ private:
 	bool mOnGround;
 
 	PlayerAnimation mCurrentAnimation;
-
-	std::vector<AnimationParam> mAnimationParams;
 
 	std::unique_ptr<ModelRenderer> mModel;
 
