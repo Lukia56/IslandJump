@@ -4,7 +4,6 @@
 #include <vector>
 #include "PlayerAnimation.h"
 #include "Camera/CameraProperty.h"
-#include "Param/Param.h"
 #include "Utility/Vector.h"
 
 class ModelRenderer;
@@ -43,6 +42,8 @@ public:
 
 public:
 
+	bool OnGround() const { return mOnGround; }
+
 	PlayerLandRecorder* GetLandTerrainRecorder() const { return mLandTerrainRecorder.get(); }
 
 	Observer::IObserver* GetObserver() const { return mObserver.get(); }
@@ -57,8 +58,6 @@ private:
 	void MoveHorizontal(float deltaTime);
 
 	void MoveVertical(float deltaTime);
-
-	void AnimationUpdate();
 
 	bool CanJump() const;
 
@@ -87,8 +86,6 @@ private:
 	float mAerialControl;
 
 	bool mOnGround;
-
-	PlayerAnimation mCurrentAnimation;
 
 	std::unique_ptr<ModelRenderer> mModel;
 

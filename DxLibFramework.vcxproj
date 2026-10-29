@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Sources\System\PlayerDataManager.cpp" />
+    <ClCompile Include="Sources\World\Component\ModelAnimate\PlayerModelAnimator.cpp" />
     <ClCompile Include="Sources\World\Other\Effect\EffectManager.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\ItemEffectText.cpp" />
     <ClCompile Include="Sources\World\UI\Widget\ItemEffectTextManager.cpp" />
@@ -263,6 +264,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\System\PlayerDataManager.h" />
+    <ClInclude Include="Sources\World\Component\ModelAnimate\PlayerModelAnimator.h" />
     <ClInclude Include="Sources\World\Other\Effect\EffectManager.h" />
     <ClInclude Include="Sources\World\UI\Widget\ItemEffectText.h" />
     <ClInclude Include="Sources\World\UI\Widget\ItemEffectTextManager.h" />

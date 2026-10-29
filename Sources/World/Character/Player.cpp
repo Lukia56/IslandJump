@@ -1,9 +1,8 @@
 #include "Player.h"
-#include <cassert>
 #include <imgui.h>
 #include "PlayerLandRecorder.h"
 #include "../Component/Collider3D.h"
-#include "../Component/ModelAnimate/ModelAnimator.h"
+#include "../Component/ModelAnimate/PlayerModelAnimator.h"
 #include "../Component/Rendering/ModelRenderer.h"
 #include "../Other/BlobShadow.h"
 #include "Collision/Collision3D.h"
@@ -35,7 +34,6 @@ Player::Player(std::shared_ptr<Resource::ResourceBase> model, std::shared_ptr<Re
 	mBonusMoveAccel(0.0f),
 	mAerialControl(0.0f),
 	mOnGround(false),
-	mCurrentAnimation(PlayerAnimation::Idle),
 	mModel(nullptr),
 	mLandTerrainRecorder(nullptr),
 	mObserver(nullptr),
@@ -60,8 +58,7 @@ void Player::Init()
 
 	mTransform->localScale = kInitScale;
 
-	mModelAnimator = std::make_unique<ModelAnimator>(mModel.get(), kModelAnimationFPS);
-	mModelAnimator->Play(AnimationParam{ .animIndex = 3, .isLoop = true, .isForcePlay = false });
+	mModelAnimator = std::make_unique<PlayerModelAnimator>(this, mModel.get(), kModelAnimationFPS);
 
 	const std::vector<AABBColliderParam>& aabbParam = PlayerDataManager::GetInstance().GetAABBParams();
 	for (const auto& param : aabbParam)
@@ -84,7 +81,7 @@ void Player::Update()
 	MoveHorizontal(deltaTime);
 	MoveVertical(deltaTime);
 
-	AnimationUpdate();
+	mModelAnimator->Update();
 
 	// Šp“x‚ðÝ’è‚·‚é
 	if (mLastMoveVec != Vector3::Zero)
@@ -288,43 +285,6 @@ void Player::MoveVertical(float deltaTime)
 	{
 		mVelocity.y -= param.gravity * param.gravityScale * deltaTime;
 	}
-}
-
-void Player::AnimationUpdate()
-{
-	PlayerAnimation nextAnim = PlayerAnimation::Idle;
-
-	if (mOnGround)
-	{
-		if (InputManager::GetInstance().IsPressed(Input::Action::Jump))
-		{
-			nextAnim = PlayerAnimation::JumpIn;
-		}
-		else
-		if (InputManager::GetInstance().GetAsVector3(Input::Action::Move) != Vector3::Zero)
-		{
-			nextAnim = PlayerAnimation::Run;
-		}
-		else
-		if (mCurrentAnimation == PlayerAnimation::JumpLoop
-		|| (mCurrentAnimation == PlayerAnimation::Land && mModelAnimator->IsPlaying()))	// ‹­§Ä¶‚¾‚ÆRun‚âJumpIn‚ªÄ¶‚Å‚«‚È‚­‚È‚é‚½‚ß•Ê“r•ªŠò
-		{
-			nextAnim = PlayerAnimation::Land;
-		}
-	}
-	else
-	{
-		nextAnim = PlayerAnimation::JumpLoop;
-	}
-
-	if (mCurrentAnimation != nextAnim)
-	{
-		mCurrentAnimation = nextAnim;
-
-		mModelAnimator->Play(PlayerDataManager::GetInstance().GetAnimationParam(nextAnim));
-	}
-
-	mModelAnimator->Update();
 }
 
 bool Player::CanJump() const
