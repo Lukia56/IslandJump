@@ -4,7 +4,7 @@
 
 namespace
 {
-	const char* const kDataPath = "Resources\\MasterData\\ItemTextureData.csv";
+	const char* const kDataPath = "Resources\\MasterData\\Item\\ItemTextureData.csv";
 }
 
 ItemTextureDataBase::ItemTextureDataBase()

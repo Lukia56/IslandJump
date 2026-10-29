@@ -28,7 +28,7 @@ namespace
 
 	const char* const kBGMPath = "Resources\\Sound\\BGM\\Title.ogg";
 
-	const char* const kStageDifficultyDataPath = "Resources\\MasterData\\StageDifficultyData.csv";
+	const char* const kStageDifficultyDataPath = "Resources\\MasterData\\Stage\\StageDifficultyData.csv";
 }
 
 SceneTitle::SceneTitle() :

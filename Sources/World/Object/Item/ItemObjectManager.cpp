@@ -11,7 +11,7 @@
 
 namespace
 {
-	const char* const kEffectParamPath = "Resources\\MasterData\\ItemEffectParam.csv";
+	const char* const kEffectParamPath = "Resources\\MasterData\\Item\\ItemEffectParam.csv";
 }
 
 ItemObjectManager::ItemObjectManager(int itemNum, ResultRecorder* resultRecorder) :
