@@ -54,6 +54,29 @@ namespace Data
 		};
 
 		template <>
+		struct FromCsv<PlayerParam>
+		{
+			static PlayerParam Binding(const Row& row)
+			{
+				PlayerParam param;
+
+				param.moveSpeed = Get<float>(row, "moveSpeed");
+				param.moveAccel = Get<float>(row, "moveAccel");
+
+				param.jumpForce = Get<float>(row, "jumpForce");
+				param.jumpCancelThreshold = Get<float>(row, "jumpCancelThreshold");
+				param.jumpBufferTime = Get<float>(row, "jumpBufferTime");
+				param.forceJumpTime = Get<float>(row, "forceJumpTime");
+
+				param.airResistanceCoef = Get<float>(row, "airResistanceCoef");
+				param.gravity = Get<float>(row, "gravity");
+				param.gravityScale = Get<float>(row, "gravityScale");
+
+				return param;
+			}
+		};
+
+		template <>
 		struct FromCsv<AABBColliderParam>
 		{
 			static AABBColliderParam Binding(const Row& row)

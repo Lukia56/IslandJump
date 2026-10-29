@@ -1,0 +1,2 @@
+moveSpeed,moveAccel,jumpForce,jumpCancelThreshold,jumpBufferTime,forceJumpTime,airResistanceCoef,gravity,gravityScale
+500,60,1500,300,0.15,0.1,0.25,980,2

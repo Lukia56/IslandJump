@@ -15,6 +15,21 @@ struct WindowConfigs
 	int colorBit = 0;
 };
 
+struct PlayerParam
+{
+	float moveSpeed = 0.0f;
+	float moveAccel = 0.0f;
+
+	float jumpForce = 0.0f;
+	float jumpCancelThreshold = 0.0f;
+	float jumpBufferTime = 0.0f;
+	float forceJumpTime = 0.0f;
+
+	float airResistanceCoef = 0.0f;
+	float gravity = 0.0f;
+	float gravityScale = 0.0f;
+};
+
 struct AABBColliderParam
 {
 	Vector3 size{};
