@@ -3,7 +3,7 @@
 #include <imgui.h>
 #include "PlayerLandRecorder.h"
 #include "../Component/Collider3D.h"
-#include "../Component/ModelAnimator.h"
+#include "../Component/ModelAnimate/ModelAnimator.h"
 #include "../Component/Rendering/ModelRenderer.h"
 #include "../Other/BlobShadow.h"
 #include "Collision/Collision3D.h"

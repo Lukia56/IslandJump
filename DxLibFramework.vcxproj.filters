@@ -171,7 +171,7 @@
     <ClCompile Include="Sources\Utility\Data\Data.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\Component\ModelAnimator.cpp">
+    <ClCompile Include="Sources\World\Component\ModelAnimate\ModelAnimator.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Scene\Test\SceneSelectDebug.cpp">
@@ -587,7 +587,7 @@
     <ClInclude Include="Sources\Utility\Data\JSON\JsonLoader.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\Component\ModelAnimator.h">
+    <ClInclude Include="Sources\World\Component\ModelAnimate\ModelAnimator.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Scene\Test\SceneSelectDebug.h">

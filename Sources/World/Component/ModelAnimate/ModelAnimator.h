@@ -13,9 +13,9 @@ class ModelAnimator
 public:
 
 	ModelAnimator(ModelRenderer* renderer, float fps = TimeManager::kFPS);
-	~ModelAnimator();
+	virtual ~ModelAnimator();
 
-	void Update();
+	virtual void Update();
 
 	void Play(const AnimationParam& param);
 

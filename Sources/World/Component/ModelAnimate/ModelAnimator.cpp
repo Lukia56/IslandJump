@@ -2,7 +2,7 @@
 #include <assert.h>
 #include <DxLib.h>
 #include "Param/Param.h"
-#include "Rendering/ModelRenderer.h"
+#include "../Rendering/ModelRenderer.h"
 #include "System/TimeManager.h"
 
 ModelAnimator::ModelAnimator(ModelRenderer* renderer, float fps) :

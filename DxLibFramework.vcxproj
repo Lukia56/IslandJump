@@ -193,7 +193,7 @@
     <ClCompile Include="Sources\Stage\StageLoader.cpp" />
     <ClCompile Include="Sources\Stage\StageModelDataBase.cpp" />
     <ClCompile Include="Sources\World\Object\StageObject.cpp" />
-    <ClCompile Include="Sources\World\Component\ModelAnimator.cpp" />
+    <ClCompile Include="Sources\World\Component\ModelAnimate\ModelAnimator.cpp" />
     <ClCompile Include="Sources\Application.cpp" />
     <ClCompile Include="Sources\Camera\CameraFollow.cpp" />
     <ClCompile Include="Sources\Camera\CameraStatic.cpp" />
@@ -329,7 +329,7 @@
     <ClInclude Include="Sources\Stage\StageModelDataBase.h" />
     <ClInclude Include="Sources\World\Object\StageObject.h" />
     <ClInclude Include="Sources\Utility\Geometry.h" />
-    <ClInclude Include="Sources\World\Component\ModelAnimator.h" />
+    <ClInclude Include="Sources\World\Component\ModelAnimate\ModelAnimator.h" />
     <ClInclude Include="Sources\Application.h" />
     <ClInclude Include="Sources\Camera\CameraFollow.h" />
     <ClInclude Include="Sources\Camera\CameraStatic.h" />
