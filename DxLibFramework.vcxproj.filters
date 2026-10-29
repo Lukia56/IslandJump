@@ -330,7 +330,7 @@
     <ClCompile Include="Sources\World\UI\Screen\InGameScreen.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\UI\Widget\GoalProgressBar.cpp">
+    <ClCompile Include="Sources\World\UI\Widget\InGame\GoalProgressBar.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\Object\Cloud\CloudModel.cpp">
@@ -342,7 +342,7 @@
     <ClCompile Include="Sources\System\SoundManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\UI\Widget\ItemUseCountUI.cpp">
+    <ClCompile Include="Sources\World\UI\Widget\InGame\ItemUseCountUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\Other\BlobShadow.cpp">
@@ -351,7 +351,7 @@
     <ClCompile Include="Sources\World\Other\Effect\EffectInstance.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\UI\Widget\CloudInvasionEffect.cpp">
+    <ClCompile Include="Sources\World\UI\Widget\InGame\CloudInvasionEffect.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Observer\ItemObserver.cpp">
@@ -363,10 +363,10 @@
     <ClCompile Include="Sources\World\UI\Screen\OptionsMenuScreen.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\UI\Widget\ItemEffectTextManager.cpp">
+    <ClCompile Include="Sources\World\UI\Widget\InGame\ItemEffectTextManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\World\UI\Widget\ItemEffectText.cpp">
+    <ClCompile Include="Sources\World\UI\Widget\InGame\ItemEffectText.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Sources\World\Other\Effect\EffectManager.cpp">
@@ -791,7 +791,7 @@
     <ClInclude Include="Sources\World\UI\Screen\InGameScreen.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\UI\Widget\GoalProgressBar.h">
+    <ClInclude Include="Sources\World\UI\Widget\InGame\GoalProgressBar.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\Object\Cloud\CloudModel.h">
@@ -803,7 +803,7 @@
     <ClInclude Include="Sources\System\SoundManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\UI\Widget\ItemUseCountUI.h">
+    <ClInclude Include="Sources\World\UI\Widget\InGame\ItemUseCountUI.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Utility\Data\JSON\ToJson.h">
@@ -821,7 +821,7 @@
     <ClInclude Include="Sources\World\Other\Effect\EffectInstance.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\UI\Widget\CloudInvasionEffect.h">
+    <ClInclude Include="Sources\World\UI\Widget\InGame\CloudInvasionEffect.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Observer\ItemObserver.h">
@@ -836,10 +836,10 @@
     <ClInclude Include="resource.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\UI\Widget\ItemEffectTextManager.h">
+    <ClInclude Include="Sources\World\UI\Widget\InGame\ItemEffectTextManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\World\UI\Widget\ItemEffectText.h">
+    <ClInclude Include="Sources\World\UI\Widget\InGame\ItemEffectText.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Sources\World\Other\Effect\EffectManager.h">

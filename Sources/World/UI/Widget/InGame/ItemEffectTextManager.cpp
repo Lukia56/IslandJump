@@ -1,6 +1,6 @@
 #include "ItemEffectTextManager.h"
 #include "ItemEffectText.h"
-#include "../Core/UIRoot.h"
+#include "World/UI/Core/UIRoot.h"
 
 namespace
 {

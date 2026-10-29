@@ -1,5 +1,5 @@
 #include "ItemEffectText.h"
-#include "TextObject.h"
+#include "../TextObject.h"
 #include "System/TimeManager.h"
 #include "Utility/Color.h"
 

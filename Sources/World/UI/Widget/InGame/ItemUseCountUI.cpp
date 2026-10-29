@@ -1,7 +1,7 @@
 #include "ItemUseCountUI.h"
 #include <string>
-#include "ImageObject.h"
-#include "TextObject.h"
+#include "../ImageObject.h"
+#include "../TextObject.h"
 #include "System/Resource/ResourceBase.h"
 #include "World/Object/Item/ItemObjectManager.h"
 

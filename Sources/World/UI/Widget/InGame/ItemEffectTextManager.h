@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core/UIObject.h"
+#include "World/UI/Core/UIObject.h"
 #include <stack>
 #include "World/Object/Item/ItemType.h"
 

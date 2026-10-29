@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core/UIObject.h"
+#include "World/UI/Core/UIObject.h"
 
 class UIImageRenderer;
 namespace Resource

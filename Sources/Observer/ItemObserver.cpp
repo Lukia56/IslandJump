@@ -2,7 +2,7 @@
 #include <string>
 #include "World/Other/Effect/EffectInstance.h"
 #include "World/Other/Effect/EffectManager.h"
-#include "World/UI/Widget/ItemEffectTextManager.h"
+#include "World/UI/Widget/InGame/ItemEffectTextManager.h"
 
 namespace
 {

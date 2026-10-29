@@ -1,6 +1,6 @@
 #include "GoalProgressBar.h"
-#include "BoxObject.h"
-#include "TextObject.h"
+#include "../BoxObject.h"
+#include "../TextObject.h"
 #include "System/Resource/ResourceBase.h"
 
 namespace
