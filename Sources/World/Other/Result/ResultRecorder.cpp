@@ -46,7 +46,7 @@ ResultData ResultRecorder::CreateResultData() const
 	result.distanceScore = static_cast<int>(mProgressDistance * kDistanceScoreCoef);
 	result.itemScore = static_cast<int>(mItemUseCount * kItemScoreCoef);
 
-	float scoreCoef = mDifficultyData->difficulty == StageDifficultyData::Difficulty::Hard ? kHardModeScoreCoef : 1.0f;
+	float scoreCoef = mDifficultyData->difficulty == StageDifficultyData::Difficulty::Hard && mIsSuccessed ? kHardModeScoreCoef : 1.0f;
 	result.overallScore = static_cast<int>((result.distanceScore + result.itemScore) * scoreCoef);
 	
 	return result;
