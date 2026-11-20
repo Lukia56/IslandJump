@@ -44,5 +44,11 @@ public:
 
 private:
 
+	bool CheckEnabled(Collider3D* collider) const;
+
+	bool IsExpectCheck(Collider3D* colliderA, Collider3D* colliderB) const;
+
+private:
+
 	std::vector<Collider3D*> mColliders;
 };

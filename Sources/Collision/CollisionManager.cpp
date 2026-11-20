@@ -8,37 +8,27 @@ void CollisionManager::CheckAllCollision()
 {
 	for (size_t i = 0; i < mColliders.size(); i++)
 	{
-		const Collider3D* colliderA = mColliders[i];
-		if (!colliderA) continue;
-
-		GameObject* ownerA = colliderA->GetOwner();
-		if (!ownerA) continue;
-		if (!ownerA->IsActive()) continue;
+		Collider3D* colliderA = mColliders[i];
+		if (!CheckEnabled(colliderA)) continue;
 
 		for (size_t j = i + 1; j < mColliders.size(); j++)
 		{
-			const Collider3D* colliderB = mColliders[j];
-			if (!colliderB) continue;
+			Collider3D* colliderB = mColliders[j];
+			if (!CheckEnabled(colliderB)) continue;
 
-			// お互いが静的なら衝突を調べない
-			if (!colliderA->IsDynamic() && !colliderB->IsDynamic()) continue;
-
-			GameObject* ownerB = colliderB->GetOwner();
-			if (!ownerB) continue;
-			if (!ownerB->IsActive()) continue;
-
-			if (ownerA == ownerB) continue;
+			// 衝突を計算するかどうかチェック
+			if (!IsExpectCheck(colliderA, colliderB)) continue;
 
 			// 衝突結果を調べる
 			Collision::Result result = colliderA->GetShape()->CheckCollision(colliderB->GetShape());
 			if (!result.isHit) continue;
 
-			ownerA->ResolveCollision(result, colliderA, colliderB);
+			colliderA->GetOwner()->ResolveCollision(result, colliderA, colliderB);
 
 			// もう一つのコライダ目線に合わせて法線を反転
 			result.normal = -result.normal;
 
-			ownerB->ResolveCollision(result, colliderB, colliderA);
+			colliderB->GetOwner()->ResolveCollision(result, colliderB, colliderA);
 		}
 	}
 }
@@ -55,6 +45,9 @@ std::vector<Collision::RaycastResult> CollisionManager::Raycast(const Collision:
 	for (const auto& collider : mColliders)
 	{
 		if (!pred(collider)) continue;
+		if (!CheckEnabled(collider)) continue;
+
+		// TODO: 無効状態判定
 
 		Collision::RaycastResult result = collider->GetShape()->Raycast(ray);
 
@@ -94,4 +87,29 @@ CollisionManager& CollisionManager::GetInstance()
 	static CollisionManager instance;
 
 	return instance;
+}
+
+bool CollisionManager::CheckEnabled(Collider3D* collider) const
+{
+	if (!collider) return false;
+
+	GameObject* owner = collider->GetOwner();
+	if (!owner) return false;
+	if (!owner->IsActive()) return false;
+
+	return true;
+}
+
+bool CollisionManager::IsExpectCheck(Collider3D* colliderA, Collider3D* colliderB) const
+{
+	// お互いが静的なら衝突を調べない
+	if (!colliderA->IsDynamic() && !colliderB->IsDynamic()) return false;
+
+	// 所有者が同じなら調べない
+	GameObject* ownerA = colliderA->GetOwner();
+	GameObject* ownerB = colliderB->GetOwner();
+	if (ownerA == ownerB) return false;
+
+	// ここまで来たら調べる
+	return true;
 }
